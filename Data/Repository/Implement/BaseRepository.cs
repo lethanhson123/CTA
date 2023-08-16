@@ -27,6 +27,12 @@
             {
                 model.Display = model.Name;
             }
+            if (!string.IsNullOrEmpty(model.ContentHTML))
+            {
+                model.ContentHTML = model.ContentHTML.Replace(@"</div>", @"</p>");
+                model.ContentHTML = model.ContentHTML.Replace(@"<div", @"<p");
+            }
+
         }
         public virtual int Add(T model)
         {
