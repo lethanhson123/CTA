@@ -6,9 +6,11 @@
     public class AboutFileController : BaseController<AboutFile, IAboutFileBusiness>
     {
         private readonly IAboutFileBusiness _AboutFileBusiness;
-        public AboutFileController(IAboutFileBusiness AboutFileBusiness) : base(AboutFileBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public AboutFileController(IAboutFileBusiness AboutFileBusiness, IWebHostEnvironment WebHostEnvironment) : base(AboutFileBusiness, WebHostEnvironment)
         {
             _AboutFileBusiness = AboutFileBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

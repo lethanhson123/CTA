@@ -1,16 +1,98 @@
-﻿namespace API.Controllers
+﻿using Helper;
+using Microsoft.AspNetCore.Hosting;
+
+namespace API.Controllers
 {
     public class BaseController<T, TBaseBusiness> : Controller
         where T : BaseModel
         where TBaseBusiness : IBaseBusiness<T>
     {
         private readonly TBaseBusiness _baseBusiness;
-
-        public BaseController(TBaseBusiness baseBusiness)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public BaseController(TBaseBusiness baseBusiness
+            , IWebHostEnvironment webHostEnvironment)
         {
             _baseBusiness = baseBusiness;
+            _webHostEnvironment = webHostEnvironment;
         }
-
+        [HttpPost]
+        [Route("SaveAndUploadFileAsync")]
+        public async Task<T> SaveAndUploadFileAsync()
+        {
+            T model = JsonConvert.DeserializeObject<T>(Request.Form["data"]);
+            model.Code = GlobalHelper.SetName(model.Name);
+            try
+            {
+                if (Request.Form.Files.Count > 0)
+                {
+                    var file = Request.Form.Files[0];
+                    if (file == null || file.Length == 0)
+                    {
+                    }
+                    if (file != null)
+                    {
+                        string fileExtension = Path.GetExtension(file.FileName);
+                        model.FileName = model.Code + "_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                        string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, GlobalHelper.Image, model.GetType().Name);
+                        bool isFolderExists = System.IO.Directory.Exists(folderPath);
+                        if (!isFolderExists)
+                        {
+                            System.IO.Directory.CreateDirectory(folderPath);
+                        }
+                        var physicalPath = Path.Combine(folderPath, model.FileName);
+                        using (var stream = new FileStream(physicalPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);                            
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string mes = e.Message;
+            }
+            await _baseBusiness.SaveAsync(model);
+            return model;
+        }
+        [HttpPost]
+        [Route("SaveAndUploadFile")]
+        public T SaveAndUploadFile()
+        {
+            T model = JsonConvert.DeserializeObject<T>(Request.Form["data"]);
+            model.Code = GlobalHelper.SetName(model.Name);
+            try
+            {
+                if (Request.Form.Files.Count > 0)
+                {
+                    var file = Request.Form.Files[0];
+                    if (file == null || file.Length == 0)
+                    {
+                    }
+                    if (file != null)
+                    {
+                        string fileExtension = Path.GetExtension(file.FileName);
+                        model.FileName = model.Code + "_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                        string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, GlobalHelper.Image, model.GetType().Name);
+                        bool isFolderExists = System.IO.Directory.Exists(folderPath);
+                        if (!isFolderExists)
+                        {
+                            System.IO.Directory.CreateDirectory(folderPath);
+                        }
+                        var physicalPath = Path.Combine(folderPath, model.FileName);
+                        using (var stream = new FileStream(physicalPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);                            
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string mes = e.Message;
+            }
+            _baseBusiness.Save(model);
+            return model;
+        }
         [HttpPost]
         [Route("Save")]
         public virtual T Save()

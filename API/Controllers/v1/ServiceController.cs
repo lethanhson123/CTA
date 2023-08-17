@@ -6,9 +6,11 @@
     public class ServiceController : BaseController<Service, IServiceBusiness>
     {
         private readonly IServiceBusiness _ServiceBusiness;
-        public ServiceController(IServiceBusiness ServiceBusiness) : base(ServiceBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public ServiceController(IServiceBusiness ServiceBusiness, IWebHostEnvironment WebHostEnvironment) : base(ServiceBusiness, WebHostEnvironment)
         {
             _ServiceBusiness = ServiceBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

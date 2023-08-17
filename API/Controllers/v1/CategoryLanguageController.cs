@@ -6,9 +6,11 @@
     public class CategoryLanguageController : BaseController<CategoryLanguage, ICategoryLanguageBusiness>
     {
         private readonly ICategoryLanguageBusiness _CategoryLanguageBusiness;
-        public CategoryLanguageController(ICategoryLanguageBusiness CategoryLanguageBusiness) : base(CategoryLanguageBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public CategoryLanguageController(ICategoryLanguageBusiness CategoryLanguageBusiness, IWebHostEnvironment WebHostEnvironment) : base(CategoryLanguageBusiness, WebHostEnvironment)
         {
             _CategoryLanguageBusiness = CategoryLanguageBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

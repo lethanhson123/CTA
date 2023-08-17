@@ -6,9 +6,11 @@
     public class NewsFileController : BaseController<NewsFile, INewsFileBusiness>
     {
         private readonly INewsFileBusiness _NewsFileBusiness;
-        public NewsFileController(INewsFileBusiness NewsFileBusiness) : base(NewsFileBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public NewsFileController(INewsFileBusiness NewsFileBusiness, IWebHostEnvironment WebHostEnvironment) : base(NewsFileBusiness, WebHostEnvironment)
         {
             _NewsFileBusiness = NewsFileBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

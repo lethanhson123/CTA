@@ -6,9 +6,11 @@
     public class IdeasFileController : BaseController<IdeasFile, IIdeasFileBusiness>
     {
         private readonly IIdeasFileBusiness _IdeasFileBusiness;
-        public IdeasFileController(IIdeasFileBusiness IdeasFileBusiness) : base(IdeasFileBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public IdeasFileController(IIdeasFileBusiness IdeasFileBusiness, IWebHostEnvironment WebHostEnvironment) : base(IdeasFileBusiness, WebHostEnvironment)
         {
             _IdeasFileBusiness = IdeasFileBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

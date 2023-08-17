@@ -1,5 +1,6 @@
 <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
     <input name="ID" [(ngModel)]="AboutService.formData.ID" type="hidden">
+    <input name="FileName" [(ngModel)]="AboutService.formData.FileName" type="hidden">
     <div class="col s12 m12 l5">
         <div class="col s12 m12 l9">
             <h5 class="card-title"><b>Giới thiệu</b></h5>
@@ -46,37 +47,43 @@
                     type="number">
             </div>
         </div>
-        <div class="col s6 m6 l4">
-            <div class="input-field">
-                <label for="IsHomePage">Trang chủ</label>
-            </div>
-        </div>
-        <div class="input-field col s6 m6 l8">
+        <div class="col s4 m4 l4"></div>
+        <div class="input-field col s4 m4 l4">
             <p>
                 <label>
                     <input type="checkbox" class="filled-in" name="IsHomePage"
                         [(ngModel)]="AboutService.formData.IsHomePage" />
-                    <span>.</span>
+                    <span>Trang chủ</span>
                 </label>
             </p>
         </div>
-        <div class="col s6 m6 l4">
-            <div class="input-field">
-                <label for="Active">Kích hoạt</label>
-            </div>
-        </div>
-        <div class="input-field col s6 m6 l8">
+        <div class="input-field col s4 m4 l4">
             <p>
                 <label>
-                    <input type="checkbox" class="filled-in" name="Active"
-                        [(ngModel)]="AboutService.formData.Active" />
-                    <span>.</span>
+                    <input type="checkbox" class="filled-in" name="Active" [(ngModel)]="AboutService.formData.Active" />
+                    <span>Kích hoạt</span>
                 </label>
             </p>
+        </div>
+        <div class="col s4 m4 l4">
+            <div class="input-field">
+                <label for="FileName">Hình ảnh</label>
+            </div>
+        </div>
+        <div class="col s8 m8 l8">
+            <div class="input-field">
+                <input type="file" multiple (change)="changeImage($event.target.files)">
+            </div>
+            <div class="input-field">
+                <a target="_blank" href="{{AboutService.formData.FileName}}" *ngIf="AboutService.formData.FileName"
+                    title="{{AboutService.formData.FileName}}">
+                    <img class="responsive-img" width="50%" title="{{AboutService.formData.FileName}}"
+                        alt="{{AboutService.formData.FileName}}" [src]="AboutService.formData.FileName"></a>
+            </div>
         </div>
     </div>
     <div class="col s12 m12 l7">
-        <ck-editor [config]="{'height': 400}" name="ContentHTML" [(ngModel)]="AboutService.formData.ContentHTML"
+        <ck-editor [config]="{'height': 500}" name="ContentHTML" [(ngModel)]="AboutService.formData.ContentHTML"
             skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
     </div>
 </form>

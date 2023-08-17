@@ -15,5 +15,6 @@ export class News {
     Active?: boolean;
     SortOrder?: number;
     IsHomePage?: boolean;
+    FileName?: string;
 }
 

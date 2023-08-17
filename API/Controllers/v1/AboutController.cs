@@ -6,9 +6,11 @@
     public class AboutController : BaseController<About, IAboutBusiness>
     {
         private readonly IAboutBusiness _AboutBusiness;
-        public AboutController(IAboutBusiness AboutBusiness) : base(AboutBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public AboutController(IAboutBusiness AboutBusiness, IWebHostEnvironment WebHostEnvironment) : base(AboutBusiness, WebHostEnvironment)
         {
             _AboutBusiness = AboutBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

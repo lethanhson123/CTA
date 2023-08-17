@@ -19,6 +19,7 @@ namespace Data.Model
         public bool? Active { get; set; }
         public int? SortOrder { get; set; }
         public bool? IsHomePage { get; set; }
+        public string? FileName { get; set; }
         public BaseModel()
         {
             SortOrder = GlobalHelper.InitializationSortOrder;

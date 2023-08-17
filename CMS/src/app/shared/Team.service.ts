@@ -19,6 +19,32 @@ export class TeamService {
         this.formData = {
         }
     }
+    SaveAndUploadFile(formData: Team, fileToUpload: FileList) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadFile';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        if (fileToUpload) {
+            if (fileToUpload.length > 0) {
+                for (var i = 0; i < fileToUpload.length; i++) {
+                    formUpload.append('file[]', fileToUpload[i]);
+                }
+            }
+        }     
+        return this.httpClient.post(url, formUpload);
+    }
+    SaveAndUploadFileAsync(formData: Team, fileToUpload: FileList) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadFileAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        if (fileToUpload) {
+            if (fileToUpload.length > 0) {
+                for (var i = 0; i < fileToUpload.length; i++) {
+                    formUpload.append('file[]', fileToUpload[i]);
+                }
+            }
+        }     
+        return this.httpClient.post(url, formUpload);
+    }
     Save(formData: Team) {
         let url = this.aPIURL + this.controller + '/Save';
         const formUpload: FormData = new FormData();

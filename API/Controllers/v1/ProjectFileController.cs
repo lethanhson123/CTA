@@ -6,9 +6,11 @@
     public class ProjectFileController : BaseController<ProjectFile, IProjectFileBusiness>
     {
         private readonly IProjectFileBusiness _ProjectFileBusiness;
-        public ProjectFileController(IProjectFileBusiness ProjectFileBusiness) : base(ProjectFileBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public ProjectFileController(IProjectFileBusiness ProjectFileBusiness, IWebHostEnvironment WebHostEnvironment) : base(ProjectFileBusiness, WebHostEnvironment)
         {
             _ProjectFileBusiness = ProjectFileBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

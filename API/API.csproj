@@ -20,4 +20,10 @@
     <ProjectReference Include="..\Business\Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Download\" />
+    <Folder Include="wwwroot\Image\" />
+    <Folder Include="wwwroot\Upload\" />
+  </ItemGroup>
+
 </Project>

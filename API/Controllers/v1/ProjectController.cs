@@ -6,9 +6,11 @@
     public class ProjectController : BaseController<Project, IProjectBusiness>
     {
         private readonly IProjectBusiness _ProjectBusiness;
-        public ProjectController(IProjectBusiness ProjectBusiness) : base(ProjectBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public ProjectController(IProjectBusiness ProjectBusiness, IWebHostEnvironment WebHostEnvironment) : base(ProjectBusiness, WebHostEnvironment)
         {
             _ProjectBusiness = ProjectBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

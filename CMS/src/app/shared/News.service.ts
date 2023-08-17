@@ -19,6 +19,32 @@ export class NewsService {
         this.formData = {
         }
     }
+    SaveAndUploadFile(formData: News, fileToUpload: FileList) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadFile';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        if (fileToUpload) {
+            if (fileToUpload.length > 0) {
+                for (var i = 0; i < fileToUpload.length; i++) {
+                    formUpload.append('file[]', fileToUpload[i]);
+                }
+            }
+        }     
+        return this.httpClient.post(url, formUpload);
+    }
+    SaveAndUploadFileAsync(formData: News, fileToUpload: FileList) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadFileAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        if (fileToUpload) {
+            if (fileToUpload.length > 0) {
+                for (var i = 0; i < fileToUpload.length; i++) {
+                    formUpload.append('file[]', fileToUpload[i]);
+                }
+            }
+        }     
+        return this.httpClient.post(url, formUpload);
+    }
     Save(formData: News) {
         let url = this.aPIURL + this.controller + '/Save';
         const formUpload: FormData = new FormData();

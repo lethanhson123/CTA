@@ -6,9 +6,11 @@
     public class TeamController : BaseController<Team, ITeamBusiness>
     {
         private readonly ITeamBusiness _TeamBusiness;
-        public TeamController(ITeamBusiness TeamBusiness) : base(TeamBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public TeamController(ITeamBusiness TeamBusiness, IWebHostEnvironment WebHostEnvironment) : base(TeamBusiness, WebHostEnvironment)
         {
             _TeamBusiness = TeamBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

@@ -19,7 +19,7 @@ import { AboutDetailComponent } from './about-detail/about-detail.component';
 export class AboutComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ID', 'Name', 'SortOrder', 'IsHomePage', 'Active', 'Save'];
+  displayColumns: string[] = ['FileName', 'Name', 'SortOrder', 'IsHomePage', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
@@ -96,7 +96,7 @@ export class AboutComponent implements OnInit {
     );
   }
   onDelete(element: About) {
-    if (confirm(environment.DeleteConfirm + ': ' + element.Name)) {
+    if (confirm(element.Name + ': ' + environment.DeleteConfirm)) {
       this.AboutService.RemoveAsync(element.ID).subscribe(
         res => {
           this.onSearch();

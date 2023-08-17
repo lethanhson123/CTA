@@ -6,9 +6,11 @@
     public class BannerController : BaseController<Banner, IBannerBusiness>
     {
         private readonly IBannerBusiness _BannerBusiness;
-        public BannerController(IBannerBusiness BannerBusiness) : base(BannerBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public BannerController(IBannerBusiness BannerBusiness, IWebHostEnvironment WebHostEnvironment) : base(BannerBusiness, WebHostEnvironment)
         {
             _BannerBusiness = BannerBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

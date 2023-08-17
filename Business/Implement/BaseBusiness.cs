@@ -18,6 +18,13 @@ namespace Business.Implement
             {
                 model.SortOrder = 1;
             }
+            if (!string.IsNullOrEmpty(model.FileName))
+            {
+                if (model.FileName.Contains(GlobalHelper.APISite) == false)
+                {
+                    model.FileName = GlobalHelper.APISite + GlobalHelper.Image + @"/" + model.GetType().Name + @"/" + model.FileName;
+                }
+            }                      
         }
         public virtual T Save(T model)
         {

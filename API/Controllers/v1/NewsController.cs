@@ -6,9 +6,11 @@
     public class NewsController : BaseController<News, INewsBusiness>
     {
         private readonly INewsBusiness _NewsBusiness;
-        public NewsController(INewsBusiness NewsBusiness) : base(NewsBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public NewsController(INewsBusiness NewsBusiness, IWebHostEnvironment WebHostEnvironment) : base(NewsBusiness, WebHostEnvironment)
         {
             _NewsBusiness = NewsBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

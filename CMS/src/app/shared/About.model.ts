@@ -15,5 +15,6 @@ export class About {
     Active?: boolean;
     SortOrder?: number;
     IsHomePage?: boolean;
+    FileName?: string;
 }
 

@@ -6,9 +6,11 @@
     public class ContactFileController : BaseController<ContactFile, IContactFileBusiness>
     {
         private readonly IContactFileBusiness _ContactFileBusiness;
-        public ContactFileController(IContactFileBusiness ContactFileBusiness) : base(ContactFileBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public ContactFileController(IContactFileBusiness ContactFileBusiness, IWebHostEnvironment WebHostEnvironment) : base(ContactFileBusiness, WebHostEnvironment)
         {
             _ContactFileBusiness = ContactFileBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

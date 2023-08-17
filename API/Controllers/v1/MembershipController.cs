@@ -6,9 +6,11 @@
     public class MembershipController : BaseController<Membership, IMembershipBusiness>
     {
         private readonly IMembershipBusiness _MembershipBusiness;
-        public MembershipController(IMembershipBusiness MembershipBusiness) : base(MembershipBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public MembershipController(IMembershipBusiness MembershipBusiness, IWebHostEnvironment WebHostEnvironment) : base(MembershipBusiness, WebHostEnvironment)
         {
             _MembershipBusiness = MembershipBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

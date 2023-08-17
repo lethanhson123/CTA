@@ -6,9 +6,11 @@
     public class CareerFileController : BaseController<CareerFile, ICareerFileBusiness>
     {
         private readonly ICareerFileBusiness _CareerFileBusiness;
-        public CareerFileController(ICareerFileBusiness CareerFileBusiness) : base(CareerFileBusiness)
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public CareerFileController(ICareerFileBusiness CareerFileBusiness, IWebHostEnvironment WebHostEnvironment) : base(CareerFileBusiness, WebHostEnvironment)
         {
             _CareerFileBusiness = CareerFileBusiness;
+            _WebHostEnvironment = WebHostEnvironment;
         }
     }
 }

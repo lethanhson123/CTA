@@ -15,5 +15,6 @@ export class Ideas {
     Active?: boolean;
     SortOrder?: number;
     IsHomePage?: boolean;
+    FileName?: string;
 }
 

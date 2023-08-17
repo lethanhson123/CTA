@@ -15,5 +15,6 @@ export class Contact {
     Active?: boolean;
     SortOrder?: number;
     IsHomePage?: boolean;
+    FileName?: string;
 }
 

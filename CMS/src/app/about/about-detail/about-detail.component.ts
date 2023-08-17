@@ -17,6 +17,8 @@ export class AboutDetailComponent implements OnInit {
 
   ID: number = environment.InitializationNumber;
   isShowLoading: boolean = false;
+  fileToUpload: any;
+  fileToUpload0: File = null;
   constructor(
     public AboutService: AboutService,
     public CategoryLanguageService: CategoryLanguageService,
@@ -54,7 +56,7 @@ export class AboutDetailComponent implements OnInit {
     );
   }
   onSubmit(form: NgForm) {
-    this.AboutService.SaveAsync(form.value).subscribe(
+    this.AboutService.SaveAndUploadFileAsync(form.value, this.fileToUpload).subscribe(
       res => {
         this.NotificationService.success(environment.SaveSuccess);
       },
@@ -62,5 +64,16 @@ export class AboutDetailComponent implements OnInit {
         this.NotificationService.warn(environment.SaveNotSuccess);
       }
     );
+  }
+  changeImage(files: FileList) {
+    if (files) {
+      this.fileToUpload = files;
+      this.fileToUpload0 = files.item(0);
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.AboutService.formData.FileName = event.target.result;
+      };
+      reader.readAsDataURL(this.fileToUpload0);
+    }
   }
 }
