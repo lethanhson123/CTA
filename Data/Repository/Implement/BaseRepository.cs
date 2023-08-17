@@ -31,6 +31,14 @@
             {
                 model.ContentHTML = model.ContentHTML.Replace(@"</div>", @"</p>");
                 model.ContentHTML = model.ContentHTML.Replace(@"<div", @"<p");
+                model.ContentHTML = model.ContentHTML.Replace(@"<html>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</html>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"<head>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</head>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"<title>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</title>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"<body>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</body>", @"");
             }
 
         }
@@ -211,8 +219,7 @@
             var result = _context.Set<T>().AsNoTracking().FirstOrDefault(model => model.ID == ID);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));
-                result.Active = GlobalHelper.InitializationBool;
+                result = (T)Activator.CreateInstance(typeof(T));                
             }
             return result;
         }
@@ -221,8 +228,7 @@
             var result = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(model => model.ID == ID);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));
-                result.Active = GlobalHelper.InitializationBool;
+                result = (T)Activator.CreateInstance(typeof(T));                
             }
             return result;
         }
@@ -231,8 +237,7 @@
             var result = _context.Set<T>().AsNoTracking().FirstOrDefault(model => model.Name == name);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));
-                result.Active = GlobalHelper.InitializationBool;
+                result = (T)Activator.CreateInstance(typeof(T));                
             }
             return result;
         }
@@ -241,8 +246,7 @@
             var result = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(model => model.Name == name);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));
-                result.Active = GlobalHelper.InitializationBool;
+                result = (T)Activator.CreateInstance(typeof(T));                
             }
             return result;
         }
@@ -251,8 +255,7 @@
             var result = _context.Set<T>().AsNoTracking().FirstOrDefault(model => model.Code == code);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));
-                result.Active = GlobalHelper.InitializationBool;
+                result = (T)Activator.CreateInstance(typeof(T));                
             }
             return result;
         }
@@ -261,8 +264,7 @@
             var result = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(model => model.Code == code);
             if (result == null)
             {
-                result = (T)Activator.CreateInstance(typeof(T));
-                result.Active = GlobalHelper.InitializationBool;
+                result = (T)Activator.CreateInstance(typeof(T));                
             }
             return result;
         }

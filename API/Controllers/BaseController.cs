@@ -75,6 +75,20 @@
             return result;
         }
         [HttpPost]
+        [Route("GetAllAndEmptyToList")]
+        public virtual List<T> GetAllAndEmptyToList()
+        {
+            var result = _baseBusiness.GetAllAndEmptyToList();
+            return result;
+        }
+        [HttpPost]
+        [Route("GetAllAndEmptyToListAsync")]
+        public virtual async Task<List<T>> GetAllAndEmptyToListAsync()
+        {
+            var result = await _baseBusiness.GetAllAndEmptyToListAsync();
+            return result;
+        }
+        [HttpPost]
         [Route("GetByActiveToList")]
         public virtual List<T> GetByActiveToList()
         {
@@ -104,6 +118,22 @@
         {
             long parentID = JsonConvert.DeserializeObject<long>(Request.Form["data"]);
             var result = await _baseBusiness.GetByParentIDToListAsync(parentID);
+            return result;
+        }
+        [HttpPost]
+        [Route("GetByParentIDAndEmptyToList")]
+        public virtual List<T> GetByParentIDAndEmptyToList()
+        {
+            long parentID = JsonConvert.DeserializeObject<long>(Request.Form["data"]);
+            var result = _baseBusiness.GetByParentIDAndEmptyToList(parentID);
+            return result;
+        }
+        [HttpPost]
+        [Route("GetByParentIDAndEmptyToListAsync")]
+        public virtual async Task<List<T>> GetByParentIDAndEmptyToListAsync()
+        {
+            long parentID = JsonConvert.DeserializeObject<long>(Request.Form["data"]);
+            var result = await _baseBusiness.GetByParentIDAndEmptyToListAsync(parentID);
             return result;
         }
         [HttpPost]

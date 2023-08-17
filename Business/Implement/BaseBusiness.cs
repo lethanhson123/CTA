@@ -1,4 +1,6 @@
-﻿namespace Business.Implement
+﻿using System.Collections.Generic;
+
+namespace Business.Implement
 {
     public class BaseBusiness<T, TRepository> : IBaseBusiness<T>
         where T : BaseModel
@@ -11,6 +13,11 @@
         }
         public virtual void Initialization(T model)
         {
+            model.Display = model.Name + "-" + model.Code;
+            if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationNumber))
+            {
+                model.SortOrder = 1;
+            }
         }
         public virtual T Save(T model)
         {
@@ -90,6 +97,39 @@
         {
             return await _repository.GetAllToListAsync();
         }
+        public virtual List<T> GetAllAndEmptyToList()
+        {
+            List<T> result = new List<T>();
+            T empty = (T)Activator.CreateInstance(typeof(T));
+            empty.SortOrder = GlobalHelper.InitializationNumber;
+            result.Add(empty);
+            List<T> list = _repository.GetAllToList();
+            if (list.Count > 0)
+            {
+                result.AddRange(list);
+            }
+            return result;
+        }
+        public virtual async Task<List<T>> GetAllAndEmptyToListAsync()
+        {
+            List<T> result = new List<T>();
+            try
+            {
+                T empty = (T)Activator.CreateInstance(typeof(T));
+                empty.SortOrder = GlobalHelper.InitializationNumber;
+                result.Add(empty);
+                List<T> list = await _repository.GetAllToListAsync();
+                if (list.Count > 0)
+                {
+                    result.AddRange(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+            return result;
+        }
         public virtual List<T> GetByActiveToList(bool active)
         {
             return _repository.GetByActiveToList(active);
@@ -105,6 +145,46 @@
         public virtual async Task<List<T>> GetByParentIDToListAsync(long parentID)
         {
             return await _repository.GetByParentIDToListAsync(parentID);
+        }
+        public virtual List<T> GetByParentIDAndEmptyToList(long parentID)
+        {
+            List<T> result = new List<T>();
+            try
+            {
+                T empty = (T)Activator.CreateInstance(typeof(T));
+                empty.SortOrder = GlobalHelper.InitializationNumber;
+                result.Add(empty);
+                List<T> list = _repository.GetByParentIDToList(parentID);
+                if (list.Count > 0)
+                {
+                    result.AddRange(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+            return result;
+        }
+        public virtual async Task<List<T>> GetByParentIDAndEmptyToListAsync(long parentID)
+        {
+            List<T> result = new List<T>();
+            try
+            {
+                T empty = (T)Activator.CreateInstance(typeof(T));
+                empty.SortOrder = GlobalHelper.InitializationNumber;
+                result.Add(empty);
+                List<T> list = await _repository.GetByParentIDToListAsync(parentID);
+                if (list.Count > 0)
+                {
+                    result.AddRange(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+            return result;
         }
         public virtual List<T> GetByParentIDAndActiveToList(long parentID, bool active)
         {

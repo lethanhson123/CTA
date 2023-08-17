@@ -18,8 +18,11 @@ namespace Data.Model
         public string? Note { get; set; }
         public bool? Active { get; set; }
         public int? SortOrder { get; set; }
+        public bool? IsHomePage { get; set; }
         public BaseModel()
         {
+            SortOrder = GlobalHelper.InitializationSortOrder;
+            Active = GlobalHelper.InitializationBool;
         }
     }
 }

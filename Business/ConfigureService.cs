@@ -13,6 +13,7 @@
             services.AddTransient<IContactFileBusiness, ContactFileBusiness>();
             services.AddTransient<IIdeasBusiness, IdeasBusiness>();
             services.AddTransient<IIdeasFileBusiness, IdeasFileBusiness>();
+            services.AddTransient<IMembershipBusiness, MembershipBusiness>();
             services.AddTransient<INewsBusiness, NewsBusiness>();
             services.AddTransient<INewsFileBusiness, NewsFileBusiness>();
             services.AddTransient<IProjectBusiness, ProjectBusiness>();
@@ -42,6 +43,7 @@
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddTransient<IIdeasFileRepository, IdeasFileRepository>();
             services.AddTransient<IIdeasRepository, IdeasRepository>();
+            services.AddTransient<IMembershipRepository, MembershipRepository>();
             services.AddTransient<INewsFileRepository, NewsFileRepository>();
             services.AddTransient<INewsRepository, NewsRepository>();
             services.AddTransient<IProjectFileRepository, ProjectFileRepository>();
