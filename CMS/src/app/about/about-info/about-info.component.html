@@ -1,0 +1,218 @@
+<div class="row">
+    <div id="breadcrumbs-wrapper" data-image="https://cms.ctacorporation.vn/app-assets/images/gallery/breadcrumb-bg.jpg"
+        style="color: #ffffff; background: rgb(40,70,99); background: linear-gradient(90deg, rgba(40,70,99,1) 0%, rgba(62,110,159,1) 35%, rgba(106,179,245,1) 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Giới thiệu <span
+                            *ngIf="AboutService.list">({{AboutService.list.length}} items)</span></h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CMS</a>
+                        </li>
+                        <li class="breadcrumb-item active" style="color: #ffffff;">Giới thiệu
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <div id="input-fields" class="card card-tabs">
+            <div class="card-content">
+                <div class="card-title">
+                    <div class="row">
+                        <div class="col s6 m6 l8">                           
+                        </div>
+                        <div class="col s6 m6 l4">
+                            <ul class="tabs">
+                                <li class="tab col s6 p-0"><a class="active p-0" href="#Detail">Thông tin</a></li>
+                                <li class="tab col s6 p-0"><a class="p-0" href="#Media">Media</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="Detail">
+                    <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
+                        <input name="ID" [(ngModel)]="AboutService.formData.ID" type="hidden">
+                        <input name="FileName" [(ngModel)]="AboutService.formData.FileName" type="hidden">
+                        <div class="col s12 m12 l5">
+                            <div class="col s12 m12 l12">
+                                <a title="Danh sách" href="javascript:window.open('','_self').close();"
+                                    class="btn-floating waves-effect waves-light amber darken-4"><i
+                                        class="material-icons">arrow_back</i></a>&nbsp;&nbsp;&nbsp;
+                                <button title="Lưu thay đổi" type="submit"
+                                    class="btn-floating waves-effect waves-light cyan"><i
+                                        class="material-icons">save</i></button>
+                            </div>
+                            <div class="col s6 m6 l4">
+                                <div class="input-field">
+                                    <label for="ParentID">Ngôn ngữ</label>
+                                </div>
+                            </div>
+                            <div class="col s6 m6 l8">
+                                <mat-select
+                                    style="padding-top:10px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                    name="ParentID" [(ngModel)]="AboutService.formData.ParentID">
+                                    <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
+                                        {{item.Name}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Name">Tiêu đề</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Tiêu đề" name="Name" [(ngModel)]="AboutService.formData.Name"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="SortOrder">Sắp xếp</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Sắp xếp" name="SortOrder"
+                                        [(ngModel)]="AboutService.formData.SortOrder" type="number">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4"></div>
+                            <div class="input-field col s4 m4 l4">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="IsHomePage"
+                                            [(ngModel)]="AboutService.formData.IsHomePage" />
+                                        <span>Trang chủ</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="input-field col s4 m4 l4">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="Active"
+                                            [(ngModel)]="AboutService.formData.Active" />
+                                        <span>Kích hoạt</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="FileName">Hình ảnh</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input type="file" multiple (change)="changeImage($event.target.files)">
+                                </div>
+                                <div class="input-field">
+                                    <a target="_blank" href="{{AboutService.formData.FileName}}"
+                                        *ngIf="AboutService.formData.FileName"
+                                        title="{{AboutService.formData.FileName}}">
+                                        <img class="responsive-img" width="50%"
+                                            title="{{AboutService.formData.FileName}}"
+                                            alt="{{AboutService.formData.FileName}}"
+                                            [src]="AboutService.formData.FileName"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l7">
+                            <ck-editor [config]="{'height': 500}" name="ContentHTML"
+                                [(ngModel)]="AboutService.formData.ContentHTML" skin="moono-lisa" language="en"
+                                [fullPage]="true"></ck-editor>
+                        </div>
+                    </form>
+                </div>
+                <div id="Media">
+                    <div class="col s4 m4 l4">
+                        <div class="input-field">
+                            <input type="file" multiple (change)="changeFiles($event.target.files)">
+                        </div>
+                    </div>
+                    <div class="col s4 m4 l4">
+                        <a class="btn-floating waves-effect waves-light cyan"
+                            *ngIf="AboutService.formData.ID>0"
+                            (click)="onAddFiles()"><i
+                                class="material-icons">cloud_upload</i></a>
+                    </div>
+                    <div class="KhungOverflow">
+                        <mat-table [dataSource]="dataSourceFile" matSort>
+                            <ng-container matColumnDef="Note">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Media
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <a target="_blank" title="{{element.FileName}}" *ngIf="element.FileName"
+                                        href="{{element.FileName}}"><img width="50%" class="responsive-img"
+                                            title="{{element.FileName}}" alt="{{element.FileName}}"
+                                            [src]="element.FileName"></a>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="FileName">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Đường dẫn
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                    <input placeholder="Đường dẫn" name="FileName{{element.ID}}"
+                                        [(ngModel)]="element.FileName" type="text">
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="Name">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tiêu đề
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                    <input placeholder="Tiêu đề" name="Name{{element.ID}}" [(ngModel)]="element.Name"
+                                        type="text">
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="SortOrder">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                    <input placeholder="0" name="SortOrder{{element.ID}}" style="text-align: right;"
+                                        [(ngModel)]="element.SortOrder" type="number">
+                                </mat-cell>
+                            </ng-container> 
+                            <ng-container matColumnDef="Save">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <a title="Lưu thay đổi" (click)="onSaveFile(element)"
+                                        class="btn-floating waves-effect waves-light cyan"><i
+                                            class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
+                                    <a style="padding-left: 8px;" (click)="onDeleteFile(element)" *ngIf="element.ID>0"
+                                        class="btn-floating waves-effect waves-light red"><i
+                                            class="material-icons">delete_outline</i></a>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="loading">
+                                <mat-footer-cell *matFooterCellDef colspan="4">
+                                    Đang tải dữ liệu...
+                                </mat-footer-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="noData">
+                                <mat-footer-cell *matFooterCellDef colspan="4">
+                                    Chưa có dữ liệu.
+                                </mat-footer-cell>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayColumnsFile"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayColumnsFile;"></mat-row>
+                            <mat-footer-row *matFooterRowDef="['loading']"
+                                [ngClass]="{'hide':dataSourceFile!=null}"></mat-footer-row>
+                            <mat-footer-row *matFooterRowDef="['noData']"
+                                [ngClass]="{'hide':!(dataSourceFile!=null && dataSourceFile.data.length==0)}">
+                            </mat-footer-row>
+                        </mat-table>
+                        <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
+                            [showFirstLastButtons]></mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loading *ngIf="isShowLoading"></app-loading>

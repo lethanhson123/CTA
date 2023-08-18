@@ -1,9 +1,9 @@
 export const environment = {
   production: false, 
-  DomainURL: "http://localhost:4200/",  
-  DomainDestination: "http://localhost:4200/#/",  
-  APIURL: "https://localhost:7226/api/v1/",    
-  APIRootURL: "https://localhost:7226/",    
+  DomainURL: "https://cms.ctacorporation.vn/",  
+  DomainDestination: "https://cms.ctacorporation.vn/#/",  
+  APIURL: "https://api.ctacorporation.vn/api/v1/",    
+  APIRootURL: "https://api.ctacorporation.vn/",    
   LoginURL: "https://login.ctacorporation.vn/",
   Website: "https://ctacorporation.vn/",
   Image: "Image",  

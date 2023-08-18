@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { NotificationService } from 'src/app/shared/Notification.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { environment } from 'src/environments/environment';
+import { NotificationService } from 'src/app/shared/Notification.service';
 import { CategoryLanguage } from 'src/app/shared/CategoryLanguage.model';
 import { CategoryLanguageService } from 'src/app/shared/CategoryLanguage.service';
 import { About } from 'src/app/shared/About.model';
 import { AboutService } from 'src/app/shared/About.service';
-import { AboutDetailComponent } from './about-detail/about-detail.component';
 
 @Component({
   selector: 'app-about',
@@ -25,6 +24,7 @@ export class AboutComponent implements OnInit {
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
+  detailURL: string = "/About/Info";
   constructor(
     public AboutService: AboutService,
     public CategoryLanguageService: CategoryLanguageService,
@@ -76,25 +76,7 @@ export class AboutComponent implements OnInit {
     else {
       this.onGetToList();
     }
-  }
-  onAdd(ID: any) {
-    this.AboutService.GetByIDAsync(ID).subscribe(
-      res => {
-        this.AboutService.formData = res as About;
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.width = environment.DialogConfigWidth;
-        dialogConfig.data = { ID: ID };
-        const dialog = this.dialog.open(AboutDetailComponent, dialogConfig);
-        dialog.afterClosed().subscribe(() => {
-          this.onGetToList();
-        });
-      },
-      err => {
-      }
-    );
-  }
+  }  
   onDelete(element: About) {
     if (confirm(element.Name + ': ' + environment.DeleteConfirm)) {
       this.AboutService.RemoveAsync(element.ID).subscribe(

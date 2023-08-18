@@ -41,7 +41,7 @@
                             <a title="Tìm" (click)="onSearch()"
                                 class="btn-floating waves-effect waves-light green darken-1"><i
                                     class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                            <a title="Thêm mới" (click)="onAdd(0)"
+                            <a title="Thêm mới" target="_blank" routerLink="{{detailURL}}/0"
                                 class="btn-floating waves-effect waves-light green darken-1"><i
                                     class="material-icons">add</i></a>
                         </div>
@@ -65,8 +65,7 @@
                                 <ng-container matColumnDef="Name">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Tiêu đề
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element"><a style="cursor: pointer;"
-                                            (click)="onAdd(element.ID)"><b>{{element.Name}}</b></a></mat-cell>
+                                    <mat-cell *matCellDef="let element"><a title="Chi tiết" target="_blank" routerLink="{{detailURL}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="SortOrder">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp

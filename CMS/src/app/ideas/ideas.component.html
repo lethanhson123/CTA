@@ -25,12 +25,12 @@
                     <div class="card-content">
                         <div class="col s12 m12 l3">
                             <mat-select
-                                    style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                    name="parentID" class="browser-default" [(ngModel)]="parentID">                                    
-                                    <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
-                                        {{item.Name}}
-                                    </mat-option>
-                                </mat-select>
+                                style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                name="parentID" class="browser-default" [(ngModel)]="parentID">
+                                <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
+                                    {{item.Name}}
+                                </mat-option>
+                            </mat-select>
                         </div>
                         <div class="col s12 m12 l6">
                             <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
@@ -41,22 +41,31 @@
                             <a title="Tìm" (click)="onSearch()"
                                 class="btn-floating waves-effect waves-light green darken-1"><i
                                     class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                            <a title="Thêm mới" (click)="onAdd(0)"
+                            <a title="Thêm mới" target="_blank" routerLink="{{detailURL}}/0"
                                 class="btn-floating waves-effect waves-light green darken-1"><i
                                     class="material-icons">add</i></a>
                         </div>
                         <div class="KhungOverflow">
-                            <mat-table [dataSource]="dataSource" matSort>   
-                                <ng-container matColumnDef="ID">
+                            <mat-table [dataSource]="dataSource" matSort>
+                                <!-- <ng-container matColumnDef="ID">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>ID
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element">{{element.ID}}</mat-cell>
-                                </ng-container>                                                             
+                                </ng-container> -->
+                                <ng-container matColumnDef="FileName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Hình ảnh
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">
+                                        <a target="_blank" href="{{element.FileName}}" *ngIf="element.FileName"
+                                            title="{{element.FileName}}">
+                                            <img class="responsive-img" width="50%" title="{{element.FileName}}"
+                                                alt="{{element.FileName}}" [src]="element.FileName"></a>
+                                    </mat-cell>
+                                </ng-container>
                                 <ng-container matColumnDef="Name">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Tiêu đề
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element"><a style="cursor: pointer;"
-                                            (click)="onAdd(element.ID)"><b>{{element.Name}}</b></a></mat-cell>
+                                    <mat-cell *matCellDef="let element"><a title="Chi tiết" target="_blank" routerLink="{{detailURL}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="SortOrder">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
@@ -77,11 +86,11 @@
                                 <ng-container matColumnDef="Save">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">    
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
 
-                                        <a style="padding-left: 8px;" title="Xóa" class="btn-floating waves-effect waves-light red"
-                                            *ngIf="element.ID>0" (click)="onDelete(element)"><i
-                                                class="material-icons">delete_outline</i></a>
+                                        <a style="padding-left: 8px;" title="Xóa"
+                                            class="btn-floating waves-effect waves-light red" *ngIf="element.ID>0"
+                                            (click)="onDelete(element)"><i class="material-icons">delete_outline</i></a>
                                     </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="loading">
@@ -102,7 +111,7 @@
                                     [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}">
                                 </mat-footer-row>
                             </mat-table>
-                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="10"
+                            <mat-paginator [pageSizeOptions]="[10,20,50,100]" [pageSize]="5"
                                 [showFirstLastButtons]></mat-paginator>
                         </div>
                     </div>

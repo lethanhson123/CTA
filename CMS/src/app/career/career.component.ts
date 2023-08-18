@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { NotificationService } from 'src/app/shared/Notification.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { environment } from 'src/environments/environment';
+import { NotificationService } from 'src/app/shared/Notification.service';
 import { CategoryLanguage } from 'src/app/shared/CategoryLanguage.model';
 import { CategoryLanguageService } from 'src/app/shared/CategoryLanguage.service';
 import { Career } from 'src/app/shared/Career.model';
 import { CareerService } from 'src/app/shared/Career.service';
-import { CareerDetailComponent } from './career-detail/career-detail.component';
 
 @Component({
   selector: 'app-Career',
@@ -19,12 +18,13 @@ import { CareerDetailComponent } from './career-detail/career-detail.component';
 export class CareerComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ID', 'Name', 'SortOrder', 'IsHomePage', 'Active', 'Save'];
+  displayColumns: string[] = ['FileName', 'Name', 'SortOrder', 'IsHomePage', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
+  detailURL: string = "/Career/Info";
   constructor(
     public CareerService: CareerService,
     public CategoryLanguageService: CategoryLanguageService,
@@ -76,27 +76,9 @@ export class CareerComponent implements OnInit {
     else {
       this.onGetToList();
     }
-  }
-  onAdd(ID: any) {
-    this.CareerService.GetByIDAsync(ID).subscribe(
-      res => {
-        this.CareerService.formData = res as Career;
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.width = environment.DialogConfigWidth;
-        dialogConfig.data = { ID: ID };
-        const dialog = this.dialog.open(CareerDetailComponent, dialogConfig);
-        dialog.afterClosed().subscribe(() => {
-          this.onGetToList();
-        });
-      },
-      err => {
-      }
-    );
-  }
+  }  
   onDelete(element: Career) {
-    if (confirm(environment.DeleteConfirm + ': ' + element.Name)) {
+    if (confirm(element.Name + ': ' + environment.DeleteConfirm)) {
       this.CareerService.RemoveAsync(element.ID).subscribe(
         res => {
           this.onSearch();

@@ -11,6 +11,14 @@ import { NewsComponent } from './news/news.component';
 import { ProjectComponent } from './project/project.component';
 import { ServiceComponent } from './service/service.component';
 import { TeamComponent } from './team/team.component';
+import { AboutInfoComponent } from './about/about-info/about-info.component';
+import { CareerDetailComponent } from './career/career-detail/career-detail.component';
+import { BannerDetailComponent } from './banner/banner-detail/banner-detail.component';
+import { IdeasDetailComponent } from './ideas/ideas-detail/ideas-detail.component';
+import { NewsDetailComponent } from './news/news-detail/news-detail.component';
+import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
+import { ServiceDetailComponent } from './service/service-detail/service-detail.component';
+import { TeamDetailComponent } from './team/team-detail/team-detail.component';
 
 const routes: Routes = [  
   { path: '', redirectTo: '/Homepage', pathMatch: 'full' },
@@ -27,26 +35,106 @@ const routes: Routes = [
     path: 'About', component: AboutComponent,
   }, 
   {
+    path: 'About', children: [
+      {
+        path: 'List', component: AboutComponent,
+      },     
+      {
+        path: 'Info/:ID', component: AboutInfoComponent,
+      },
+    ]
+  },
+  {
     path: 'Banner', component: BannerComponent,
   }, 
+  {
+    path: 'Banner', children: [
+      {
+        path: 'List', component: CareerComponent,
+      },     
+      {
+        path: 'Info/:ID', component: BannerDetailComponent,
+      },
+    ]
+  },
   {
     path: 'Career', component: CareerComponent,
   }, 
   {
+    path: 'Career', children: [
+      {
+        path: 'List', component: CareerComponent,
+      },     
+      {
+        path: 'Info/:ID', component: CareerDetailComponent,
+      },
+    ]
+  },
+  {
     path: 'Ideas', component: IdeasComponent,
   }, 
+  {
+    path: 'Ideas', children: [
+      {
+        path: 'List', component: CareerComponent,
+      },     
+      {
+        path: 'Info/:ID', component: IdeasDetailComponent,
+      },
+    ]
+  },
   {
     path: 'News', component: NewsComponent,
   }, 
   {
+    path: 'News', children: [
+      {
+        path: 'List', component: CareerComponent,
+      },     
+      {
+        path: 'Info/:ID', component: NewsDetailComponent,
+      },
+    ]
+  },
+  {
     path: 'Project', component: ProjectComponent,
   }, 
+  {
+    path: 'Project', children: [
+      {
+        path: 'List', component: CareerComponent,
+      },     
+      {
+        path: 'Info/:ID', component: ProjectDetailComponent,
+      },
+    ]
+  },
   {
     path: 'Service', component: ServiceComponent,
   }, 
   {
+    path: 'Service', children: [
+      {
+        path: 'List', component: CareerComponent,
+      },     
+      {
+        path: 'Info/:ID', component: ServiceDetailComponent,
+      },
+    ]
+  },
+  {
     path: 'Team', component: TeamComponent,
   }, 
+  {
+    path: 'Team', children: [
+      {
+        path: 'List', component: CareerComponent,
+      },     
+      {
+        path: 'Info/:ID', component: TeamDetailComponent,
+      },
+    ]
+  },
 ];
 
 @NgModule({

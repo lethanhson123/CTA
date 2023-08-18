@@ -19,6 +19,32 @@ export class AboutService {
         this.formData = {
         }
     }
+    SaveAndUploadFiles(formData: About, fileToUpload: FileList) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadFiles';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        if (fileToUpload) {
+            if (fileToUpload.length > 0) {
+                for (var i = 0; i < fileToUpload.length; i++) {
+                    formUpload.append('file[]', fileToUpload[i]);
+                }
+            }
+        }     
+        return this.httpClient.post(url, formUpload);
+    }
+    SaveAndUploadFilesAsync(formData: About, fileToUpload: FileList) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadFilesAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        if (fileToUpload) {
+            if (fileToUpload.length > 0) {
+                for (var i = 0; i < fileToUpload.length; i++) {
+                    formUpload.append('file[]', fileToUpload[i]);
+                }
+            }
+        }     
+        return this.httpClient.post(url, formUpload);
+    }
     SaveAndUploadFile(formData: About, fileToUpload: FileList) {
         let url = this.aPIURL + this.controller + '/SaveAndUploadFile';
         const formUpload: FormData = new FormData();

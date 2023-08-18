@@ -16,6 +16,101 @@ namespace API.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
         [HttpPost]
+        [Route("SaveAndUploadFilesAsync")]
+        public async Task<T> SaveAndUploadFilesAsync()
+        {
+            T model = JsonConvert.DeserializeObject<T>(Request.Form["data"]);
+            model.Code = GlobalHelper.SetName(model.Name);
+            try
+            {
+                if (Request.Form.Files.Count > 0)
+                {
+                    for (int i = 0; i < Request.Form.Files.Count; i++)
+                    {
+                        var file = Request.Form.Files[i];
+                        if (file == null || file.Length == 0)
+                        {
+                        }
+                        if (file != null)
+                        {
+                            string fileExtension = Path.GetExtension(file.FileName);
+                            model.FileName = model.Code + "_" + i + "_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                            string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, GlobalHelper.Image, model.GetType().Name);
+                            bool isFolderExists = System.IO.Directory.Exists(folderPath);
+                            if (!isFolderExists)
+                            {
+                                System.IO.Directory.CreateDirectory(folderPath);
+                            }
+                            var physicalPath = Path.Combine(folderPath, model.FileName);
+                            using (var stream = new FileStream(physicalPath, FileMode.Create))
+                            {
+                                file.CopyTo(stream);
+                                T modelSave = (T)Activator.CreateInstance(typeof(T));
+                                modelSave.ParentID = model.ParentID;
+                                modelSave.FileName = model.FileName;
+                                modelSave.Name = model.Name;
+                                modelSave.Code = model.Code;
+                                await _baseBusiness.SaveAsync(modelSave);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string mes = e.Message;
+            }
+            return model;
+        }
+        [HttpPost]
+        [Route("SaveAndUploadFiles")]
+        public T SaveAndUploadFiles()
+        {
+            T model = JsonConvert.DeserializeObject<T>(Request.Form["data"]);
+            model.Code = GlobalHelper.SetName(model.Name);
+            try
+            {
+                if (Request.Form.Files.Count > 0)
+                {
+                    for (int i = 0; i < Request.Form.Files.Count; i++)
+                    {
+                        var file = Request.Form.Files[i];
+                        if (file == null || file.Length == 0)
+                        {
+                        }
+                        if (file != null)
+                        {
+                            string fileExtension = Path.GetExtension(file.FileName);
+                            model.FileName = model.Code + "_" + i + "_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                            string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, GlobalHelper.Image, model.GetType().Name);
+                            bool isFolderExists = System.IO.Directory.Exists(folderPath);
+                            if (!isFolderExists)
+                            {
+                                System.IO.Directory.CreateDirectory(folderPath);
+                            }
+                            var physicalPath = Path.Combine(folderPath, model.FileName);
+                            using (var stream = new FileStream(physicalPath, FileMode.Create))
+                            {
+                                file.CopyTo(stream);
+                                T modelSave = (T)Activator.CreateInstance(typeof(T));
+                                modelSave.ParentID = model.ParentID;
+                                modelSave.FileName = model.FileName;
+                                modelSave.Name = model.Name;
+                                modelSave.Code = model.Code;
+                                _baseBusiness.Save(modelSave);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string mes = e.Message;
+            }
+
+            return model;
+        }
+        [HttpPost]
         [Route("SaveAndUploadFileAsync")]
         public async Task<T> SaveAndUploadFileAsync()
         {
@@ -42,7 +137,7 @@ namespace API.Controllers
                         var physicalPath = Path.Combine(folderPath, model.FileName);
                         using (var stream = new FileStream(physicalPath, FileMode.Create))
                         {
-                            file.CopyTo(stream);                            
+                            file.CopyTo(stream);
                         }
                     }
                 }
@@ -81,7 +176,7 @@ namespace API.Controllers
                         var physicalPath = Path.Combine(folderPath, model.FileName);
                         using (var stream = new FileStream(physicalPath, FileMode.Create))
                         {
-                            file.CopyTo(stream);                            
+                            file.CopyTo(stream);
                         }
                     }
                 }

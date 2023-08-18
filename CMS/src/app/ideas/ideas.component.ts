@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { NotificationService } from 'src/app/shared/Notification.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { environment } from 'src/environments/environment';
+import { NotificationService } from 'src/app/shared/Notification.service';
 import { CategoryLanguage } from 'src/app/shared/CategoryLanguage.model';
 import { CategoryLanguageService } from 'src/app/shared/CategoryLanguage.service';
 import { Ideas } from 'src/app/shared/Ideas.model';
 import { IdeasService } from 'src/app/shared/Ideas.service';
-import { IdeasDetailComponent } from './ideas-detail/ideas-detail.component';
 
 @Component({
   selector: 'app-ideas',
@@ -19,12 +18,13 @@ import { IdeasDetailComponent } from './ideas-detail/ideas-detail.component';
 export class IdeasComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ID', 'Name', 'SortOrder', 'IsHomePage', 'Active', 'Save'];
+  displayColumns: string[] = ['FileName', 'Name', 'SortOrder', 'IsHomePage', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
+  detailURL: string = "/Ideas/Info";
   constructor(
     public IdeasService: IdeasService,
     public CategoryLanguageService: CategoryLanguageService,
@@ -76,27 +76,9 @@ export class IdeasComponent implements OnInit {
     else {
       this.onGetToList();
     }
-  }
-  onAdd(ID: any) {
-    this.IdeasService.GetByIDAsync(ID).subscribe(
-      res => {
-        this.IdeasService.formData = res as Ideas;
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.width = environment.DialogConfigWidth;
-        dialogConfig.data = { ID: ID };
-        const dialog = this.dialog.open(IdeasDetailComponent, dialogConfig);
-        dialog.afterClosed().subscribe(() => {
-          this.onGetToList();
-        });
-      },
-      err => {
-      }
-    );
-  }
+  }  
   onDelete(element: Ideas) {
-    if (confirm(environment.DeleteConfirm + ': ' + element.Name)) {
+    if (confirm(element.Name + ': ' + environment.DeleteConfirm)) {
       this.IdeasService.RemoveAsync(element.ID).subscribe(
         res => {
           this.onSearch();
