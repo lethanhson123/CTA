@@ -195,6 +195,14 @@
                 return builder.Build().GetSection("AppSettings").GetSection("LogoFileName").Value;
             }
         }
+        public static string ImageFileName
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("AppSettings").GetSection("ImageFileName").Value;
+            }
+        }
         public static string Facebook
         {
             get
@@ -211,6 +219,14 @@
                 return builder.Build().GetSection("AppSettings").GetSection("Twitter").Value;
             }
         }
+        public static string Instagram
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("AppSettings").GetSection("Instagram").Value;
+            }
+        }
         public static string Youtube
         {
             get
@@ -225,6 +241,20 @@
             {
                 var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                 return builder.Build().GetSection("AppSettings").GetSection("Tiktok").Value;
+            }
+        }
+        public static string LogoURL
+        {
+            get
+            {
+                return DomainURL + Image + @"/" + LogoFileName;
+            }
+        }
+        public static string ImageURL
+        {
+            get
+            {
+                return DomainURL + Image + @"/" + ImageFileName;
             }
         }
         #endregion

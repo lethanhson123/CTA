@@ -1,0 +1,18 @@
+﻿@inject Business.Interface.ITeamBusiness _teamBusiness
+
+@{
+    List<Data.Model.Team> listTeam = await _teamBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    listTeam = listTeam.OrderBy(item => item.SortOrder).ToList();
+    Data.Model.Team team = new Team();
+    if (listTeam.Count > 0)
+    {
+        team = listTeam[0];
+        team.Note = Helper.GlobalHelper.DomainURL + team.GetType().Name + "/" + team.Code + "-" + team.ID + ".html";
+    }
+}
+
+@{
+    ViewData["Title"] = "Đội ngũ";
+    ViewData["Description"] = Helper.GlobalHelper.PageDescription;
+    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "doi-ngu.html";
+}

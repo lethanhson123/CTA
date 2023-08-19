@@ -19,6 +19,7 @@
         public virtual DbSet<Data.Model.CategoryLanguage> CategoryLanguage { get; set; }
         public virtual DbSet<Data.Model.Contact> Contact { get; set; }
         public virtual DbSet<Data.Model.ContactFile> ContactFile { get; set; }
+        public virtual DbSet<Data.Model.Feedback> Feedback { get; set; }
         public virtual DbSet<Data.Model.Ideas> Ideas { get; set; }
         public virtual DbSet<Data.Model.IdeasFile> IdeasFile { get; set; }
         public virtual DbSet<Data.Model.Membership> Membership { get; set; }

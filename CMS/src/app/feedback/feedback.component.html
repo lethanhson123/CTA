@@ -4,14 +4,14 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Giới thiệu <span
-                            *ngIf="AboutService.list">({{AboutService.list.length}} items)</span></h5>
+                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Phản hồi <span
+                            *ngIf="FeedbackService.list">({{FeedbackService.list.length}} items)</span></h5>
                 </div>
                 <div class="col s12 m6 l6 right-align-md">
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CMS</a>
                         </li>
-                        <li class="breadcrumb-item active" style="color: #ffffff;">Giới thiệu
+                        <li class="breadcrumb-item active" style="color: #ffffff;">Phản hồi
                         </li>
                     </ol>
                 </div>
@@ -40,58 +40,34 @@
                         <div class="col s12 m12 l3">
                             <a title="Tìm" (click)="onSearch()"
                                 class="btn-floating waves-effect waves-light green darken-1"><i
-                                    class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
-                            <a title="Thêm mới" target="_blank" routerLink="{{detailURL}}/0"
-                                class="btn-floating waves-effect waves-light green darken-1"><i
-                                    class="material-icons">add</i></a>
+                                    class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;                            
                         </div>
                         <div class="KhungOverflow">
-                            <mat-table [dataSource]="dataSource" matSort>
-                                <!-- <ng-container matColumnDef="ID">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element">{{element.ID}}</mat-cell>
-                                </ng-container> -->
-                                <ng-container matColumnDef="FileName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Hình ảnh
-                                    </mat-header-cell>
-                                    <mat-cell *matCellDef="let element">
-                                        <a target="_blank" href="{{element.FileName}}" *ngIf="element.FileName"
-                                            title="{{element.FileName}}">
-                                            <img class="responsive-img" width="50%" title="{{element.FileName}}"
-                                                alt="{{element.FileName}}" [src]="element.FileName"></a>
-                                    </mat-cell>
-                                </ng-container>
+                            <mat-table [dataSource]="dataSource" matSort>                                
                                 <ng-container matColumnDef="Name">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tiêu đề
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Họ tên
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element"><a title="Chi tiết" target="_blank"
-                                            routerLink="{{detailURL}}/{{element.ID}}"><b>{{element.Name}}</b></a></mat-cell>
+                                    <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
                                 </ng-container>
-                                <ng-container matColumnDef="SortOrder">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
+                                <ng-container matColumnDef="Code">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element">{{element.SortOrder | number:
-                                        '1.0-0'}}</mat-cell>
+                                    <mat-cell *matCellDef="let element">{{element.Code}}</mat-cell>
                                 </ng-container>
-                                <ng-container matColumnDef="IsHomePage">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Trang chủ
+                                <ng-container matColumnDef="Display">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Công ty
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element">{{element.IsHomePage}}</mat-cell>
+                                    <mat-cell *matCellDef="let element">{{element.Display}}</mat-cell>
                                 </ng-container>
-                                <ng-container matColumnDef="Active">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nội dung
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let element">{{element.Active}}</mat-cell>
+                                    <mat-cell *matCellDef="let element">{{element.Description}}</mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="Save">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <a title="Website" target="_blank"
-                                            href="{{liveURL}}About/{{element.Code}}-{{element.ID}}.html"
-                                            class="btn-floating waves-effect waves-light green darken-1"><i
-                                                class="material-icons">laptop</i></a>&nbsp;&nbsp;&nbsp;
                                         <a style="padding-left: 8px;" title="Xóa"
                                             class="btn-floating waves-effect waves-light red" *ngIf="element.ID>0"
                                             (click)="onDelete(element)"><i class="material-icons">delete_outline</i></a>

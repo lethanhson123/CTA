@@ -73,6 +73,39 @@
                             </div>
                             <div class="col s4 m4 l4">
                                 <div class="input-field">
+                                    <label for="Code">Code</label>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Description">Mô tả</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Mô tả" name="Description" [(ngModel)]="IdeasService.formData.Description"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Code" name="Code" [(ngModel)]="IdeasService.formData.Code"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Note">Ghi chú</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Ghi chú" name="Note" [(ngModel)]="IdeasService.formData.Note"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
                                     <label for="SortOrder">Sắp xếp</label>
                                 </div>
                             </div>

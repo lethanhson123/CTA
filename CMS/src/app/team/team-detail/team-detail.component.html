@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col s12 m6 l6">
                     <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Đội ngũ <span
-                            *ngIf="ServiceService.list">({{ServiceService.list.length}} items)</span></h5>
+                            *ngIf="TeamService.list">({{TeamService.list.length}} items)</span></h5>
                 </div>
                 <div class="col s12 m6 l6 right-align-md">
                     <ol class="breadcrumbs mb-0">
@@ -35,8 +35,8 @@
                 </div>
                 <div id="Detail">
                     <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
-                        <input name="ID" [(ngModel)]="ServiceService.formData.ID" type="hidden">
-                        <input name="FileName" [(ngModel)]="ServiceService.formData.FileName" type="hidden">
+                        <input name="ID" [(ngModel)]="TeamService.formData.ID" type="hidden">
+                        <input name="FileName" [(ngModel)]="TeamService.formData.FileName" type="hidden">
                         <div class="col s12 m12 l5">
                             <div class="col s12 m12 l12">
                                 <a title="Danh sách" href="javascript:window.open('','_self').close();"
@@ -54,7 +54,7 @@
                             <div class="col s6 m6 l8">
                                 <mat-select
                                     style="padding-top:10px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
-                                    name="ParentID" [(ngModel)]="ServiceService.formData.ParentID">
+                                    name="ParentID" [(ngModel)]="TeamService.formData.ParentID">
                                     <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
                                         {{item.Name}}
                                     </mat-option>
@@ -67,7 +67,40 @@
                             </div>
                             <div class="col s8 m8 l8">
                                 <div class="input-field">
-                                    <input placeholder="Tiêu đề" name="Name" [(ngModel)]="ServiceService.formData.Name"
+                                    <input placeholder="Tiêu đề" name="Name" [(ngModel)]="TeamService.formData.Name"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Description">Mô tả</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Mô tả" name="Description" [(ngModel)]="TeamService.formData.Description"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Code">Code</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Code" name="Code" [(ngModel)]="TeamService.formData.Code"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Note">Ghi chú</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Ghi chú" name="Note" [(ngModel)]="TeamService.formData.Note"
                                         type="text">
                                 </div>
                             </div>
@@ -79,7 +112,7 @@
                             <div class="col s8 m8 l8">
                                 <div class="input-field">
                                     <input placeholder="Sắp xếp" name="SortOrder"
-                                        [(ngModel)]="ServiceService.formData.SortOrder" type="number">
+                                        [(ngModel)]="TeamService.formData.SortOrder" type="number">
                                 </div>
                             </div>
                             <div class="col s4 m4 l4"></div>
@@ -87,7 +120,7 @@
                                 <p>
                                     <label>
                                         <input type="checkbox" class="filled-in" name="IsHomePage"
-                                            [(ngModel)]="ServiceService.formData.IsHomePage" />
+                                            [(ngModel)]="TeamService.formData.IsHomePage" />
                                         <span>Trang chủ</span>
                                     </label>
                                 </p>
@@ -96,7 +129,7 @@
                                 <p>
                                     <label>
                                         <input type="checkbox" class="filled-in" name="Active"
-                                            [(ngModel)]="ServiceService.formData.Active" />
+                                            [(ngModel)]="TeamService.formData.Active" />
                                         <span>Kích hoạt</span>
                                     </label>
                                 </p>
@@ -111,19 +144,19 @@
                                     <input type="file" multiple (change)="changeImage($event.target.files)">
                                 </div>
                                 <div class="input-field">
-                                    <a target="_blank" href="{{ServiceService.formData.FileName}}"
-                                        *ngIf="ServiceService.formData.FileName"
-                                        title="{{ServiceService.formData.FileName}}">
+                                    <a target="_blank" href="{{TeamService.formData.FileName}}"
+                                        *ngIf="TeamService.formData.FileName"
+                                        title="{{TeamService.formData.FileName}}">
                                         <img class="responsive-img" width="50%"
-                                            title="{{ServiceService.formData.FileName}}"
-                                            alt="{{ServiceService.formData.FileName}}"
-                                            [src]="ServiceService.formData.FileName"></a>
+                                            title="{{TeamService.formData.FileName}}"
+                                            alt="{{TeamService.formData.FileName}}"
+                                            [src]="TeamService.formData.FileName"></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col s12 m12 l7">
                             <ck-editor [config]="{'height': 500}" name="ContentHTML"
-                                [(ngModel)]="ServiceService.formData.ContentHTML" skin="moono-lisa" language="en"
+                                [(ngModel)]="TeamService.formData.ContentHTML" skin="moono-lisa" language="en"
                                 [fullPage]="true"></ck-editor>
                         </div>
                     </form>
@@ -136,7 +169,7 @@
                     </div>
                     <div class="col s4 m4 l4">
                         <a class="btn-floating waves-effect waves-light cyan"
-                            *ngIf="ServiceService.formData.ID>0"
+                            *ngIf="TeamService.formData.ID>0"
                             (click)="onAddFiles()"><i
                                 class="material-icons">cloud_upload</i></a>
                     </div>

@@ -29,6 +29,7 @@ export class AboutInfoComponent implements OnInit {
   fileToUpload: any;
   fileToUpload0: File = null;
   fileToUpload001: any;
+  liveURL: string = environment.Website;
   constructor(
     public AboutService: AboutService,
     public AboutFileService: AboutFileService,

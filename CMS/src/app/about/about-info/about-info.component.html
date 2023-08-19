@@ -23,7 +23,7 @@
             <div class="card-content">
                 <div class="card-title">
                     <div class="row">
-                        <div class="col s6 m6 l8">                           
+                        <div class="col s6 m6 l8">
                         </div>
                         <div class="col s6 m6 l4">
                             <ul class="tabs">
@@ -44,7 +44,11 @@
                                         class="material-icons">arrow_back</i></a>&nbsp;&nbsp;&nbsp;
                                 <button title="Lưu thay đổi" type="submit"
                                     class="btn-floating waves-effect waves-light cyan"><i
-                                        class="material-icons">save</i></button>
+                                        class="material-icons">save</i></button>&nbsp;&nbsp;&nbsp;
+                                <a title="Website" target="_blank"
+                                    href="{{liveURL}}About/{{AboutService.formData.Code}}-{{AboutService.formData.ID}}.html"
+                                    class="btn-floating waves-effect waves-light green darken-1"><i
+                                        class="material-icons">laptop</i></a>
                             </div>
                             <div class="col s6 m6 l4">
                                 <div class="input-field">
@@ -68,6 +72,39 @@
                             <div class="col s8 m8 l8">
                                 <div class="input-field">
                                     <input placeholder="Tiêu đề" name="Name" [(ngModel)]="AboutService.formData.Name"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Description">Mô tả</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Mô tả" name="Description"
+                                        [(ngModel)]="AboutService.formData.Description" type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Code">Code</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Code" name="Code" [(ngModel)]="AboutService.formData.Code"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Note">Ghi chú</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Ghi chú" name="Note" [(ngModel)]="AboutService.formData.Note"
                                         type="text">
                                 </div>
                             </div>
@@ -135,10 +172,8 @@
                         </div>
                     </div>
                     <div class="col s4 m4 l4">
-                        <a class="btn-floating waves-effect waves-light cyan"
-                            *ngIf="AboutService.formData.ID>0"
-                            (click)="onAddFiles()"><i
-                                class="material-icons">cloud_upload</i></a>
+                        <a class="btn-floating waves-effect waves-light cyan" *ngIf="AboutService.formData.ID>0"
+                            (click)="onAddFiles()"><i class="material-icons">cloud_upload</i></a>
                     </div>
                     <div class="KhungOverflow">
                         <mat-table [dataSource]="dataSourceFile" matSort>
@@ -175,7 +210,7 @@
                                     <input placeholder="0" name="SortOrder{{element.ID}}" style="text-align: right;"
                                         [(ngModel)]="element.SortOrder" type="number">
                                 </mat-cell>
-                            </ng-container> 
+                            </ng-container>
                             <ng-container matColumnDef="Save">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>
                                 </mat-header-cell>

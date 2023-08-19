@@ -19,6 +19,7 @@ import { NewsDetailComponent } from './news/news-detail/news-detail.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 import { ServiceDetailComponent } from './service/service-detail/service-detail.component';
 import { TeamDetailComponent } from './team/team-detail/team-detail.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [  
   { path: '', redirectTo: '/Homepage', pathMatch: 'full' },
@@ -30,6 +31,9 @@ const routes: Routes = [
   }, 
   {
     path: 'Contact', component: ContactComponent,
+  }, 
+  {
+    path: 'Feedback', component: FeedbackComponent,
   }, 
   {
     path: 'About', component: AboutComponent,
@@ -76,7 +80,7 @@ const routes: Routes = [
   {
     path: 'Ideas', children: [
       {
-        path: 'List', component: CareerComponent,
+        path: 'List', component: IdeasComponent,
       },     
       {
         path: 'Info/:ID', component: IdeasDetailComponent,
@@ -89,7 +93,7 @@ const routes: Routes = [
   {
     path: 'News', children: [
       {
-        path: 'List', component: CareerComponent,
+        path: 'List', component: NewsComponent,
       },     
       {
         path: 'Info/:ID', component: NewsDetailComponent,
@@ -102,7 +106,7 @@ const routes: Routes = [
   {
     path: 'Project', children: [
       {
-        path: 'List', component: CareerComponent,
+        path: 'List', component: ProjectComponent,
       },     
       {
         path: 'Info/:ID', component: ProjectDetailComponent,
@@ -115,7 +119,7 @@ const routes: Routes = [
   {
     path: 'Service', children: [
       {
-        path: 'List', component: CareerComponent,
+        path: 'List', component: ServiceComponent,
       },     
       {
         path: 'Info/:ID', component: ServiceDetailComponent,
@@ -128,7 +132,7 @@ const routes: Routes = [
   {
     path: 'Team', children: [
       {
-        path: 'List', component: CareerComponent,
+        path: 'List', component: TeamComponent,
       },     
       {
         path: 'Info/:ID', component: TeamDetailComponent,

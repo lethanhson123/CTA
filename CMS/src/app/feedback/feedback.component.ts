@@ -7,26 +7,26 @@ import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/shared/Notification.service';
 import { CategoryLanguage } from 'src/app/shared/CategoryLanguage.model';
 import { CategoryLanguageService } from 'src/app/shared/CategoryLanguage.service';
-import { Team } from 'src/app/shared/Team.model';
-import { TeamService } from 'src/app/shared/Team.service';
+import { Feedback } from 'src/app/shared/Feedback.model';
+import { FeedbackService } from 'src/app/shared/Feedback.service';
 
 @Component({
-  selector: 'app-team',
-  templateUrl: './team.component.html',
-  styleUrls: ['./team.component.css']
+  selector: 'app-feedback',
+  templateUrl: './feedback.component.html',
+  styleUrls: ['./feedback.component.css']
 })
-export class TeamComponent implements OnInit {
+export class FeedbackComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['FileName', 'Name', 'SortOrder', 'IsHomePage', 'Active', 'Save'];
+  displayColumns: string[] = ['Name', 'Code', 'Display', 'Description', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
-  detailURL: string = "/Team/Info";
+  detailURL: string = "/Feedback/Info";
   constructor(
-    public TeamService: TeamService,
+    public FeedbackService: FeedbackService,
     public CategoryLanguageService: CategoryLanguageService,
     public NotificationService: NotificationService,
     private dialog: MatDialog
@@ -56,10 +56,10 @@ export class TeamComponent implements OnInit {
   }
   onGetToList() {
     this.isShowLoading = true;
-    this.TeamService.GetByParentIDToListAsync(this.parentID).subscribe(
+    this.FeedbackService.GetByParentIDToListAsync(this.parentID).subscribe(
       res => {
-        this.TeamService.list = res as Team[];
-        this.dataSource = new MatTableDataSource(this.TeamService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
+        this.FeedbackService.list = res as Feedback[];
+        this.dataSource = new MatTableDataSource(this.FeedbackService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isShowLoading = false;
@@ -77,9 +77,9 @@ export class TeamComponent implements OnInit {
       this.onGetToList();
     }
   }  
-  onDelete(element: Team) {
+  onDelete(element: Feedback) {
     if (confirm(element.Name + ': ' + environment.DeleteConfirm)) {
-      this.TeamService.RemoveAsync(element.ID).subscribe(
+      this.FeedbackService.RemoveAsync(element.ID).subscribe(
         res => {
           this.onSearch();
           this.NotificationService.warn(environment.DeleteSuccess);

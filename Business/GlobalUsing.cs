@@ -14,3 +14,5 @@ global using Business.Interface;
 
 global using Helper;
 
+global using System.Text.Encodings.Web;
+global using System.Text.Unicode;

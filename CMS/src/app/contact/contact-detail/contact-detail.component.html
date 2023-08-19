@@ -34,7 +34,7 @@
             <div class="input-field">
                 <input placeholder="Tiêu đề" name="Name" [(ngModel)]="ContactService.formData.Name" type="text">
             </div>
-        </div>
+        </div>        
         <div class="col s4 m4 l4">
             <div class="input-field">
                 <label for="SortOrder">Sắp xếp</label>
@@ -56,14 +56,67 @@
                 <label>
                     <input type="checkbox" class="filled-in" name="Active"
                         [(ngModel)]="ContactService.formData.Active" />
-                    <span>.</span>
+                    <span>Kích hoạt</span>
                 </label>
             </p>
         </div>
     </div>
     <div class="col s12 m12 l7">
-        <ck-editor [config]="{'height': 400}" name="ContentHTML" [(ngModel)]="ContactService.formData.ContentHTML"
-            skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+        <div class="col s4 m4 l4">
+            <div class="input-field">
+                <label for="Code">Email</label>
+            </div>
+        </div>
+        <div class="col s8 m8 l8">
+            <div class="input-field">
+                <input placeholder="Email" name="Code" [(ngModel)]="ContactService.formData.Code"
+                    type="text">
+            </div>
+        </div>
+        <div class="col s4 m4 l4">
+            <div class="input-field">
+                <label for="Display">Di động</label>
+            </div>
+        </div>
+        <div class="col s8 m8 l8">
+            <div class="input-field">
+                <input placeholder="Di động" name="Display" [(ngModel)]="ContactService.formData.Display"
+                    type="text">
+            </div>
+        </div>
+        <div class="col s4 m4 l4">
+            <div class="input-field">
+                <label for="Description">Cố định</label>
+            </div>
+        </div>
+        <div class="col s8 m8 l8">
+            <div class="input-field">
+                <input placeholder="Cố định" name="Description" [(ngModel)]="ContactService.formData.Description"
+                    type="text">
+            </div>
+        </div>        
+        <div class="col s4 m4 l4">
+            <div class="input-field">
+                <label for="ContentHTML">Địa chỉ</label>
+            </div>
+        </div>
+        <div class="col s8 m8 l8">
+            <div class="input-field">
+                <input placeholder="Địa chỉ" name="ContentHTML" [(ngModel)]="ContactService.formData.ContentHTML"
+                    type="text">
+            </div>
+        </div>
+        <div class="col s4 m4 l4">
+            <div class="input-field">
+                <label for="Note">Google map</label>
+            </div>
+        </div>
+        <div class="col s8 m8 l8">
+            <div class="input-field">
+                <input placeholder="Google map" name="Note" [(ngModel)]="ContactService.formData.Note"
+                    type="text">
+            </div>
+        </div>
     </div>
 </form>
 <app-loading *ngIf="isShowLoading"></app-loading>

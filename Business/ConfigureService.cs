@@ -11,6 +11,7 @@
             services.AddTransient<ICategoryLanguageBusiness, CategoryLanguageBusiness>();
             services.AddTransient<IContactBusiness, ContactBusiness>();
             services.AddTransient<IContactFileBusiness, ContactFileBusiness>();
+            services.AddTransient<IFeedbackBusiness, FeedbackBusiness>();
             services.AddTransient<IIdeasBusiness, IdeasBusiness>();
             services.AddTransient<IIdeasFileBusiness, IdeasFileBusiness>();
             services.AddTransient<IMembershipBusiness, MembershipBusiness>();
@@ -21,8 +22,9 @@
             services.AddTransient<IServiceBusiness, ServiceBusiness>();
             services.AddTransient<IServiceFileBusiness, ServiceFileBusiness>();
             services.AddTransient<ITeamBusiness, TeamBusiness>();
-            services.AddTransient<ITeamFileBusiness, TeamFileBusiness>();           
+            services.AddTransient<ITeamFileBusiness, TeamFileBusiness>();
 
+            services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
             return services;
         }
         public static IServiceCollection AddContextService(this IServiceCollection services)
@@ -41,6 +43,7 @@
             services.AddTransient<ICategoryLanguageRepository, CategoryLanguageRepository>();
             services.AddTransient<IContactFileRepository, ContactFileRepository>();
             services.AddTransient<IContactRepository, ContactRepository>();
+            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
             services.AddTransient<IIdeasFileRepository, IdeasFileRepository>();
             services.AddTransient<IIdeasRepository, IdeasRepository>();
             services.AddTransient<IMembershipRepository, MembershipRepository>();

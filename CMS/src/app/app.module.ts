@@ -34,6 +34,7 @@ import { BannerDetailComponent } from './banner/banner-detail/banner-detail.comp
 import { AboutComponent } from './about/about.component';
 import { AboutDetailComponent } from './about/about-detail/about-detail.component';
 import { AboutInfoComponent } from './about/about-info/about-info.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 
@@ -61,7 +62,7 @@ import { AboutInfoComponent } from './about/about-info/about-info.component';
     BannerComponent, 
     BannerDetailComponent, 
     AboutComponent, 
-    AboutDetailComponent, AboutInfoComponent, 
+    AboutDetailComponent, AboutInfoComponent, FeedbackComponent, 
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

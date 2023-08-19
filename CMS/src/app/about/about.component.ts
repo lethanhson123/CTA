@@ -25,6 +25,7 @@ export class AboutComponent implements OnInit {
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
   detailURL: string = "/About/Info";
+  liveURL: string = environment.Website;
   constructor(
     public AboutService: AboutService,
     public CategoryLanguageService: CategoryLanguageService,
