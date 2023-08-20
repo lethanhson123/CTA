@@ -124,6 +124,21 @@ export class BannerDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.BannerService.formData.ID = environment.InitializationNumber;
+    this.BannerService.SaveAsync(this.BannerService.formData).subscribe(
+      res => {
+        this.BannerService.formData = res as Banner;
+        let url = this.detailURL + "/" + this.BannerService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;

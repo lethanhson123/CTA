@@ -124,6 +124,21 @@ export class ServiceDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.ServiceService.formData.ID = environment.InitializationNumber;
+    this.ServiceService.SaveAsync(this.ServiceService.formData).subscribe(
+      res => {
+        this.ServiceService.formData = res as Service;
+        let url = this.detailURL + "/" + this.ServiceService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;

@@ -4,14 +4,14 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Ý tưởng <span
+                    <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Banner <span
                             *ngIf="BannerService.list">({{BannerService.list.length}} items)</span></h5>
                 </div>
                 <div class="col s12 m6 l6 right-align-md">
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="#" style="color: #ffffff;">CMS</a>
                         </li>
-                        <li class="breadcrumb-item active" style="color: #ffffff;">Ý tưởng
+                        <li class="breadcrumb-item active" style="color: #ffffff;">Banner
                         </li>
                     </ol>
                 </div>
@@ -23,7 +23,7 @@
             <div class="card-content">
                 <div class="card-title">
                     <div class="row">
-                        <div class="col s6 m6 l8">                           
+                        <div class="col s6 m6 l8">
                         </div>
                         <div class="col s6 m6 l4">
                             <ul class="tabs">
@@ -44,7 +44,9 @@
                                         class="material-icons">arrow_back</i></a>&nbsp;&nbsp;&nbsp;
                                 <button title="Lưu thay đổi" type="submit"
                                     class="btn-floating waves-effect waves-light cyan"><i
-                                        class="material-icons">save</i></button>
+                                        class="material-icons">save</i></button>&nbsp;&nbsp;&nbsp;
+                                <a (click)="onCopy()" title="Copy" class="btn-floating waves-effect waves-light cyan"><i
+                                        class="material-icons">filter_2</i></a>
                             </div>
                             <div class="col s6 m6 l4">
                                 <div class="input-field">
@@ -78,8 +80,8 @@
                             </div>
                             <div class="col s8 m8 l8">
                                 <div class="input-field">
-                                    <input placeholder="Mô tả" name="Description" [(ngModel)]="BannerService.formData.Description"
-                                        type="text">
+                                    <input placeholder="Mô tả" name="Description"
+                                        [(ngModel)]="BannerService.formData.Description" type="text">
                                 </div>
                             </div>
                             <div class="col s4 m4 l4">
@@ -168,10 +170,8 @@
                         </div>
                     </div>
                     <div class="col s4 m4 l4">
-                        <a class="btn-floating waves-effect waves-light cyan"
-                            *ngIf="BannerService.formData.ID>0"
-                            (click)="onAddFiles()"><i
-                                class="material-icons">cloud_upload</i></a>
+                        <a class="btn-floating waves-effect waves-light cyan" *ngIf="BannerService.formData.ID>0"
+                            (click)="onAddFiles()"><i class="material-icons">cloud_upload</i></a>
                     </div>
                     <div class="KhungOverflow">
                         <mat-table [dataSource]="dataSourceFile" matSort>
@@ -208,7 +208,7 @@
                                     <input placeholder="0" name="SortOrder{{element.ID}}" style="text-align: right;"
                                         [(ngModel)]="element.SortOrder" type="number">
                                 </mat-cell>
-                            </ng-container> 
+                            </ng-container>
                             <ng-container matColumnDef="Save">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>
                                 </mat-header-cell>

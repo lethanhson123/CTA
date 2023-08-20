@@ -124,6 +124,21 @@ export class ProjectDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.ProjectService.formData.ID = environment.InitializationNumber;
+    this.ProjectService.SaveAsync(this.ProjectService.formData).subscribe(
+      res => {
+        this.ProjectService.formData = res as Project;
+        let url = this.detailURL + "/" + this.ProjectService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;

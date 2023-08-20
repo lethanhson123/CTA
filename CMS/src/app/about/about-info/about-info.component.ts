@@ -124,6 +124,21 @@ export class AboutInfoComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.AboutService.formData.ID = environment.InitializationNumber;
+    this.AboutService.SaveAsync(this.AboutService.formData).subscribe(
+      res => {
+        this.AboutService.formData = res as About;
+        let url = this.detailURL + "/" + this.AboutService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;

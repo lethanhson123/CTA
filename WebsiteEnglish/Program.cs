@@ -103,7 +103,7 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapControllerRoute(
      name: "Career",
-     pattern: "career",
+     pattern: "career.html",
      defaults: new { controller = "Home", action = "Career" });
 
     endpoints.MapControllerRoute(

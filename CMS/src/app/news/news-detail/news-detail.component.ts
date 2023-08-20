@@ -124,6 +124,21 @@ export class NewsDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.NewsService.formData.ID = environment.InitializationNumber;
+    this.NewsService.SaveAsync(this.NewsService.formData).subscribe(
+      res => {
+        this.NewsService.formData = res as News;
+        let url = this.detailURL + "/" + this.NewsService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;

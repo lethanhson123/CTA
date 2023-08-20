@@ -124,6 +124,21 @@ export class CareerDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.CareerService.formData.ID = environment.InitializationNumber;
+    this.CareerService.SaveAsync(this.CareerService.formData).subscribe(
+      res => {
+        this.CareerService.formData = res as Career;
+        let url = this.detailURL + "/" + this.CareerService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;

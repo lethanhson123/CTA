@@ -155,6 +155,21 @@ export class IdeasDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.IdeasService.formData.ID = environment.InitializationNumber;
+    this.IdeasService.SaveAsync(this.IdeasService.formData).subscribe(
+      res => {
+        this.IdeasService.formData = res as Ideas;
+        let url = this.detailURL + "/" + this.IdeasService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;

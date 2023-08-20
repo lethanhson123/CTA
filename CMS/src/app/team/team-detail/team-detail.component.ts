@@ -124,6 +124,21 @@ export class TeamDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.TeamService.formData.ID = environment.InitializationNumber;
+    this.TeamService.SaveAsync(this.TeamService.formData).subscribe(
+      res => {
+        this.TeamService.formData = res as Team;
+        let url = this.detailURL + "/" + this.TeamService.formData.ID;
+        this.router.navigateByUrl(url);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+        this.isShowLoading = false;
+      }
+    );
+  }
   changeImage(files: FileList) {
     if (files) {
       this.fileToUpload = files;
