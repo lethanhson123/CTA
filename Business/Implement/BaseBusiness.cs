@@ -19,7 +19,7 @@ namespace Business.Implement
             }
             if (!string.IsNullOrEmpty(model.FileName))
             {
-                if (model.FileName.Contains(GlobalHelper.APISite) == false)
+                if (model.FileName.Contains("https") == false)
                 {
                     model.FileName = GlobalHelper.APISite + GlobalHelper.Image + @"/" + model.GetType().Name + @"/" + model.FileName;
                 }
