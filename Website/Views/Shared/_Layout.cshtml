@@ -3,9 +3,9 @@
 @inject Business.Interface.IIdeasBusiness _ideasBusiness
 
 @{
-    List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
 
-    List<Data.Model.Ideas> listIdeas = _ideasBusiness.GetByCondition(item => item.ParentID == 1 && item.IsHomePage == true && item.Active == true).ToList();
+    List<Data.Model.Ideas> listIdeas = _ideasBusiness.GetByCondition(item => item.ParentID == Helper.GlobalHelper.CategoryLanguageID && item.IsHomePage == true && item.Active == true).ToList();
 
     Data.Model.Ideas ideas = new Ideas();
     if (listIdeas.Count > 0)

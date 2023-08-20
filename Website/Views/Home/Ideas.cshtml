@@ -2,7 +2,7 @@
 @inject Business.Interface.ICategoryIdeasBusiness _categoryIdeasBusiness
 
 @{
-    List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listIdeas = listIdeas.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Ideas ideas = new Ideas();
     if (listIdeas.Count > 0)
@@ -11,7 +11,7 @@
         ideas.Note = Helper.GlobalHelper.DomainURL + ideas.GetType().Name + "/" + ideas.Code + "-" + ideas.ID + ".html";
     }
 
-    List<Data.Model.CategoryIdeas> listCategoryIdeas = await _categoryIdeasBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.CategoryIdeas> listCategoryIdeas = await _categoryIdeasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
 }
 
 @{

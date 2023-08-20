@@ -1,0 +1,86 @@
+﻿@inject Business.Interface.IAboutBusiness _aboutBusiness
+
+@{
+    List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listAbout = listAbout.OrderBy(item => item.SortOrder).ToList();
+    Data.Model.About about = new About();
+    if (listAbout.Count > 0)
+    {
+        about = listAbout[0];
+        about.Note = Helper.GlobalHelper.DomainURL + about.GetType().Name + "/" + about.Code + "-" + about.ID + ".html";
+    }
+}
+
+@{
+    ViewData["Title"] = about.Name;
+    ViewData["Description"] = about.Description;
+    ViewData["URLImage"] = about.FileName;
+    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "about.html";
+}
+<div class="slider">
+    <div class="content">
+        @Html.Raw("<a style='text-decoration: none;' href='"+ about.Note +"' title='"+ about.Name +"'><h1 class='marginbt1'>"+ about.Name +"</h1></a>")
+        <p>
+            @about.Description
+        </p>
+    </div>
+</div>
+<div class="light-grey-after">
+    <div class="wrapper">
+        <div class="about-us">
+            <div>
+                <div class="wrapper">
+                    @Html.Raw("<a class='news-item hover-style' style='text-decoration: none;' href='"+ about.Note +"' title='"+ about.Name +"'>")
+                    @Html.Raw("<div class='zoom-image marginbt1 text-center'>")
+                    @Html.Raw("<img class='img-fix' src='"+about.FileName+"' alt='"+about.Name+"' title='"+about.Name+"'>")
+                    @Html.Raw("</div>")
+                    @Html.Raw("</a>")
+                </div>
+            </div>
+            <div>
+                <div class="wrapper ">
+                    @{
+                        int row = 0;
+                        foreach (Data.Model.About item in listAbout)
+                        {
+                            if (item.ID != about.ID)
+                            {
+                                string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
+                                @Html.Raw(@"<div class='padtop_4_5'>")
+                                if (row % 2 == 0)
+                                {
+                                    @Html.Raw(@"<div class='inner'>")
+                                }
+                                else
+                                {
+                                    @Html.Raw(@"<div class='inner convert-row'>")
+                                }
+                                @Html.Raw(@"<div class='left'>")
+                                @Html.Raw("<a style='text-decoration: none;' href='"+ url +"' title='"+ item.Name +"'>")
+                                @Html.Raw("<img src='"+item.FileName+"' alt='"+item.Name+"' title='"+item.Name+"'>")
+                                @Html.Raw("</a>")
+                                @Html.Raw(@"</div>")
+                                @Html.Raw(@"<div class='right'>")
+                                @Html.Raw(@"<div class='content first-item-about'>")
+                                @Html.Raw("<a style='text-decoration: none;' href='"+ url +"' title='"+ item.Name +"'><h2 class='marginbt1'>"+ item.Name +"</h2></a>")
+                                @Html.Raw(@"<p>"+item.Description+"</p>")
+                                @Html.Raw(@"</div>")
+                                @Html.Raw(@"</div>")
+                                @Html.Raw(@"</div>")
+                                @Html.Raw(@"</div>")
+                                row = row + 1;
+                            }
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="note-text bg-color-4 padding4_5_0">
+    <div class="content">
+        <h2 class="marginbt2">Discuss your workplace</h2>
+        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+    </div>
+</div>

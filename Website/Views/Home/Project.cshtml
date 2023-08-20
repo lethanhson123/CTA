@@ -3,7 +3,7 @@
 @inject Business.Interface.IProjectFileBusiness _projectFileBusiness
 
 @{
-    List<Data.Model.Project> listProject = await _projectBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Project> listProject = await _projectBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listProject = listProject.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Project project = new Project();
     if (listProject.Count > 0)

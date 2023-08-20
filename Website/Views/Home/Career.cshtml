@@ -1,7 +1,7 @@
 ﻿@inject Business.Interface.ICareerBusiness _careerBusiness
 
 @{
-    List<Data.Model.Career> listCareer = await _careerBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Career> listCareer = await _careerBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listCareer = listCareer.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Career career = new Career();
     if (listCareer.Count > 0)

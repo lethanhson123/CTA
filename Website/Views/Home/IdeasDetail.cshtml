@@ -1,7 +1,7 @@
 ﻿@model Data.Model.Ideas;
 @inject Business.Interface.IIdeasBusiness _ideasBusiness
 @{
-    List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listIdeas = listIdeas.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Ideas ideas = new Ideas();
     if (listIdeas.Count > 0)

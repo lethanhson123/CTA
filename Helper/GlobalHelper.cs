@@ -243,6 +243,14 @@
                 return builder.Build().GetSection("AppSettings").GetSection("Tiktok").Value;
             }
         }
+        public static long CategoryLanguageID
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return long.Parse(builder.Build().GetSection("AppSettings").GetSection("CategoryLanguageID").Value);
+            }
+        }
         public static string LogoURL
         {
             get

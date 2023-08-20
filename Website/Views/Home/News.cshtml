@@ -1,7 +1,7 @@
 ﻿@inject Business.Interface.INewsBusiness _newsBusiness
 
 @{
-    List<Data.Model.News> listNews = await _newsBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.News> listNews = await _newsBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listNews = listNews.OrderBy(item => item.SortOrder).ToList();
     Data.Model.News news = new News();
     if (listNews.Count > 0)

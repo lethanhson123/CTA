@@ -1,7 +1,7 @@
 ﻿@inject Business.Interface.IServiceBusiness _serviceBusiness
 @inject Business.Interface.IProjectBusiness _projectBusiness
 @{
-    List<Data.Model.Service> listService = await _serviceBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Service> listService = await _serviceBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listService = listService.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Service service = new Service();
     if (listService.Count > 0)

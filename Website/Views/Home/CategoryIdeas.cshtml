@@ -7,7 +7,7 @@
     List<Data.Model.Ideas> listIdeas = _ideasBusiness.GetByCondition(item => item.CategoryIdeasID == Model.ID && item.Active == true).ToList();
     listIdeas = listIdeas.OrderBy(item => item.SortOrder).ToList();
 
-    List<Data.Model.CategoryIdeas> listCategoryIdeas = await _categoryIdeasBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.CategoryIdeas> listCategoryIdeas = await _categoryIdeasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
 }
 
 @{

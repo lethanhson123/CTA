@@ -7,7 +7,7 @@
     ViewData["URLCurrent"] = Model.Note;
     ViewData["URLImage"] = Model.FileName;
 
-    List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listAbout = listAbout.OrderBy(item => item.SortOrder).ToList();
 
     string urlParent = Helper.GlobalHelper.DomainURL + "gioi-thieu.html";

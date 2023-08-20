@@ -1,0 +1,151 @@
+﻿@inject Business.Interface.IContactBusiness _contactBusiness
+@{
+    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
+}
+@{
+    ViewData["Title"] = "Get the latest news from us";
+    ViewData["Description"] = Helper.GlobalHelper.PageDescription;
+    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "subscribe.html";
+    ViewData["URLImage"] = Helper.GlobalHelper.ImageURL;
+}
+<style>
+    .btn-talk:hover {
+        cursor: pointer;
+        border-width: 0px;
+    }
+</style>
+<script>
+    function onSaveNewsletter() {
+        $.ajax({
+            type: "POST",
+            datatype: "JSON",
+            url: '@Url.Action("SaveNewsletter", "Home")',
+            data: $('#formNewsletter').serialize(),
+            success: function (result) {
+                window.location.href = "/thank.html";
+            },
+            error: function (jqXHR, exception) { },
+            complete: function () { },
+        })
+    }
+</script>
+<div class="slider bg-image-contact">
+    <div class="content">
+        <h1 class="marginbt1">Get the latest news from us</h1>
+    </div>
+</div>
+<div>
+    <div>
+        <div class="contact">
+            <div class="wrapper ">
+                <div class="contact-frm inner">
+                    <div class="left-contact">
+                        <div class="item">
+                            <svg width="19" height="23" viewBox="0 0 19 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 9.5C18 16.1111 9.5 21.7778 9.5 21.7778C9.5 21.7778 1 16.1111 1 9.5C1 7.24566 1.89553 5.08365 3.48959 3.48959C5.08365 1.89553 7.24566 1 9.5 1C11.7543 1 13.9163 1.89553 15.5104 3.48959C17.1045 5.08365 18 7.24566 18 9.5Z"
+                                      stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M9.49935 12.3337C11.0642 12.3337 12.3327 11.0651 12.3327 9.50033C12.3327 7.93552 11.0642 6.66699 9.49935 6.66699C7.93454 6.66699 6.66602 7.93552 6.66602 9.50033C6.66602 11.0651 7.93454 12.3337 9.49935 12.3337Z"
+                                      stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p><strong>Address: </strong><a target="_blank" href="@contact.Note" title="@contact.ContentHTML">@contact.ContentHTML</a></p>
+                        </div>
+                        <div class="item">
+                            <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.7 1H16.3C17.235 1 18 1.765 18 2.7V12.9C18 13.835 17.235 14.6 16.3 14.6H2.7C1.765 14.6 1 13.835 1 12.9V2.7C1 1.765 1.765 1 2.7 1Z"
+                                      stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M18 2.69971L9.5 8.64971L1 2.69971" stroke="#424B5A" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                            <p><strong>Email: </strong><a href="mailto:@contact.Code" title="@contact.Code">@contact.Code</a></p>
+                        </div>
+                        <div class="item">
+                            <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.9995 13.753V16.3173C18.0004 16.5553 17.9517 16.791 17.8563 17.0091C17.7609 17.2272 17.6211 17.423 17.4457 17.5839C17.2702 17.7449 17.0632 17.8674 16.8376 17.9436C16.6121 18.0199 16.3732 18.0482 16.1361 18.0268C13.5059 17.741 10.9794 16.8422 8.75957 15.4027C6.69433 14.0904 4.94337 12.3394 3.63104 10.2742C2.18648 8.0443 1.28751 5.50549 1.00694 2.86345C0.985578 2.62708 1.01367 2.38886 1.08942 2.16394C1.16518 1.93902 1.28693 1.73234 1.44694 1.55706C1.60694 1.38178 1.80169 1.24173 2.01879 1.14584C2.23589 1.04994 2.47057 1.00031 2.7079 1.00008H5.27217C5.68698 0.996 6.08913 1.14289 6.40366 1.41338C6.71818 1.68388 6.92362 2.05951 6.98168 2.47026C7.08991 3.29088 7.29063 4.09663 7.58001 4.87212C7.69501 5.17806 7.7199 5.51055 7.65173 5.8302C7.58355 6.14985 7.42518 6.44326 7.19537 6.67566L6.10983 7.7612C7.32662 9.90112 9.09844 11.6729 11.2384 12.8897L12.3239 11.8042C12.5563 11.5744 12.8497 11.416 13.1694 11.3478C13.489 11.2797 13.8215 11.3045 14.1274 11.4195C14.9029 11.7089 15.7087 11.9096 16.5293 12.0179C16.9445 12.0765 17.3237 12.2856 17.5948 12.6055C17.8658 12.9254 18.0099 13.3338 17.9995 13.753Z"
+                                      stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p><strong>Phone:</strong> <a href="tel:@contact.Description">@contact.Description</a></p>
+                        </div>
+                        <div class="item">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 1L12.05 18L8.65 10.35L1 6.95L18 1Z" stroke="#424B5A" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p><strong>Mobile:</strong> <a href="tel:@contact.Display">@contact.Display</a></p>
+                        </div>
+                        <div class="social">
+                            <ul>
+                                <li>
+                                    <a href="@Helper.GlobalHelper.Facebook" title="Facebook">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 0.0400391C4.5 0.0400391 0 4.53004 0 10.06C0 15.06 3.66 19.21 8.44 19.96V12.96H5.9V10.06H8.44V7.85004C8.44 5.34004 9.93 3.96004 12.22 3.96004C13.31 3.96004 14.45 4.15004 14.45 4.15004V6.62004H13.19C11.95 6.62004 11.56 7.39004 11.56 8.18004V10.06H14.34L13.89 12.96H11.56V19.96C13.9164 19.5879 16.0622 18.3856 17.6099 16.5701C19.1576 14.7546 20.0054 12.4457 20 10.06C20 4.53004 15.5 0.0400391 10 0.0400391Z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Helper.GlobalHelper.Instagram" title="Instagram">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7383 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7383 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 6.26174 2.61107 4.78649 3.69878 3.69878C4.78649 2.61107 6.26174 2 7.8 2ZM7.6 4C6.64522 4 5.72955 4.37928 5.05442 5.05442C4.37928 5.72955 4 6.64522 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C17.3548 20 18.2705 19.6207 18.9456 18.9456C19.6207 18.2705 20 17.3548 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.5815 5.5 17.8995 5.6317 18.1339 5.86612C18.3683 6.10054 18.5 6.41848 18.5 6.75C18.5 7.08152 18.3683 7.39946 18.1339 7.63388C17.8995 7.8683 17.5815 8 17.25 8C16.9185 8 16.6005 7.8683 16.3661 7.63388C16.1317 7.39946 16 7.08152 16 6.75C16 6.41848 16.1317 6.10054 16.3661 5.86612C16.6005 5.6317 16.9185 5.5 17.25 5.5ZM12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7ZM12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9Z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Helper.GlobalHelper.Youtube" title="Youtube">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Helper.GlobalHelper.Tiktok" title="Tiktok">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M19.3208 5.562C19.169 5.48345 19.0211 5.39734 18.8778 5.304C18.4615 5.02872 18.0798 4.7044 17.7408 4.338C16.8918 3.367 16.5748 2.382 16.4588 1.693H16.4628C16.3658 1.12 16.4058 0.75 16.4128 0.75H12.5478V15.693C12.5478 15.893 12.5478 16.092 12.5398 16.288C12.5398 16.312 12.5368 16.334 12.5358 16.361C12.5358 16.371 12.5358 16.383 12.5328 16.394V16.403C12.4922 16.939 12.3205 17.4569 12.0328 17.9109C11.7451 18.365 11.3502 18.7414 10.8828 19.007C10.3953 19.2844 9.84378 19.4298 9.28283 19.429C7.48283 19.429 6.02283 17.961 6.02283 16.148C6.02283 14.334 7.48283 12.866 9.28283 12.866C9.62383 12.866 9.96283 12.92 10.2868 13.026L10.2918 9.09C9.30784 8.96305 8.30822 9.04147 7.35607 9.3203C6.40391 9.59913 5.5199 10.0723 4.75983 10.71C4.09368 11.2885 3.53362 11.9789 3.10483 12.75C2.94183 13.031 2.32583 14.162 2.25183 15.996C2.20483 17.036 2.51783 18.116 2.66683 18.561V18.571C2.75983 18.833 3.12383 19.729 3.71583 20.484C4.19323 21.09 4.75728 21.6224 5.38983 22.064V22.054L5.39883 22.064C7.26883 23.334 9.34383 23.251 9.34383 23.251C9.70283 23.236 10.9058 23.251 12.2718 22.604C13.7868 21.886 14.6488 20.817 14.6488 20.817C15.1999 20.1781 15.6382 19.45 15.9448 18.664C16.2948 17.744 16.4108 16.642 16.4108 16.202V8.273C16.4578 8.301 17.0828 8.714 17.0828 8.714C17.0828 8.714 17.9828 9.291 19.3858 9.666C20.3918 9.933 21.7488 9.99 21.7488 9.99V6.153C21.2738 6.205 20.3088 6.055 19.3198 5.563L19.3208 5.562Z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="right-contact">
+                        <div class="bg-image-contact">
+                            <div class="form">
+                                <svg width="100%" height="auto" viewBox="0 0 580 665" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 92.4868V665H580V0H92.6389L0 92.4868Z" fill="white" />
+                                </svg>
+                                <div class="info-contact">
+                                    <p>
+                                        Please enter your email, we will send you the latest News
+                                    </p>                                    
+                                </div>
+                                <form id="formNewsletter">
+                                    <div class="content">                                        
+                                        <div class="form-group form-text ">
+                                            <label for="Code">Email <i>(*)</i></label><span class="error"></span>
+                                            <input id="Code" name="Code" placeholder="Email" type="text" />
+                                        </div>
+                                    </div>
+                                    <button type="button" onclick='onSaveNewsletter()' class="btn-talk">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="note-text bg-color-2 padding4_5_0">
+    <div class="content">
+        <h2 class="marginbt2">Discuss your workplace</h2>
+        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+    </div>
+</div>

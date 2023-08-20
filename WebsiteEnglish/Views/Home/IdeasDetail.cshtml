@@ -1,0 +1,102 @@
+﻿@model Data.Model.Ideas;
+@inject Business.Interface.IIdeasBusiness _ideasBusiness
+@{
+    List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listIdeas = listIdeas.OrderBy(item => item.SortOrder).ToList();
+    Data.Model.Ideas ideas = new Ideas();
+    if (listIdeas.Count > 0)
+    {
+        ideas = listIdeas[0];
+        ideas.Note = Helper.GlobalHelper.DomainURL + ideas.GetType().Name + "/" + ideas.Code + "-" + ideas.ID + ".html";
+    }    
+}
+
+@{
+    Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
+    ViewData["Title"] = Model.Name;
+    ViewData["Description"] = Model.Description;    
+    ViewData["URLCurrent"] = Model.Note;
+    ViewData["URLImage"] = Model.FileName;
+}
+<div class="slider">
+    <div class="content">
+        <a style="text-decoration: none;" href="@Model.Note" title="@Model.Name"><h1 class="marginbt1">@Model.Name</h1></a>
+    </div>
+</div>
+<div style="background-color: #fff; width: 100%;">
+    <div class="wrapper">
+        <div class="news-detail">
+            <div>
+                <div class="wrapper">
+                    <div class="content-detail ">
+                        <div class="icon">
+                            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 10.332V4.99863C12.9998 4.76482 12.938 4.53517 12.821 4.33274C12.704 4.13031 12.5358 3.96221 12.3333 3.8453L7.66667 1.17863C7.46397 1.06161 7.23405 1 7 1C6.76595 1 6.53603 1.06161 6.33333 1.17863L1.66667 3.8453C1.46418 3.96221 1.29599 4.13031 1.17897 4.33274C1.06196 4.53517 1.00024 4.76482 1 4.99863V10.332C1.00024 10.5658 1.06196 10.7954 1.17897 10.9979C1.29599 11.2003 1.46418 11.3684 1.66667 11.4853L6.33333 14.152C6.53603 14.269 6.76595 14.3306 7 14.3306C7.23405 14.3306 7.46397 14.269 7.66667 14.152L12.3333 11.4853C12.5358 11.3684 12.704 11.2003 12.821 10.9979C12.938 10.7954 12.9998 10.5658 13 10.332Z"
+                                      stroke="#424B5A" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span>@Model.LastUpdatedDate.Value.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                        </div>
+                        <h3>@Model.Description</h3>
+                    </div>
+                    <a class="news-item hover-style" href="@Model.Note" title="@Model.Name">
+                        <div class="zoom-image marginbt1 text-center">
+                            <img class="img-fix" src="@Model.FileName" title="@Model.Name" alt="@Model.Name">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="wrapper ">
+                    <div class="main-content-detail">
+                        @Html.Raw(@"" + Model.ContentHTML)
+                        <div class="padding4_5_0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="note-text bg-color-2 padding4_5_0">
+    <div class="content">
+        <h2 class="marginbt2">Discuss your workplace</h2>
+        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+    </div>
+</div>
+
+<div style="background-color: #fff; width: 100%;">
+    <div class="wrapper">
+        <div class="heading" style="text-align: center;">
+            <h2>Related Posts</h2>
+        </div>
+        <div class="padding4_5_0"></div>
+        <div class="news">
+            @{
+                foreach (Data.Model.Ideas item in listIdeas)
+                {
+                    if (item.ID != Model.ID)
+                    {
+                        string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
+                        @Html.Raw(@"<a class='news-item hover-style' href='"+ url +"' title='"+ item.Name +"'>")
+                        @Html.Raw(@"<div class='zoom-image marginbt1'><img src='"+item.FileName+"' alt='"+item.Name+"' title='"+item.Name+"'></div>")
+                        @Html.Raw(@"<div class='icon'>")
+                        @Html.Raw(@"<svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'>")
+                        @Html.Raw(@"<path d='M13 10.332V4.99863C12.9998 4.76482 12.938 4.53517 12.821 4.33274C12.704 4.13031 12.5358 3.96221 12.3333 3.8453L7.66667 1.17863C7.46397 1.06161 7.23405 1 7 1C6.76595 1 6.53603 1.06161 6.33333 1.17863L1.66667 3.8453C1.46418 3.96221 1.29599 4.13031 1.17897 4.33274C1.06196 4.53517 1.00024 4.76482 1 4.99863V10.332C1.00024 10.5658 1.06196 10.7954 1.17897 10.9979C1.29599 11.2003 1.46418 11.3684 1.66667 11.4853L6.33333 14.152C6.53603 14.269 6.76595 14.3306 7 14.3306C7.23405 14.3306 7.46397 14.269 7.66667 14.152L12.3333 11.4853C12.5358 11.3684 12.704 11.2003 12.821 10.9979C12.938 10.7954 12.9998 10.5658 13 10.332Z' stroke='#424B5A' stroke-linecap='round' stroke-linejoin='round'>")
+                        @Html.Raw(@"</path>")
+                        @Html.Raw(@"</svg>")
+                        @Html.Raw(@"<span>Ideas</span>")
+                        @Html.Raw(@"</div>")
+                        @Html.Raw(@"<h3>")
+                        @Html.Raw(@"<span>"+ item.Name +"</span>")
+                        @Html.Raw(@"<svg width='33' height='20' viewBox='0 0 33 20' fill='none' xmlns='http://www.w3.org/2000/svg'>")
+                        @Html.Raw(@"<path fill-rule='evenodd' clip-rule='evenodd' d='M23.7071 0.707106C23.3166 0.316582 22.6834 0.316582 22.2929 0.707106L21.944 1.05603C21.5537 1.4463 21.5534 2.07898 21.9433 2.46961L28.2125 8.75H1C0.447715 8.75 0 9.19771 0 9.75V10.25C0 10.8023 0.447715 11.25 1 11.25H28.2125L21.9433 17.5304C21.5534 17.921 21.5537 18.5537 21.944 18.944L22.2929 19.2929C22.6834 19.6834 23.3166 19.6834 23.7071 19.2929L33 10L23.7071 0.707106Z' fill='#424B5A'>")
+                        @Html.Raw(@"</path>")
+                        @Html.Raw(@"</svg>")
+                        @Html.Raw(@"</h3>")
+                        @Html.Raw(@"</a>")
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="padding4_5_0"></div>
+</div>

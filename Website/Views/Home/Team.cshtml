@@ -1,7 +1,7 @@
 ﻿@inject Business.Interface.ITeamBusiness _teamBusiness
 
 @{
-    List<Data.Model.Team> listTeam = await _teamBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Team> listTeam = await _teamBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listTeam = listTeam.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Team team = new Team();
     if (listTeam.Count > 0)

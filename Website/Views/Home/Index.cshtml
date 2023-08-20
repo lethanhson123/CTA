@@ -8,7 +8,7 @@
 @inject Business.Interface.IBannerFileBusiness _bannerFileBusiness
 
 @{
-    List<Data.Model.News> listNews = await _newsBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.News> listNews = await _newsBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listNews = listNews.OrderBy(item => item.SortOrder).ToList();
     Data.Model.News news = new News();
     if (listNews.Count > 0)
@@ -17,7 +17,7 @@
         news.Note = Helper.GlobalHelper.DomainURL + news.GetType().Name + "/" + news.Code + "-" + news.ID + ".html";
     }
 
-    List<Data.Model.Team> listTeam = await _teamBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Team> listTeam = await _teamBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listTeam = listTeam.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Team team = new Team();
     if (listTeam.Count > 0)
@@ -26,7 +26,7 @@
         team.Note = Helper.GlobalHelper.DomainURL + team.GetType().Name + "/" + team.Code + "-" + team.ID + ".html";
     }
 
-    List<Data.Model.Project> listProject = _projectBusiness.GetByCondition(item => item.ParentID == 1 && item.IsHomePage == true && item.Active == true).ToList();
+    List<Data.Model.Project> listProject = _projectBusiness.GetByCondition(item => item.ParentID == Helper.GlobalHelper.CategoryLanguageID && item.IsHomePage == true && item.Active == true).ToList();
     listProject = listProject.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Project project001 = new Project();
     List<Data.Model.ProjectFile> listProjectFile = new List<ProjectFile>();
@@ -37,7 +37,7 @@
         listProjectFile = await _projectFileBusiness.GetByParentIDAndActiveToListAsync(project001.ID, true);
     }
 
-    List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listIdeas = listIdeas.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Ideas ideas = new Ideas();
     if (listIdeas.Count > 0)
@@ -46,7 +46,7 @@
         ideas.Note = Helper.GlobalHelper.DomainURL + ideas.GetType().Name + "/" + ideas.Code + "-" + ideas.ID + ".html";
     }
 
-    List<Data.Model.Service> listService = await _serviceBusiness.GetByParentIDAndActiveToListAsync(1, true);
+    List<Data.Model.Service> listService = await _serviceBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listService = listService.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Service service = new Service();
     if (listService.Count > 0)
@@ -76,7 +76,7 @@
         service003.Note = Helper.GlobalHelper.DomainURL + service003.GetType().Name + "/" + service003.Code + "-" + service003.ID + ".html";
     }
 
-    List<Data.Model.Banner> listBanner = _bannerBusiness.GetByCondition(item => item.ParentID == 1 && item.IsHomePage == true && item.Active == true).ToList();
+    List<Data.Model.Banner> listBanner = _bannerBusiness.GetByCondition(item => item.ParentID == Helper.GlobalHelper.CategoryLanguageID && item.IsHomePage == true && item.Active == true).ToList();
     listBanner = listBanner.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Banner banner = new Banner();
     List<Data.Model.BannerFile> listBannerFile = new List<BannerFile>();
@@ -118,17 +118,7 @@
                 }
                 row = row + 1;
             }
-        }
-        @* <div class="sticky-panel-0 vimeo-wrapper">
-            <iframe id="vimeo-player"
-                    src="https://player.vimeo.com/video/816861211?background=1&amp;autoplay=1&amp;loop=1&amp;byline=0&amp;title=0&amp;muted=1&amp;api=1&amp;dnt=1"
-                    frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"
-                    data-lf-form-tracking-inspected-dzlr5a5zn5z8boq2="true" data-lf-yt-playback-inspected-dzlr5a5zn5z8boq2="true"
-                    data-lf-vimeo-playback-inspected-dzlr5a5zn5z8boq2="true">
-            </iframe>
-        </div>
-        <div class="sticky-panel-1" style="background-image:url('images/banner-1.jpg');"></div>
-        <div class="sticky-panel-2" style="background-image:url('images/banner-sp.jpg');"></div> *@
+        }       
     </div>
 </div>
 <div class="scroll-panel scroll-panel-0">
