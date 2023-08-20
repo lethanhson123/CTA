@@ -29,6 +29,8 @@ export class ProjectDetailComponent implements OnInit {
   fileToUpload: any;
   fileToUpload0: File = null;
   fileToUpload001: any;
+  detailURL: string = "/Project/Info";
+  liveURL: string = environment.Website;
   constructor(
     public ProjectService: ProjectService,
     public ProjectFileService: ProjectFileService,
@@ -106,8 +108,15 @@ export class ProjectDetailComponent implements OnInit {
     this.isShowLoading = true;
     this.ProjectService.SaveAndUploadFileAsync(form.value, this.fileToUpload).subscribe(
       res => {
-        this.NotificationService.success(environment.SaveSuccess);
-        this.isShowLoading = false;
+        if (form.value.ID > 0) {
+          this.NotificationService.success(environment.SaveSuccess);
+          this.isShowLoading = false;
+        }
+        else {
+          this.ProjectService.formData = res as Project;
+          let url = this.detailURL + "/" + this.ProjectService.formData.ID;
+          this.router.navigateByUrl(url);
+        }
       },
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);

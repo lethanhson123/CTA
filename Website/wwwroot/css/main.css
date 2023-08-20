@@ -1683,7 +1683,10 @@ body {
 .filter ul.top > li.active a {
   background: url("../images/up.svg") no-repeat right center;
 }
-.filter ul.top > li .open {
+.filter ul.top > li a.sohu {
+  background: url("");
+}
+        .filter ul.top > li .open {
   position: absolute;
   z-index: 100;
 }

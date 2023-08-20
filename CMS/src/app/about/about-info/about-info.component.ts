@@ -29,6 +29,7 @@ export class AboutInfoComponent implements OnInit {
   fileToUpload: any;
   fileToUpload0: File = null;
   fileToUpload001: any;
+  detailURL: string = "/About/Info";
   liveURL: string = environment.Website;
   constructor(
     public AboutService: AboutService,
@@ -107,8 +108,15 @@ export class AboutInfoComponent implements OnInit {
     this.isShowLoading = true;
     this.AboutService.SaveAndUploadFileAsync(form.value, this.fileToUpload).subscribe(
       res => {
-        this.NotificationService.success(environment.SaveSuccess);
-        this.isShowLoading = false;
+        if (form.value.ID > 0) {
+          this.NotificationService.success(environment.SaveSuccess);
+          this.isShowLoading = false;
+        }
+        else {
+          this.AboutService.formData = res as About;
+          let url = this.detailURL + "/" + this.AboutService.formData.ID;
+          this.router.navigateByUrl(url);
+        }
       },
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);

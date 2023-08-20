@@ -16,5 +16,6 @@ export class Ideas {
     SortOrder?: number;
     IsHomePage?: boolean;
     FileName?: string;
+    CategoryIdeasID?: number;
 }
 

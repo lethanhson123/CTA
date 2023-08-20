@@ -25,6 +25,7 @@ export class TeamComponent implements OnInit {
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
   detailURL: string = "/Team/Info";
+  liveURL: string = environment.Website;
   constructor(
     public TeamService: TeamService,
     public CategoryLanguageService: CategoryLanguageService,

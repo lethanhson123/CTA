@@ -25,6 +25,7 @@ export class IdeasComponent implements OnInit {
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
   detailURL: string = "/Ideas/Info";
+  liveURL: string = environment.Website;
   constructor(
     public IdeasService: IdeasService,
     public CategoryLanguageService: CategoryLanguageService,

@@ -20,6 +20,9 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
 import { ServiceDetailComponent } from './service/service-detail/service-detail.component';
 import { TeamDetailComponent } from './team/team-detail/team-detail.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { CategoryIdeasComponent } from './category-ideas/category-ideas.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
+import { CandidateComponent } from './candidate/candidate.component';
 
 const routes: Routes = [  
   { path: '', redirectTo: '/Homepage', pathMatch: 'full' },
@@ -34,6 +37,15 @@ const routes: Routes = [
   }, 
   {
     path: 'Feedback', component: FeedbackComponent,
+  }, 
+  {
+    path: 'CategoryIdeas', component: CategoryIdeasComponent,
+  }, 
+  {
+    path: 'Newsletter', component: NewsletterComponent,
+  }, 
+  {
+    path: 'Candidate', component: CandidateComponent,
   }, 
   {
     path: 'About', component: AboutComponent,

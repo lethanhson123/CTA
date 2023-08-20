@@ -12,6 +12,8 @@ import { Ideas } from 'src/app/shared/Ideas.model';
 import { IdeasService } from 'src/app/shared/Ideas.service';
 import { IdeasFile } from 'src/app/shared/IdeasFile.model';
 import { IdeasFileService } from 'src/app/shared/IdeasFile.service';
+import { CategoryIdeas } from 'src/app/shared/CategoryIdeas.model';
+import { CategoryIdeasService } from 'src/app/shared/CategoryIdeas.service';
 
 @Component({
   selector: 'app-ideas-detail',
@@ -29,9 +31,12 @@ export class IdeasDetailComponent implements OnInit {
   fileToUpload: any;
   fileToUpload0: File = null;
   fileToUpload001: any;
+  detailURL: string = "/Ideas/Info";
+  liveURL: string = environment.Website;
   constructor(
     public IdeasService: IdeasService,
     public IdeasFileService: IdeasFileService,
+    public CategoryIdeasService: CategoryIdeasService,
     public CategoryLanguageService: CategoryLanguageService,
     public NotificationService: NotificationService,
     private router: Router
@@ -53,6 +58,7 @@ export class IdeasDetailComponent implements OnInit {
             this.IdeasService.formData = res as Ideas;
             if (this.IdeasService.formData) {
               this.onGetCategoryLanguageToListAsync();
+              this.onGetCategoryIdeasToListAsync();
               if (this.IdeasService.formData.ID > 0) {
                 this.onGetFileToList();
               }
@@ -87,6 +93,33 @@ export class IdeasDetailComponent implements OnInit {
       }
     );
   }
+  onGetCategoryIdeasToListAsync() {
+    this.isShowLoading = true;
+    this.CategoryIdeasService.GetByActiveToListAsync(true).subscribe(
+      res => {
+        this.CategoryIdeasService.list = (res as CategoryIdeas[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
+        if (this.CategoryIdeasService.list) {
+          if (this.CategoryIdeasService.list.length > 0) {
+            if (this.IdeasService.formData) {
+              if (this.IdeasService.formData.ID == 0) {
+                this.IdeasService.formData.CategoryIdeasID = this.CategoryIdeasService.list[0].ID;
+              }
+            }
+
+            for(let i=0;i<this.CategoryIdeasService.list.length;i++){
+              if(this.CategoryIdeasService.list[i].CategoryID>0){
+                this.CategoryIdeasService.list[i].Name = "..." + this.CategoryIdeasService.list[i].Name;
+              }
+            }
+            this.isShowLoading = false;
+          }
+        }
+      },
+      err => {
+        this.isShowLoading = false;
+      }
+    );
+  }
   onGetFileToList() {
     this.isShowLoading = true;
     this.IdeasFileService.GetByParentIDAndEmptyToListAsync(this.IdeasService.formData.ID).subscribe(
@@ -106,8 +139,15 @@ export class IdeasDetailComponent implements OnInit {
     this.isShowLoading = true;
     this.IdeasService.SaveAndUploadFileAsync(form.value, this.fileToUpload).subscribe(
       res => {
-        this.NotificationService.success(environment.SaveSuccess);
-        this.isShowLoading = false;
+        if (form.value.ID > 0) {
+          this.NotificationService.success(environment.SaveSuccess);
+          this.isShowLoading = false;
+        }
+        else {
+          this.IdeasService.formData = res as Ideas;
+          let url = this.detailURL + "/" + this.IdeasService.formData.ID;
+          this.router.navigateByUrl(url);
+        }
       },
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);

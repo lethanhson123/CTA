@@ -25,6 +25,7 @@ export class CareerComponent implements OnInit {
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
   detailURL: string = "/Career/Info";
+  liveURL: string = environment.Website;
   constructor(
     public CareerService: CareerService,
     public CategoryLanguageService: CategoryLanguageService,

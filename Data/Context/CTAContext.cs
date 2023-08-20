@@ -14,8 +14,10 @@
         public virtual DbSet<Data.Model.AboutFile> AboutFile { get; set; }
         public virtual DbSet<Data.Model.Banner> Banner { get; set; }
         public virtual DbSet<Data.Model.BannerFile> BannerFile { get; set; }
+        public virtual DbSet<Data.Model.Candidate> Candidate { get; set; }
         public virtual DbSet<Data.Model.Career> Career { get; set; }
         public virtual DbSet<Data.Model.CareerFile> CareerFile { get; set; }
+        public virtual DbSet<Data.Model.CategoryIdeas> CategoryIdeas { get; set; }
         public virtual DbSet<Data.Model.CategoryLanguage> CategoryLanguage { get; set; }
         public virtual DbSet<Data.Model.Contact> Contact { get; set; }
         public virtual DbSet<Data.Model.ContactFile> ContactFile { get; set; }
@@ -25,6 +27,7 @@
         public virtual DbSet<Data.Model.Membership> Membership { get; set; }
         public virtual DbSet<Data.Model.News> News { get; set; }
         public virtual DbSet<Data.Model.NewsFile> NewsFile { get; set; }
+        public virtual DbSet<Data.Model.Newsletter> Newsletter { get; set; }
         public virtual DbSet<Data.Model.Project> Project { get; set; }
         public virtual DbSet<Data.Model.ProjectFile> ProjectFile { get; set; }
         public virtual DbSet<Data.Model.Service> Service { get; set; }

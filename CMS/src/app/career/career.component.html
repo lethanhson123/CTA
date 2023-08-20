@@ -88,7 +88,10 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-
+                                        <a title="Website" target="_blank"
+                                            href="{{liveURL}}Career/{{element.Code}}-{{element.ID}}.html"
+                                            class="btn-floating waves-effect waves-light green darken-1"><i
+                                                class="material-icons">laptop</i></a>&nbsp;&nbsp;&nbsp;
                                         <a style="padding-left: 8px;" title="Xóa"
                                             class="btn-floating waves-effect waves-light red" *ngIf="element.ID>0"
                                             (click)="onDelete(element)"><i class="material-icons">delete_outline</i></a>

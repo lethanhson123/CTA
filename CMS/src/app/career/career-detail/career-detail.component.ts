@@ -29,6 +29,8 @@ export class CareerDetailComponent implements OnInit {
   fileToUpload: any;
   fileToUpload0: File = null;
   fileToUpload001: any;
+  detailURL: string = "/Career/Info";
+  liveURL: string = environment.Website;
   constructor(
     public CareerService: CareerService,
     public CareerFileService: CareerFileService,
@@ -106,8 +108,15 @@ export class CareerDetailComponent implements OnInit {
     this.isShowLoading = true;
     this.CareerService.SaveAndUploadFileAsync(form.value, this.fileToUpload).subscribe(
       res => {
-        this.NotificationService.success(environment.SaveSuccess);
-        this.isShowLoading = false;
+        if (form.value.ID > 0) {
+          this.NotificationService.success(environment.SaveSuccess);
+          this.isShowLoading = false;
+        }
+        else {
+          this.CareerService.formData = res as Career;
+          let url = this.detailURL + "/" + this.CareerService.formData.ID;
+          this.router.navigateByUrl(url);
+        }
       },
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);

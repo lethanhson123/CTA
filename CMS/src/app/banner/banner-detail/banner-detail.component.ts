@@ -29,6 +29,8 @@ export class BannerDetailComponent implements OnInit {
   fileToUpload: any;
   fileToUpload0: File = null;
   fileToUpload001: any;
+  detailURL: string = "/Banner/Info";
+  liveURL: string = environment.Website;
   constructor(
     public BannerService: BannerService,
     public BannerFileService: BannerFileService,
@@ -106,8 +108,15 @@ export class BannerDetailComponent implements OnInit {
     this.isShowLoading = true;
     this.BannerService.SaveAndUploadFileAsync(form.value, this.fileToUpload).subscribe(
       res => {
-        this.NotificationService.success(environment.SaveSuccess);
-        this.isShowLoading = false;
+        if (form.value.ID > 0) {
+          this.NotificationService.success(environment.SaveSuccess);
+          this.isShowLoading = false;
+        }
+        else {
+          this.BannerService.formData = res as Banner;
+          let url = this.detailURL + "/" + this.BannerService.formData.ID;
+          this.router.navigateByUrl(url);
+        }
       },
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);

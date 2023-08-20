@@ -47,6 +47,11 @@ app.UseEndpoints(endpoints =>
         defaults: new { controller = "Home", action = "Thank" });
 
     endpoints.MapControllerRoute(
+     name: "Product",
+     pattern: "san-pham.html",
+     defaults: new { controller = "Home", action = "Product" });
+
+    endpoints.MapControllerRoute(
        name: "About",
        pattern: "gioi-thieu.html",
        defaults: new { controller = "Home", action = "About" });
@@ -65,6 +70,71 @@ app.UseEndpoints(endpoints =>
        name: "TeamDetail",
        pattern: "Team/{Code}-{ID}.html",
        defaults: new { controller = "Home", action = "TeamDetail" });
+
+    endpoints.MapControllerRoute(
+      name: "Project",
+      pattern: "du-an.html",
+      defaults: new { controller = "Home", action = "Project" });
+
+    endpoints.MapControllerRoute(
+       name: "ProjectDetail",
+       pattern: "Project/{Code}-{ID}.html",
+       defaults: new { controller = "Home", action = "ProjectDetail" });
+
+    endpoints.MapControllerRoute(
+      name: "News",
+      pattern: "tin-tuc.html",
+      defaults: new { controller = "Home", action = "News" });
+
+    endpoints.MapControllerRoute(
+       name: "NewsDetail",
+       pattern: "News/{Code}-{ID}.html",
+       defaults: new { controller = "Home", action = "NewsDetail" });
+
+    endpoints.MapControllerRoute(
+     name: "Service",
+     pattern: "dich-vu.html",
+     defaults: new { controller = "Home", action = "Service" });
+
+    endpoints.MapControllerRoute(
+       name: "ServiceDetail",
+       pattern: "Service/{Code}-{ID}.html",
+       defaults: new { controller = "Home", action = "ServiceDetail" });
+
+    endpoints.MapControllerRoute(
+     name: "Career",
+     pattern: "tuyen-dung.html",
+     defaults: new { controller = "Home", action = "Career" });
+
+    endpoints.MapControllerRoute(
+       name: "CareerDetail",
+       pattern: "Career/{Code}-{ID}.html",
+       defaults: new { controller = "Home", action = "CareerDetail" });
+
+    endpoints.MapControllerRoute(
+     name: "Ideas",
+     pattern: "y-tuong.html",
+     defaults: new { controller = "Home", action = "Ideas" });
+
+    endpoints.MapControllerRoute(
+       name: "IdeasDetail",
+       pattern: "Ideas/{Code}-{ID}.html",
+       defaults: new { controller = "Home", action = "IdeasDetail" });
+
+    endpoints.MapControllerRoute(
+      name: "CategoryIdeas",
+      pattern: "CategoryIdeas/{Code}-{ID}.html",
+      defaults: new { controller = "Home", action = "CategoryIdeas" });
+
+    endpoints.MapControllerRoute(
+       name: "Tag",
+       pattern: "tag/{searchString}",
+       defaults: new { controller = "Home", action = "Tag" });
+
+    endpoints.MapControllerRoute(
+       name: "Search",
+       pattern: "search/{searchString}",
+       defaults: new { controller = "Home", action = "Search" });
 
     endpoints.MapControllerRoute(
         name: "default",

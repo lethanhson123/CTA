@@ -25,6 +25,7 @@ export class ServiceComponent implements OnInit {
   searchString: string = environment.InitializationString;
   parentID: number = environment.InitializationNumber;
   detailURL: string = "/Service/Info";
+  liveURL: string = environment.Website;
   constructor(
     public ServiceService: ServiceService,
     public CategoryLanguageService: CategoryLanguageService,

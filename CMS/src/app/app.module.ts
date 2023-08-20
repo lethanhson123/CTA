@@ -35,6 +35,9 @@ import { AboutComponent } from './about/about.component';
 import { AboutDetailComponent } from './about/about-detail/about-detail.component';
 import { AboutInfoComponent } from './about/about-info/about-info.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
+import { CandidateComponent } from './candidate/candidate.component';
+import { CategoryIdeasComponent } from './category-ideas/category-ideas.component';
 
 
 
@@ -62,7 +65,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
     BannerComponent, 
     BannerDetailComponent, 
     AboutComponent, 
-    AboutDetailComponent, AboutInfoComponent, FeedbackComponent, 
+    AboutDetailComponent, AboutInfoComponent, FeedbackComponent, NewsletterComponent, CandidateComponent, CategoryIdeasComponent, 
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

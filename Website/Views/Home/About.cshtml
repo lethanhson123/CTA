@@ -12,10 +12,10 @@
 }
 
 @{
-    ViewData["Title"] = "Giới thiệu";
-    ViewData["Description"] = Helper.GlobalHelper.PageDescription;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "gioi-thieu.html";
+    ViewData["Title"] = about.Name;
+    ViewData["Description"] = about.Description;
     ViewData["URLImage"] = about.FileName;
+    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "gioi-thieu.html";    
 }
 <div class="slider">
     <div class="content">
@@ -25,7 +25,7 @@
         </p>
     </div>
 </div>
-<div class="light-grey-after">
+<div class="light-grey-after" >
     <div class="wrapper">
         <div class="about-us">
             <div>
