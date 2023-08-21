@@ -23,6 +23,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { CategoryIdeasComponent } from './category-ideas/category-ideas.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { CandidateComponent } from './candidate/candidate.component';
+import { MembershipComponent } from './membership/membership.component';
 
 const routes: Routes = [  
   { path: '', redirectTo: '/Homepage', pathMatch: 'full' },
@@ -40,6 +41,9 @@ const routes: Routes = [
   }, 
   {
     path: 'CategoryIdeas', component: CategoryIdeasComponent,
+  }, 
+  {
+    path: 'Membership', component: MembershipComponent,
   }, 
   {
     path: 'Newsletter', component: NewsletterComponent,

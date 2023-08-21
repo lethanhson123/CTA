@@ -1,4 +1,5 @@
 ﻿using Helper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebsiteEnglish.Models;
@@ -19,6 +20,7 @@ namespace WebsiteEnglishEnglish.Controllers
         private readonly ICandidateBusiness _CandidateBusiness;
         private readonly INewsletterBusiness _NewsletterBusiness;
         private readonly ICategoryIdeasBusiness _CategoryIdeasBusiness;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         public HomeController(ILogger<HomeController> logger
             , IFeedbackBusiness feedbackBusiness
             , IAboutBusiness aboutBusiness
@@ -31,6 +33,7 @@ namespace WebsiteEnglishEnglish.Controllers
             , ICandidateBusiness candidateBusiness
             , INewsletterBusiness newsletterBusiness
             , ICategoryIdeasBusiness categoryIdeasBusiness
+            , IWebHostEnvironment webHostEnvironment
             )
         {
             _logger = logger;
@@ -45,6 +48,7 @@ namespace WebsiteEnglishEnglish.Controllers
             _CandidateBusiness = candidateBusiness;
             _NewsletterBusiness = newsletterBusiness;
             _CategoryIdeasBusiness = categoryIdeasBusiness;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -155,8 +159,48 @@ namespace WebsiteEnglishEnglish.Controllers
             string result = GlobalHelper.InitializationString;
             try
             {
-                feedback.ParentID = 1;
+                feedback.ParentID = GlobalHelper.CategoryLanguageID;
                 _FeedbackBusiness.Save(feedback);
+                if (feedback.ID > 0)
+                {
+                    Helper.Model.Mail mail = new Helper.Model.Mail();
+                    mail.MailFrom = GlobalHelper.MasterEmailUser;
+                    mail.UserName = GlobalHelper.MasterEmailUser;
+                    mail.Password = GlobalHelper.MasterEmailPassword;
+                    mail.SMTPPort = GlobalHelper.SMTPPort;
+                    mail.SMTPServer = GlobalHelper.SMTPServer;
+                    mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
+                    mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
+                    mail.Display = GlobalHelper.MasterEmailDisplay;
+                    mail.MailTo = GlobalHelper.MailTo;
+                    mail.Subject = "Feedback: " + feedback.Code + " sent at " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
+                    if (!string.IsNullOrEmpty(mail.MailTo))
+                    {
+                        string path = Path.Combine(_webHostEnvironment.WebRootPath, "Mail", "Feedback.html");
+                        string contentHTML = GlobalHelper.InitializationString;
+                        using (FileStream fs = new FileStream(path, FileMode.Open))
+                        {
+                            using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+                            {
+                                contentHTML = r.ReadToEnd();
+                            }
+                        }
+                        contentHTML = contentHTML.Replace("[Name]", feedback.Name);
+                        contentHTML = contentHTML.Replace("[Code]", feedback.Code);
+                        contentHTML = contentHTML.Replace("[Display]", feedback.Display);
+                        contentHTML = contentHTML.Replace("[Description]", feedback.Description);
+                        mail.Content = contentHTML;
+                        if (!string.IsNullOrEmpty(mail.MailTo))
+                        {
+                            MailHelper.SendMail(mail);
+                        }
+                        if (!string.IsNullOrEmpty(feedback.Code))
+                        {
+                            mail.MailTo = feedback.Code;
+                            MailHelper.SendMail(mail);
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -176,6 +220,46 @@ namespace WebsiteEnglishEnglish.Controllers
                 candidateSave.Code = candidate.Code;
                 candidateSave.Display = candidate.Display;
                 _CandidateBusiness.Save(candidateSave);
+                if (candidateSave.ID > 0)
+                {
+                    Helper.Model.Mail mail = new Helper.Model.Mail();
+                    mail.MailFrom = GlobalHelper.MasterEmailUser;
+                    mail.UserName = GlobalHelper.MasterEmailUser;
+                    mail.Password = GlobalHelper.MasterEmailPassword;
+                    mail.SMTPPort = GlobalHelper.SMTPPort;
+                    mail.SMTPServer = GlobalHelper.SMTPServer;
+                    mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
+                    mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
+                    mail.Display = GlobalHelper.MasterEmailDisplay;
+                    mail.MailTo = GlobalHelper.MailTo;
+                    mail.Subject = "Candidate: " + candidateSave.Code + " sent at " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
+                    if (!string.IsNullOrEmpty(mail.MailTo))
+                    {
+                        string path = Path.Combine(_webHostEnvironment.WebRootPath, "Mail", "Candidate.html");
+                        string contentHTML = GlobalHelper.InitializationString;
+                        using (FileStream fs = new FileStream(path, FileMode.Open))
+                        {
+                            using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+                            {
+                                contentHTML = r.ReadToEnd();
+                            }
+                        }
+                        contentHTML = contentHTML.Replace("[Name]", candidateSave.Name);
+                        contentHTML = contentHTML.Replace("[Code]", candidateSave.Code);
+                        contentHTML = contentHTML.Replace("[Display]", candidateSave.Display);
+                        contentHTML = contentHTML.Replace("[Description]", candidateSave.Description);
+                        mail.Content = contentHTML;
+                        if (!string.IsNullOrEmpty(mail.MailTo))
+                        {
+                            MailHelper.SendMail(mail);
+                        }
+                        if (!string.IsNullOrEmpty(candidateSave.Code))
+                        {
+                            mail.MailTo = candidateSave.Code;
+                            MailHelper.SendMail(mail);
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -189,8 +273,48 @@ namespace WebsiteEnglishEnglish.Controllers
             string result = GlobalHelper.InitializationString;
             try
             {
-                newsletter.ParentID = 1;
+                newsletter.ParentID = GlobalHelper.CategoryLanguageID;
                 _NewsletterBusiness.Save(newsletter);
+                if (newsletter.ID > 0)
+                {
+                    Helper.Model.Mail mail = new Helper.Model.Mail();
+                    mail.MailFrom = GlobalHelper.MasterEmailUser;
+                    mail.UserName = GlobalHelper.MasterEmailUser;
+                    mail.Password = GlobalHelper.MasterEmailPassword;
+                    mail.SMTPPort = GlobalHelper.SMTPPort;
+                    mail.SMTPServer = GlobalHelper.SMTPServer;
+                    mail.IsMailBodyHtml = GlobalHelper.IsMailBodyHtml;
+                    mail.IsMailUsingSSL = GlobalHelper.IsMailUsingSSL;
+                    mail.Display = GlobalHelper.MasterEmailDisplay;
+                    mail.MailTo = GlobalHelper.MailTo;
+                    mail.Subject = "Newsletter: " + newsletter.Code + " sent at " + GlobalHelper.InitializationDateTime.ToString("dd/MM/yyyy HH:mm:ss");
+                    if (!string.IsNullOrEmpty(mail.MailTo))
+                    {
+                        string path = Path.Combine(_webHostEnvironment.WebRootPath, "Mail", "Newsletter.html");
+                        string contentHTML = GlobalHelper.InitializationString;
+                        using (FileStream fs = new FileStream(path, FileMode.Open))
+                        {
+                            using (StreamReader r = new StreamReader(fs, Encoding.UTF8))
+                            {
+                                contentHTML = r.ReadToEnd();
+                            }
+                        }
+                        contentHTML = contentHTML.Replace("[Name]", newsletter.Name);
+                        contentHTML = contentHTML.Replace("[Code]", newsletter.Code);
+                        contentHTML = contentHTML.Replace("[Display]", newsletter.Display);
+                        contentHTML = contentHTML.Replace("[Description]", newsletter.Description);
+                        mail.Content = contentHTML;
+                        if (!string.IsNullOrEmpty(mail.MailTo))
+                        {
+                            MailHelper.SendMail(mail);
+                        }
+                        if (!string.IsNullOrEmpty(newsletter.Code))
+                        {
+                            mail.MailTo = newsletter.Code;
+                            MailHelper.SendMail(mail);
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
