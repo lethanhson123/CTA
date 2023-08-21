@@ -1,4 +1,5 @@
 ﻿@inject Business.Interface.IAboutBusiness _aboutBusiness
+@inject Business.Interface.ITeamBusiness _teamBusiness
 
 @{
     List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
@@ -8,6 +9,22 @@
     {
         about = listAbout[0];
         about.Note = Helper.GlobalHelper.DomainURL + about.GetType().Name + "/" + about.Code + "-" + about.ID + ".html";
+    }
+
+    List<Data.Model.Team> listTeam = await _teamBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listTeam = listTeam.OrderBy(item => item.SortOrder).ToList();
+    Data.Model.Team team = new Team();
+    if (listTeam.Count > 0)
+    {
+        team = listTeam[0];
+        team.Note = Helper.GlobalHelper.DomainURL + team.GetType().Name + "/" + team.Code + "-" + team.ID + ".html";
+    }
+
+    Data.Model.Team team001 = new Team();
+    if (listTeam.Count > 1)
+    {
+        team001 = listTeam[1];
+        team001.Note = Helper.GlobalHelper.DomainURL + team001.GetType().Name + "/" + team001.Code + "-" + team001.ID + ".html";
     }
 }
 
@@ -73,6 +90,52 @@
                         }
                     }
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padding-top-4-5">
+        <div class="note-text bg-color-2 padding4_5_0">
+            <div class="content">
+                <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
+                <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="slider">
+    <div class="content">
+        @Html.Raw("<a style='text-decoration: none;' href='"+ team.Note +"' title='"+ team.Name +"'><h1 class='marginbt1'>"+ team.Name +"</h1></a>")
+        <p>
+            @team.Description
+        </p>
+    </div>
+</div>
+<div class="light-grey-after2">
+    <div class="wrapper">
+        <div class="meet-team">          
+            <div>
+                <div class="wrapper">
+                    <div class="four-col-wrapper alm-wrapper">
+                        <div class="alm-reveal alm-filters">
+                            @{
+                                foreach (Data.Model.Team item in listTeam)
+                                {
+                                    if ((item.ID != team.ID) && (item.ID != team001.ID))
+                                    {
+                                        string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
+                                        @Html.Raw(@"<a class='news-item hover-style column three-col people-box' href='"+ url +"' title='"+ item.Name +"'>")
+                                        @Html.Raw(@"<div class='zoom-image marginbt1 text-center'>")
+                                        @Html.Raw(@"<img width='600' height='800' src='"+ item.FileName +"' decoding='async' title='"+ item.Name +"' alt='"+ item.Name +"'>")
+                                        @Html.Raw(@"<h2>"+ item.Name +"</h2>")
+                                        @Html.Raw(@"</div>")
+                                        @Html.Raw(@"</a>")
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="padding-bottom-3em"></div>
                 </div>
             </div>
         </div>

@@ -29,8 +29,8 @@
             }
             if (!string.IsNullOrEmpty(model.ContentHTML))
             {
-                model.ContentHTML = model.ContentHTML.Replace(@"</div>", @"</p>");
-                model.ContentHTML = model.ContentHTML.Replace(@"<div", @"<p");
+                //model.ContentHTML = model.ContentHTML.Replace(@"</div>", @"</p>");
+                //model.ContentHTML = model.ContentHTML.Replace(@"<div", @"<p");
                 model.ContentHTML = model.ContentHTML.Replace(@"<html>", @"");
                 model.ContentHTML = model.ContentHTML.Replace(@"</html>", @"");
                 model.ContentHTML = model.ContentHTML.Replace(@"<head>", @"");
