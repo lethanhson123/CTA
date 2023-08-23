@@ -124,7 +124,7 @@
                                         [(ngModel)]="ServiceService.formData.SortOrder" type="number">
                                 </div>
                             </div>
-                            <div class="col s4 m4 l4">
+                            <!-- <div class="col s4 m4 l4">
                                 <div class="input-field">
                                     <label for="Status">QC: Tình trạng</label>
                                 </div>
@@ -178,7 +178,7 @@
                                     <input placeholder="Quy cách: Ngày hoàn thành" name="DateComplete"
                                         [(ngModel)]="ServiceService.formData.DateComplete" type="text">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="input-field col s4 m4 l4">
                                 <p>
                                     <label>
@@ -227,7 +227,7 @@
                             </div>
                         </div>
                         <div class="col s12 m12 l7">
-                            <ck-editor [config]="{'height': 1000}" name="ContentHTML"
+                            <ck-editor [config]="{'height': 800}" name="ContentHTML"
                                 [(ngModel)]="ServiceService.formData.ContentHTML" skin="moono-lisa" language="en"
                                 [fullPage]="true"></ck-editor>
                         </div>
