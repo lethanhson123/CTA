@@ -15,7 +15,6 @@
   }
 }
 @media (max-width: 1600px) {
-
   .owl-carousel .owl-item img, .img-fix{
     height: 500px;
   }
@@ -244,6 +243,12 @@
 
 /* contact*/
 @media (max-width: 1199.98px) {
+  .company .content h2 .quote-line{
+    width: 100%;
+  }
+  .ideas .heading{
+    width: 100%;
+  }
   .contact-frm{
     display: block;
   }
@@ -465,6 +470,10 @@
   }
   .meet-team .three-col{
     width: 100%;
+  }
+  .btn-project-home{
+    position: absolute;
+    right: 32px;
   }
 }
 @media (max-width: 489px) {

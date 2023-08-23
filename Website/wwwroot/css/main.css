@@ -682,6 +682,8 @@ body {
 }
 .ideas .heading {
   text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 .ideas .swiper-scrollbar {
   height: 6px !important;
@@ -736,6 +738,8 @@ body {
 }
 .company .content h2 .quote-line {
   display: block;
+  width: 70%;
+  margin: 0 auto;
 }
 .company .content span.line {
   width: 128px;
@@ -1268,7 +1272,7 @@ body {
 }
 
 .banner-ads {
-  background-color: #F5F5F5;
+  background-color: #000;
   padding: 5px 0;
   position: absolute;
   width: 100%;
@@ -1683,10 +1687,7 @@ body {
 .filter ul.top > li.active a {
   background: url("../images/up.svg") no-repeat right center;
 }
-.filter ul.top > li a.sohu {
-  background: url("");
-}
-        .filter ul.top > li .open {
+.filter ul.top > li .open {
   position: absolute;
   z-index: 100;
 }
