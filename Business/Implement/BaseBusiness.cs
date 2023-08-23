@@ -13,6 +13,28 @@ namespace Business.Implement
         }
         public virtual void Initialization(T model)
         {
+            model.LastUpdatedDate = DateTime.Now;
+            if (model.CreatedDate == null)
+            {
+                model.CreatedDate = DateTime.Now;
+            }
+            if (model.Active == null)
+            {
+                model.Active = true;
+            }
+            if (!string.IsNullOrEmpty(model.ContentHTML))
+            {
+                //model.ContentHTML = model.ContentHTML.Replace(@"</div>", @"</p>");
+                //model.ContentHTML = model.ContentHTML.Replace(@"<div", @"<p");
+                model.ContentHTML = model.ContentHTML.Replace(@"<html>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</html>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"<head>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</head>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"<title>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</title>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"<body>", @"");
+                model.ContentHTML = model.ContentHTML.Replace(@"</body>", @"");
+            }
             if ((model.SortOrder == null) || (model.SortOrder == GlobalHelper.InitializationSortOrder))
             {
                 model.SortOrder = GlobalHelper.InitializationNumber;
@@ -106,8 +128,7 @@ namespace Business.Implement
         public virtual List<T> GetAllAndEmptyToList()
         {
             List<T> result = new List<T>();
-            T empty = (T)Activator.CreateInstance(typeof(T));
-            empty.SortOrder = GlobalHelper.InitializationSortOrder;
+            T empty = (T)Activator.CreateInstance(typeof(T));            
             result.Add(empty);
             List<T> list = _repository.GetAllToList();
             if (list.Count > 0)
@@ -121,8 +142,7 @@ namespace Business.Implement
             List<T> result = new List<T>();
             try
             {
-                T empty = (T)Activator.CreateInstance(typeof(T));
-                empty.SortOrder = GlobalHelper.InitializationSortOrder;
+                T empty = (T)Activator.CreateInstance(typeof(T));                
                 result.Add(empty);
                 List<T> list = await _repository.GetAllToListAsync();
                 if (list.Count > 0)
@@ -157,8 +177,7 @@ namespace Business.Implement
             List<T> result = new List<T>();
             try
             {
-                T empty = (T)Activator.CreateInstance(typeof(T));
-                empty.SortOrder = GlobalHelper.InitializationSortOrder;
+                T empty = (T)Activator.CreateInstance(typeof(T));                
                 result.Add(empty);
                 List<T> list = _repository.GetByParentIDToList(parentID);
                 if (list.Count > 0)
@@ -177,8 +196,7 @@ namespace Business.Implement
             List<T> result = new List<T>();
             try
             {
-                T empty = (T)Activator.CreateInstance(typeof(T));
-                empty.SortOrder = GlobalHelper.InitializationSortOrder;
+                T empty = (T)Activator.CreateInstance(typeof(T));                
                 result.Add(empty);
                 List<T> list = await _repository.GetByParentIDToListAsync(parentID);
                 if (list.Count > 0)

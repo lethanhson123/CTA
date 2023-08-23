@@ -138,7 +138,70 @@
                                         [(ngModel)]="IdeasService.formData.SortOrder" type="number">
                                 </div>
                             </div>
-                            <div class="col s4 m4 l4"></div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Status">QC: Tình trạng</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Tình trạng" name="Status"
+                                        [(ngModel)]="IdeasService.formData.Status" type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Location">QC: Vị trí</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Vị trí" name="Location"
+                                        [(ngModel)]="IdeasService.formData.Location" type="text">
+                                </div>
+                            </div>     
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Recognize">QC: Công nhận</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Công nhận" name="Recognize"
+                                        [(ngModel)]="IdeasService.formData.Recognize" type="text">
+                                </div>
+                            </div>                            
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Area">QC: Khu vực</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Khu vực" name="Area"
+                                        [(ngModel)]="IdeasService.formData.Area" type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="DateComplete">QC: Ngày hoàn thành</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Ngày hoàn thành" name="DateComplete"
+                                        [(ngModel)]="IdeasService.formData.DateComplete" type="text">
+                                </div>
+                            </div>
+                            <div class="input-field col s4 m4 l4">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="IsShow"
+                                            [(ngModel)]="IdeasService.formData.IsShow" />
+                                        <span>Quy cách (QC)</span>
+                                    </label>
+                                </p>
+                            </div>
                             <div class="input-field col s4 m4 l4">
                                 <p>
                                     <label>
@@ -178,7 +241,7 @@
                             </div>
                         </div>
                         <div class="col s12 m12 l7">
-                            <ck-editor [config]="{'height': 500}" name="ContentHTML"
+                            <ck-editor [config]="{'height': 1000}" name="ContentHTML"
                                 [(ngModel)]="IdeasService.formData.ContentHTML" skin="moono-lisa" language="en"
                                 [fullPage]="true"></ck-editor>
                         </div>

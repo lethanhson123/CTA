@@ -62,7 +62,7 @@
                             </div>
                             <div class="col s6 m6 l8">
                                 <mat-select
-                                    style="padding-top:10px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                    style="padding-top:20px; padding-bottom:20px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
                                     name="ParentID" [(ngModel)]="ProjectService.formData.ParentID">
                                     <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
                                         {{item.Name}}
@@ -124,7 +124,70 @@
                                         [(ngModel)]="ProjectService.formData.SortOrder" type="number">
                                 </div>
                             </div>
-                            <div class="col s4 m4 l4"></div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Status">QC: Tình trạng</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Tình trạng" name="Status"
+                                        [(ngModel)]="ProjectService.formData.Status" type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Location">QC: Vị trí</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Vị trí" name="Location"
+                                        [(ngModel)]="ProjectService.formData.Location" type="text">
+                                </div>
+                            </div>     
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Recognize">QC: Công nhận</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Công nhận" name="Recognize"
+                                        [(ngModel)]="ProjectService.formData.Recognize" type="text">
+                                </div>
+                            </div>                            
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="Area">QC: Khu vực</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Khu vực" name="Area"
+                                        [(ngModel)]="ProjectService.formData.Area" type="text">
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="DateComplete">QC: Ngày hoàn thành</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input placeholder="Quy cách: Ngày hoàn thành" name="DateComplete"
+                                        [(ngModel)]="ProjectService.formData.DateComplete" type="text">
+                                </div>
+                            </div>
+                            <div class="input-field col s4 m4 l4">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="IsShow"
+                                            [(ngModel)]="ProjectService.formData.IsShow" />
+                                        <span>Quy cách (QC)</span>
+                                    </label>
+                                </p>
+                            </div>
                             <div class="input-field col s4 m4 l4">
                                 <p>
                                     <label>
@@ -164,7 +227,7 @@
                             </div>
                         </div>
                         <div class="col s12 m12 l7">
-                            <ck-editor [config]="{'height': 500}" name="ContentHTML"
+                            <ck-editor [config]="{'height': 1000}" name="ContentHTML"
                                 [(ngModel)]="ProjectService.formData.ContentHTML" skin="moono-lisa" language="en"
                                 [fullPage]="true"></ck-editor>
                         </div>

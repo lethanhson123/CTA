@@ -246,7 +246,7 @@
   .company .content h2 .quote-line{
     width: 100%;
   }
-  .ideas .heading{
+  .ideas .heading, .team .heading {
     width: 100%;
   }
   .contact-frm{

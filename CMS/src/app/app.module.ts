@@ -39,6 +39,12 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { CategoryIdeasComponent } from './category-ideas/category-ideas.component';
 import { MembershipComponent } from './membership/membership.component';
+import { AwardComponent } from './award/award.component';
+import { AwardInfoComponent } from './award/award-info/award-info.component';
+import { EmailComponent } from './email/email.component';
+import { MenuComponent } from './menu/menu.component';
+import { QuoteComponent } from './quote/quote.component';
+import { SocialNetworkComponent } from './social-network/social-network.component';
 
 
 
@@ -66,7 +72,7 @@ import { MembershipComponent } from './membership/membership.component';
     BannerComponent, 
     BannerDetailComponent, 
     AboutComponent, 
-    AboutDetailComponent, AboutInfoComponent, FeedbackComponent, NewsletterComponent, CandidateComponent, CategoryIdeasComponent, MembershipComponent, 
+    AboutDetailComponent, AboutInfoComponent, FeedbackComponent, NewsletterComponent, CandidateComponent, CategoryIdeasComponent, MembershipComponent, AwardComponent, AwardInfoComponent, EmailComponent, MenuComponent, QuoteComponent, SocialNetworkComponent, 
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

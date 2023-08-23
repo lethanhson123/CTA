@@ -24,11 +24,29 @@ import { CategoryIdeasComponent } from './category-ideas/category-ideas.componen
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { MembershipComponent } from './membership/membership.component';
+import { AwardComponent } from './award/award.component';
+import { AwardInfoComponent } from './award/award-info/award-info.component';
+import { EmailComponent } from './email/email.component';
+import { MenuComponent } from './menu/menu.component';
+import { QuoteComponent } from './quote/quote.component';
+import { SocialNetworkComponent } from './social-network/social-network.component';
 
 const routes: Routes = [  
   { path: '', redirectTo: '/Homepage', pathMatch: 'full' },
   {
     path: 'Homepage', component: AboutComponent,
+  },   
+  {
+    path: 'Email', component: EmailComponent,
+  }, 
+  {
+    path: 'Menu', component: MenuComponent,
+  }, 
+  {
+    path: 'Quote', component: QuoteComponent,
+  }, 
+  {
+    path: 'SocialNetwork', component: SocialNetworkComponent,
   },   
   {
     path: 'CategoryLanguage', component: CategoryLanguageComponent,
@@ -61,6 +79,19 @@ const routes: Routes = [
       },     
       {
         path: 'Info/:ID', component: AboutInfoComponent,
+      },
+    ]
+  },
+  {
+    path: 'Award', component: AwardComponent,
+  }, 
+  {
+    path: 'Award', children: [
+      {
+        path: 'List', component: AwardComponent,
+      },     
+      {
+        path: 'Info/:ID', component: AwardInfoComponent,
       },
     ]
   },

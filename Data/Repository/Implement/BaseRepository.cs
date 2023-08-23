@@ -14,33 +14,6 @@
         }
         public virtual void Initialization(T model)
         {
-            model.LastUpdatedDate = DateTime.Now;
-            if (model.CreatedDate == null)
-            {
-                model.CreatedDate = DateTime.Now;
-            }
-            if (model.Active == null)
-            {
-                model.Active = true;
-            }
-            if (model.Display == null)
-            {
-                model.Display = model.Name;
-            }
-            if (!string.IsNullOrEmpty(model.ContentHTML))
-            {
-                //model.ContentHTML = model.ContentHTML.Replace(@"</div>", @"</p>");
-                //model.ContentHTML = model.ContentHTML.Replace(@"<div", @"<p");
-                model.ContentHTML = model.ContentHTML.Replace(@"<html>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</html>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"<head>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</head>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"<title>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</title>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"<body>", @"");
-                model.ContentHTML = model.ContentHTML.Replace(@"</body>", @"");
-            }
-
         }
         public virtual int Add(T model)
         {

@@ -12,6 +12,8 @@
 
         public virtual DbSet<Data.Model.About> About { get; set; }
         public virtual DbSet<Data.Model.AboutFile> AboutFile { get; set; }
+        public virtual DbSet<Data.Model.Award> Award { get; set; }
+        public virtual DbSet<Data.Model.AwardFile> AwardFile { get; set; }
         public virtual DbSet<Data.Model.Banner> Banner { get; set; }
         public virtual DbSet<Data.Model.BannerFile> BannerFile { get; set; }
         public virtual DbSet<Data.Model.Candidate> Candidate { get; set; }
@@ -21,17 +23,21 @@
         public virtual DbSet<Data.Model.CategoryLanguage> CategoryLanguage { get; set; }
         public virtual DbSet<Data.Model.Contact> Contact { get; set; }
         public virtual DbSet<Data.Model.ContactFile> ContactFile { get; set; }
+        public virtual DbSet<Data.Model.Email> Email { get; set; }
         public virtual DbSet<Data.Model.Feedback> Feedback { get; set; }
         public virtual DbSet<Data.Model.Ideas> Ideas { get; set; }
         public virtual DbSet<Data.Model.IdeasFile> IdeasFile { get; set; }
         public virtual DbSet<Data.Model.Membership> Membership { get; set; }
+        public virtual DbSet<Data.Model.Menu> Menu { get; set; }
         public virtual DbSet<Data.Model.News> News { get; set; }
         public virtual DbSet<Data.Model.NewsFile> NewsFile { get; set; }
         public virtual DbSet<Data.Model.Newsletter> Newsletter { get; set; }
         public virtual DbSet<Data.Model.Project> Project { get; set; }
         public virtual DbSet<Data.Model.ProjectFile> ProjectFile { get; set; }
+        public virtual DbSet<Data.Model.Quote> Quote { get; set; }
         public virtual DbSet<Data.Model.Service> Service { get; set; }
         public virtual DbSet<Data.Model.ServiceFile> ServiceFile { get; set; }
+        public virtual DbSet<Data.Model.SocialNetwork> SocialNetwork { get; set; }
         public virtual DbSet<Data.Model.Team> Team { get; set; }
         public virtual DbSet<Data.Model.TeamFile> TeamFile { get; set; }
 

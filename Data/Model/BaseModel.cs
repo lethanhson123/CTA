@@ -20,10 +20,18 @@ namespace Data.Model
         public int? SortOrder { get; set; }
         public bool? IsHomePage { get; set; }
         public string? FileName { get; set; }
+        public string? Status { get; set; }
+        public string? DateComplete { get; set; }
+        public string? Location { get; set; }
+        public string? Area { get; set; }
+        public string? Recognize { get; set; }
+        public bool? IsShow { get; set; }
         public BaseModel()
         {
+            ParentID = GlobalHelper.CategoryLanguageID;
             SortOrder = GlobalHelper.InitializationSortOrder;
             Active = GlobalHelper.InitializationBool;
+            IsShow = GlobalHelper.InitializationBool;
         }
     }
 }
