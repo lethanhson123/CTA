@@ -1,5 +1,5 @@
 ﻿@model Data.Model.CategoryIdeas;
-
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @inject Business.Interface.IIdeasBusiness _ideasBusiness
 @inject Business.Interface.ICategoryIdeasBusiness _categoryIdeasBusiness
 
@@ -8,6 +8,8 @@
     listIdeas = listIdeas.OrderBy(item => item.SortOrder).ToList();
 
     List<Data.Model.CategoryIdeas> listCategoryIdeas = await _categoryIdeasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(3);
 }
 
 @{
@@ -28,6 +30,9 @@
 <div class="slider">
     <div class="content">
         @Html.Raw("<a style='text-decoration: none;' href='"+ Model.Note +"' title='"+ Model.Name +"'><h1 class='marginbt1'>"+ Model.Name +"</h1></a>")
+        <p>
+            @Model.Description
+        </p>
     </div>
 </div>
 <div class="wrapper padtop_4_5">
@@ -49,8 +54,8 @@
                         {
                             if (itemSub.CategoryID == item.ID)
                             {
-                                string url = Helper.GlobalHelper.DomainURL + itemSub.GetType().Name + "/y-tuong-" + itemSub.ID + ".html";
-                                @Html.Raw(@"<li><a class='sohu' style='text-decoration: none; font-size: 14px;' href='"+url+"' title='"+ itemSub.Name +"'>"+itemSub.Name+"</a></li>")
+                                string url = Helper.GlobalHelper.DomainURL + itemSub.GetType().Name + "/" + itemSub.ID + ".html";
+                                @Html.Raw(@"<li><a class='sohu' href='"+url+"' title='"+ itemSub.Name +"'>"+itemSub.Name+"</a></li>")
                             }
                         }
                         @Html.Raw(@"</ul>")
@@ -106,7 +111,7 @@
 <div class="padding4_5_0"></div>
 <div class="note-text bg-color-4 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

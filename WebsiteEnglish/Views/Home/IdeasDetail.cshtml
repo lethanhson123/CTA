@@ -1,5 +1,7 @@
 ﻿@model Data.Model.Ideas;
 @inject Business.Interface.IIdeasBusiness _ideasBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
+
 @{
     List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listIdeas = listIdeas.OrderBy(item => item.SortOrder).ToList();
@@ -9,6 +11,7 @@
         ideas = listIdeas[0];
         ideas.Note = Helper.GlobalHelper.DomainURL + ideas.GetType().Name + "/" + ideas.Code + "-" + ideas.ID + ".html";
     }    
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(15);
 }
 
 @{
@@ -58,12 +61,12 @@
 </div>
 <div class="note-text bg-color-2 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Discuss your workplace</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>
 <div class="padding4_5_0"></div>
-<div style="background-color: #fff; width: 100%;">
+<div style="background-color: #fff; width: 100%;">    
     <div class="wrapper">
         <div class="heading" style="text-align: center;">
             <h2>Related Posts</h2>

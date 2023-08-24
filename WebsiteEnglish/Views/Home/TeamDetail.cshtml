@@ -1,5 +1,6 @@
 ﻿@model Data.Model.Team;
 @inject Business.Interface.IProjectBusiness _projectBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
     Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
     ViewData["Title"] = Model.Name;
@@ -7,7 +8,8 @@
     ViewData["URLCurrent"] = Model.Note;
     ViewData["URLImage"] = Model.FileName;
 
-    List<Data.Model.Project> listProject = await _projectBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    int pageCount = GlobalHelper.RowCount + 1;
+    List<Data.Model.Project> listProject = _projectBusiness.GetByParentIDAndActiveToList(Helper.GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
     listProject = listProject.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Project project = new Project();
     if (listProject.Count > 0)
@@ -15,6 +17,9 @@
         project = listProject[0];
         project.Note = Helper.GlobalHelper.DomainURL + project.GetType().Name + "/" + project.Code + "-" + project.ID + ".html";
     }
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(17);
+    string urlPage = Helper.GlobalHelper.DomainURL + "Teams/2.html";
 }
 <div class="slider-portfolio">
     <div class="content">
@@ -44,7 +49,7 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M73.1643 61.3486C73.1885 61.3486 73.2128 61.3486 73.237 61.3486C73.254 61.4262 73.1849 61.418 73.1279 61.4214C73.1346 61.3917 73.1643 61.385 73.1643 61.3486Z" fill="#424B5A" />
                     </svg>
                 </div>
-                <h2 class="marginbt2 color-dark">Our Projects</h2>
+                <h2 class="marginbt2 color-dark">Những Projects của chúng tôi</h2>
             </div>
             <div class="content">
                 @{
@@ -74,12 +79,15 @@
                     }
                 }
             </div>
+            <div class="padding4_5_0 view-more">
+                <a class="btn-primary" href="@urlPage" title="View more" style="background-color: #fff;"><span>View more</span></a>
+            </div>
         </div>
     </div>
 </div>
 <div class="note-text bg-color-4 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Discuss your workplace</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

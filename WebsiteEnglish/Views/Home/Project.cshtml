@@ -1,32 +1,34 @@
-﻿@inject Business.Interface.IProjectBusiness _projectBusiness
-
+﻿@model BaseViewModel
 @inject Business.Interface.IProjectFileBusiness _projectFileBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 
-@{
-    List<Data.Model.Project> listProject = await _projectBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
-    listProject = listProject.OrderBy(item => item.SortOrder).ToList();
+@{  
     Data.Model.Project project = new Project();
-    if (listProject.Count > 0)
+    if (Model.Projects.Count > 0)
     {
-        project = listProject[0];
+        project = Model.Projects[0];
         project.Note = Helper.GlobalHelper.DomainURL + project.GetType().Name + "/" + project.Code + "-" + project.ID + ".html";
     }
 
     Data.Model.Project project001 = new Project();
     List<Data.Model.ProjectFile> listProjectFile = new List<ProjectFile>();
-    if (listProject.Count > 1)
+    if (Model.Projects.Count > 1)
     {
-        project001 = listProject[1];
+        project001 = Model.Projects[1];
         project001.Note = Helper.GlobalHelper.DomainURL + project001.GetType().Name + "/" + project001.Code + "-" + project001.ID + ".html";
         listProjectFile = await _projectFileBusiness.GetByParentIDAndActiveToListAsync(project001.ID, true);
     }
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(14);
 }
 
 @{
     ViewData["Title"] = project.Name;
     ViewData["Description"] = project.Description;
     ViewData["URLImage"] = project.FileName;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "project.html";
+    ViewData["URLCurrent"] = menu.Display;
+    Model.PageIndex = Model.PageIndex + 1;
+    string urlPage = Helper.GlobalHelper.DomainURL + "Projects/2.html";
 
 }
 <div class="slider">
@@ -90,7 +92,7 @@
 
 @{
     int row = 0;
-    foreach (Data.Model.Project item in listProject)
+    foreach (Data.Model.Project item in Model.Projects)
     {
         if ((item.ID != project.ID) && (item.ID != project001.ID))
         {
@@ -110,8 +112,7 @@
             @Html.Raw(@"<div class='content'>")
             @Html.Raw(@"<span class='years marginbt2'>"+item.LastUpdatedDate.Value.Year+"</span>")
             @Html.Raw(@"<h2 class='marginbt1'>"+ item.Name +"</h2>")
-            @Html.Raw(@"<p>")
-            @Html.Raw(@"" + item.Description)
+            @Html.Raw(@"<p>")            
             @Html.Raw(@"<svg width='33' height='20' viewBox='0 0 33 20' fill='none' xmlns='http://www.w3.org/2000/svg'>")
             @Html.Raw(@"<path fill-rule='evenodd' clip-rule='evenodd' d='M23.7071 0.707106C23.3166 0.316582 22.6834 0.316582 22.2929 0.707106L21.944 1.05603C21.5537 1.4463 21.5534 2.07898 21.9433 2.46961L28.2125 8.75H1C0.447715 8.75 0 9.19771 0 9.75V10.25C0 10.8023 0.447715 11.25 1 11.25H28.2125L21.9433 17.5304C21.5534 17.921 21.5537 18.5537 21.944 18.944L22.2929 19.2929C22.6834 19.6834 23.3166 19.6834 23.7071 19.2929L33 10L23.7071 0.707106Z' fill='#424B5A' />")
             @Html.Raw(@"</svg>")
@@ -124,16 +125,17 @@
             row = row + 1;
         }
     }
-}
 
-<div class="note-text bg-color-1 padding7_0" style="background-color: #ffffff;">
-    <div class="content">
-        <h2 class="marginbt1">Collaboration is our lifeblood</h2>
-        <a class="btn-primary" href="@Helper.GlobalHelper.DomainURLSub/team.html" title="Meet our team"><span>Meet our team</span></a>
-    </div>
-</div>
+    if (Model.IsShowPage==true)
+    {
+        @Html.Raw(@"<div class='padding4_5_0 view-more'>")
+        @Html.Raw(@"<a class='btn-primary' href='"+urlPage+"' title='View more'><span>View more</span></a>")
+        @Html.Raw(@"</div>")
+    }
+}
 <div class="note-text bg-color-2 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Skill is our strength</h2><a class="btn-primary color1 white" href="@Helper.GlobalHelper.DomainURLSub/service.html" title="Services"><span>Services</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

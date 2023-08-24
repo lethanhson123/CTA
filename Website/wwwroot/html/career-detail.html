@@ -120,7 +120,7 @@
                 <img class="logo-ctaaa" b-1090d60hba alt="CTA Office Design &amp; Build" title="CTA Office Design &amp; Build" src="https://ctacorporation.vn/image/logo.svg" width="100px" />
             </a>
         </div>
-        
+
     </header>
     <div class="languages">
         <div class="en active"><span>EN</span><img src="images/icon-switch-en.png" alt=""></div>
@@ -224,25 +224,25 @@
         }
     </style>
     <script>
-    function onSaveCandidate() {
-        $.ajax({
-            type: "POST",
-            datatype: "JSON",
-            url: '/Home/SaveCandidate',
-            data: $('#formCandidate').serialize(),
-            success: function (result) {
-                window.location.href = "/loi-cam-on.html";
-            },
-            error: function (jqXHR, exception) { },
-            complete: function () { },
-        })
-    }
+        function onSaveCandidate() {
+            $.ajax({
+                type: "POST",
+                datatype: "JSON",
+                url: '/Home/SaveCandidate',
+                data: $('#formCandidate').serialize(),
+                success: function (result) {
+                    window.location.href = "/loi-cam-on.html";
+                },
+                error: function (jqXHR, exception) { },
+                complete: function () { },
+            })
+        }
     </script>
-   <div class="slider bg-image-career-detail" style="background: url(https://api.ctacorporation.vn/Image/Career/workplace-strategist_20230824143318.jpg) no-repeat center center;">
-    <div class="content">
-        <a style="text-decoration: none;" href="https://ctacorporation.vn/Career/workplace-strategist-4.html" title="Workplace Strategist"><h1 class="marginbt1">Workplace Strategist</h1></a>
+    <div class="slider bg-image-career-detail" style="background: url(https://api.ctacorporation.vn/Image/Career/workplace-strategist_20230824143318.jpg) no-repeat center center;">
+        <div class="content">
+            <a style="text-decoration: none;" href="https://ctacorporation.vn/Career/workplace-strategist-4.html" title="Workplace Strategist"><h1 class="marginbt1">Workplace Strategist</h1></a>
+        </div>
     </div>
-</div>
     <div>
         <div>
             <div class="contact career-detail">
@@ -422,16 +422,16 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $(".languages").click(function (e) {
-            if($(".languages .en").hasClass("active")) {
-                $(".languages .en").removeClass("active")
-                $(".languages .vn").addClass("active")
-            }
-            else {
-                $(".languages .en").addClass("active")
-                $(".languages .vn").removeClass("active")
-            }
+                if ($(".languages .en").hasClass("active")) {
+                    $(".languages .en").removeClass("active")
+                    $(".languages .vn").addClass("active")
+                }
+                else {
+                    $(".languages .en").addClass("active")
+                    $(".languages .vn").removeClass("active")
+                }
             })
         });
-      </script>
+    </script>
 </body>
 </html>

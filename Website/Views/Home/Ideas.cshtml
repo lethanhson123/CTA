@@ -58,7 +58,7 @@
                             if (itemSub.CategoryID == item.ID)
                             {
                                 string url = Helper.GlobalHelper.DomainURL + itemSub.GetType().Name + "/" + itemSub.ID + ".html";
-                                @Html.Raw(@"<li><a class='sohu' style='text-decoration: none; font-size: 14px; background: url("") no-repeat right center;' href='"+url+"' title='"+ itemSub.Name +"'>"+itemSub.Name+"</a></li>")
+                                @Html.Raw(@"<li><a class='sohu' href='"+url+"' title='"+ itemSub.Name +"'>"+itemSub.Name+"</a></li>")
                             }
                         }
                         @Html.Raw(@"</ul>")

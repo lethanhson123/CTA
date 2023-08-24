@@ -15,10 +15,10 @@
         team001.Note = Helper.GlobalHelper.DomainURL + team001.GetType().Name + "/" + team001.Code + "-" + team001.ID + ".html";
     }
     Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(5);
+    Model.PageIndex = Model.PageIndex + 1;
+    string urlPage = Helper.GlobalHelper.DomainURL + "Teams/" + Model.PageIndex + ".html";
+}
 
-    string urlPage = Helper.GlobalHelper.DomainURL + "Teams/2.html";
-}
-}
 
 @{
     ViewData["Title"] = team.Name;

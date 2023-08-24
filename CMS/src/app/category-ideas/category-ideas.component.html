@@ -71,6 +71,14 @@
                                             [(ngModel)]="element.Name" type="text">
                                     </mat-cell>
                                 </ng-container>       
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mô tả
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <input placeholder="Mô tả" name="Description{{element.ID}}"
+                                            [(ngModel)]="element.Description" type="text">
+                                    </mat-cell>
+                                </ng-container>    
                                 <ng-container matColumnDef="SortOrder">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
                                     </mat-header-cell>

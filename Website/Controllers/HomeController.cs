@@ -1,13 +1,4 @@
-﻿
-
-using Business.Implement;
-using Business.Interface;
-using Data.Model;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Routing.Matching;
-using System;
-
-namespace Website.Controllers
+﻿namespace Website.Controllers
 {
     public class HomeController : Controller
     {

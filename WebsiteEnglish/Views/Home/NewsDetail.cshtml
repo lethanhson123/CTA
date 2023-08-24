@@ -1,14 +1,24 @@
 ﻿@model Data.Model.News;
 @inject Business.Interface.INewsBusiness _newsBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
     Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
     ViewData["Title"] = Model.Name;
-    ViewData["Description"] = Model.Description;    
+    ViewData["Description"] = Model.Description;
     ViewData["URLCurrent"] = Model.Note;
     ViewData["URLImage"] = Model.FileName;
 
-    List<Data.Model.News> listNews = await _newsBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
-    listNews = listNews.OrderBy(item => item.SortOrder).ToList();
+    int pageCount = GlobalHelper.NewsCount + 1;
+    List<Data.Model.News> listNews = _newsBusiness.GetByParentIDAndActiveToList(Helper.GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();    
+    Data.Model.News news = new News();
+    if (listNews.Count > 0)
+    {
+        news = listNews[0];
+        news.Note = Helper.GlobalHelper.DomainURL + news.GetType().Name + "/" + news.Code + "-" + news.ID + ".html";
+    }
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(18);
+    string urlPage = Helper.GlobalHelper.DomainURL + "Newss/2.html";
 }
 <div class="slider">
     <div class="content">
@@ -50,8 +60,8 @@
 </div>
 <div class="note-text bg-color-2 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Discuss your workplace</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>
 
@@ -66,7 +76,7 @@
             @{
                 foreach (Data.Model.News item in listNews)
                 {
-                    if (item.ID != Model.ID)
+                    if ((item.ID != Model.ID)&& (item.ID != news.ID))
                     {
                         string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
                         @Html.Raw(@"<a class='news-item hover-style' href='"+ url +"' title='"+ item.Name +"'>")
@@ -90,6 +100,8 @@
                 }
             }
         </div>
+        <div class="padding4_5_0 view-more">
+            <a class="btn-primary" href="@urlPage" title="View more" style="background-color: #fff;"><span>View more</span></a>
+        </div>
     </div>
-    <div class="padding4_5_0"></div>
 </div>

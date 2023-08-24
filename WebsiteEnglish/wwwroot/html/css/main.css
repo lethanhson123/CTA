@@ -16,6 +16,7 @@ html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockq
      -moz-text-size-adjust: none;
       -ms-text-size-adjust: none;
           text-size-adjust: none;
+  color: #424B5A;
 }
 
 footer, header, nav, section, main {
@@ -232,6 +233,7 @@ body {
 }
 .column.four-col.right.single-margin-right, .scroll-panel-0 .copy h2, .scroll-panel-0 .copy p{
   text-shadow: -0.8px 1px 4px #636363;
+  color: #fff;
 }
 
 
@@ -260,10 +262,12 @@ body {
   font-weight: bold;
   font-size: 50px;
   line-height: 50px;
+  color: #fff;
 }
 .copy p {
   line-height: 25px;
   font-size: 18px;
+  color: #fff;
 }
 .copy .button {
   display: -webkit-inline-box;
@@ -277,6 +281,7 @@ body {
 }
 .copy .button span {
   font-size: 18px;
+  color: #fff;
 }
 .copy .button svg {
   margin-left: 10px;
@@ -394,6 +399,9 @@ body {
   border: 1px solid white;
   color: white;
 }
+.btn-primary.white span.bold123{
+  font-weight: bold;
+}
 .btn-primary.white:hover::before {
   background: #FF9900;
 }
@@ -502,6 +510,10 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+.services .wrapper > a h2 span{
+  color: #fff;
+  letter-spacing: 1;
 }
 .services .wrapper > a svg {
   margin-left: 10px;
@@ -682,6 +694,8 @@ body {
 }
 .ideas .heading {
   text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 .ideas .swiper-scrollbar {
   height: 6px !important;
@@ -736,6 +750,8 @@ body {
 }
 .company .content h2 .quote-line {
   display: block;
+  width: 70%;
+  margin: 0 auto;
 }
 .company .content span.line {
   width: 128px;
@@ -850,6 +866,8 @@ body {
 }
 .team .heading {
   text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 .team .item {
   text-decoration: none;
@@ -914,12 +932,12 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #FF9900;
+  background-color: #f3b251;
   cursor: pointer;
 }
 .header .logo {
   background-color: white;
-  width: 135px;
+  width: 120px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -972,12 +990,12 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #FF9900;
+  background-color: #f3b251;
   cursor: pointer;
 }
 #open-menu .left .top-menu .logo {
   background-color: white;
-  width: 135px;
+  width: 120px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1265,10 +1283,11 @@ body {
 .scroll-panel-0 .copy {
   position: absolute;
   left: 20%;
+  color: #fff;
 }
 
 .banner-ads {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   padding: 5px 0;
   position: absolute;
   width: 100%;
@@ -1314,8 +1333,8 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   font-size: 14px;
-  color: #424B5A;
-  background-color: #FFD685;
+  color: #fff;
+  background-color: #ff9900;
   text-decoration: none;
   margin-left: 4rem;
 }
@@ -1343,14 +1362,27 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
 }
+
 .slider.bg-image {
   background: url("../images/services.png") no-repeat center center;
   height: 400px;
-  background-size: cover;
+  background-size: cover !important;
+}
+.slider.bg-image::before{
+  content: "";
+  background-color: #fff;
+  opacity: 0.3;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 0;
 }
 .slider .content {
-  width: 685px;
+  width: 60%;
   text-align: center;
+  z-index: 10;
 }
 .slider .content h1 {
   font-size: 50px;
@@ -1362,7 +1394,6 @@ body {
   color: #424B5A;
   line-height: 30px;
 }
-
 .project-item.right .inner .left {
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
@@ -1767,7 +1798,7 @@ body {
 .slider.bg-image-contact {
   background: url(../images/contact-bg.jpg) no-repeat center center;
   height: 400px;
-  background-size: cover;
+  background-size: cover !important;
 }
 .contact .bg-image-contact {
   background: url(../images/bg-line-contact.svg) no-repeat center right;
@@ -1786,6 +1817,15 @@ body {
   margin-top: -70px;
   margin-right: 150px;
 }
+.slider.bg-image-career-detail{
+  background: url(../images/contact-bg.jpg) no-repeat center center;
+  height: 300px;
+  background-size: cover !important;
+}
+.career-detail .left-contact{
+  margin-top: 30px;
+  margin-right: 150px;
+}
 .right-contact{
   position: relative;
 }
@@ -1795,7 +1835,7 @@ body {
 .contact-frm .form svg{
   position: relative;
   right: 35px;
-  bottom: 165px;
+  bottom: 155px;
 }
 .contact-frm .form-group{
   margin-top: 25px;
@@ -1851,6 +1891,9 @@ body {
   font-size: 16px;
   font-weight: 700;
 }
+.contact .form-group input.file{
+  border-bottom: none;
+}
 .contact .form-group input:focus, .contact .form-group textarea:focus {
   outline: none;
 }
@@ -1875,13 +1918,14 @@ body {
 .btn-talk{
   background: #424B5A;
   color: #fff;
-  padding: 10px 20px;
+  padding: 15px 20px;
   width: 100%;
   text-align: center;
   position: absolute;
   left: -35px;
   right: 0;
-  bottom: 0;
+  bottom: -10px;
+  font-size: 16px;
 }
 .btn-talk:hover{
   background-color: #FF9900;
@@ -1945,6 +1989,11 @@ img{
   height: auto;
   max-width: 100%;
 }
+img.logo-ctaaa{
+  height: auto;
+  max-width: 90%;
+  margin-left: 5px;
+} 
 .text-center{
   text-align: center;
 }
@@ -2316,7 +2365,7 @@ padding-right: 2.5em
 .slider.bg-image-project-dtail {
   background: url(../images/ct-project-1.jpg) no-repeat center center;
   height: 500px;
-  background-size: cover;
+  background-size: cover !important;
 }
 .content-detail{
   max-width: 1000px;
@@ -2382,4 +2431,45 @@ padding-right: 2.5em
 }
 .news-detail .icon svg {
   margin-right: 10px;
+}
+
+/* Language*/
+.languages {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 15px;
+  top: 80px;
+  right: 100px;
+  border-radius: 30px;
+  z-index: 1000;
+  cursor: pointer;
+}
+.languages .en, .languages .vn {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.languages .en img, .languages .vn img {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.languages .en span, .languages .vn span {
+  color: white;
+}
+.languages .en.active, .languages .vn.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.languages .en img {
+  margin-left: 10px;
+}
+.languages .vn img {
+  margin-right: 15px;
 }

@@ -1,21 +1,24 @@
-﻿@inject Business.Interface.INewsBusiness _newsBusiness
+﻿@model BaseViewModel
 
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
-    List<Data.Model.News> listNews = await _newsBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
-    listNews = listNews.OrderBy(item => item.SortOrder).ToList();
+    
     Data.Model.News news = new News();
-    if (listNews.Count > 0)
+    if (Model.Newss.Count > 0)
     {
-        news = listNews[0];
+        news = Model.Newss[0];
         news.Note = Helper.GlobalHelper.DomainURL + news.GetType().Name + "/" + news.Code + "-" + news.ID + ".html";
     }
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(18);
 }
 
 @{
     ViewData["Title"] = news.Name;
     ViewData["Description"] = news.Description;
     ViewData["URLImage"] = news.FileName;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "news.html";    
+    ViewData["URLCurrent"] = menu.Display;
+    
+    string urlPage = Helper.GlobalHelper.DomainURL + "Newss/2.html";
 }
 <div class="slider">
     <div class="content">
@@ -29,7 +32,7 @@
     <div class="wrapper padtop_4_5">
         <div class="news">
             @{
-                foreach (Data.Model.News item in listNews)
+                foreach (Data.Model.News item in Model.Newss)
                 {
                     if (item.ID != news.ID)
                     {
@@ -52,16 +55,23 @@
                         @Html.Raw(@"</h3>")
                         @Html.Raw(@"</a>")
                     }
-                }
+                }               
             }       
         </div>
-    </div>
-    <div class="padding4_5_0"></div>
+        @{
+            if (Model.IsShowPage == true)
+            {
+                @Html.Raw(@"<div class='padding4_5_0 view-more'>")
+                @Html.Raw(@"<a class='btn-primary' href='"+urlPage+"' title='View more'><span>View more</span></a>")
+                @Html.Raw(@"</div>")
+            }
+        }
+    </div>    
 </div>
 
 <div class="note-text bg-color-3 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Discuss your workplace</h2>
-        <a class="btn-primary" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

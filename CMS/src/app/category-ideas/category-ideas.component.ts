@@ -17,7 +17,7 @@ import { CategoryIdeasService } from 'src/app/shared/CategoryIdeas.service';
 export class CategoryIdeasComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ParentID', 'CategoryID', 'Name', 'SortOrder', 'Save'];
+  displayColumns: string[] = ['ParentID', 'CategoryID', 'Name', 'Description', 'SortOrder', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;

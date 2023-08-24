@@ -1,5 +1,6 @@
 ﻿@inject Business.Interface.IContactBusiness _contactBusiness
 @inject Business.Interface.ISocialNetworkBusiness _socialNetworkBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @model Data.Model.Feedback;
 @{
     List<Data.Model.SocialNetwork> listSocialNetwork = await _socialNetworkBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
@@ -22,6 +23,7 @@
     {
         socialNetwork03 = listSocialNetwork[2];
     }
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(8);
 
     Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
 }
@@ -164,7 +166,7 @@
 </div>
 <div class="note-text bg-color-2 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

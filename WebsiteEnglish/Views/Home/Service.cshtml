@@ -1,5 +1,6 @@
 ﻿@inject Business.Interface.IServiceBusiness _serviceBusiness
 @inject Business.Interface.IProjectBusiness _projectBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
     List<Data.Model.Service> listService = await _serviceBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listService = listService.OrderBy(item => item.SortOrder).ToList();
@@ -39,13 +40,15 @@
         project = listProject[0];
         project.Note = Helper.GlobalHelper.DomainURL + project.GetType().Name + "/" + project.Code + "-" + project.ID + ".html";
     }
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(16);
 }
 
 @{
     ViewData["Title"] = service.Name;
     ViewData["Description"] = service.Description;
     ViewData["URLImage"] = service.FileName;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "service.html";
+    ViewData["URLCurrent"] = menu.Display;
 }
 <div class="slider bg-image" style="background: url(@service.FileName) no-repeat center center;">
     <div class="content">
@@ -128,8 +131,8 @@
 </div>
 <div class="note-text bg-color-1 padding7_0">
     <div class="content">
-        <h2 class="marginbt2">Discuss your workplace</h2>
-        <a class="btn-primary" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>
 <div class="team padding4_5_0 bg-color-1">
