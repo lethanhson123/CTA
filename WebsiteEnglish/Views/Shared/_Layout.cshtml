@@ -86,7 +86,7 @@
         socialNetwork03 = listSocialNetwork[2];
     }
 
-    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
+    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(2);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -271,7 +271,7 @@
             <div class="bottom">
                 <div class="search padding2_0">
                     <form method="post" action="">
-                        <input type="text" name="SearchString" id="SearchString" placeholder="Bạn muốn tìm gì?">
+                        <input type="text" name="SearchString" id="SearchString" placeholder="Search...">
                         <svg onclick="onSearchString('@Helper.GlobalHelper.DomainURL')" style="cursor: pointer;" width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.1187 29.2375C22.9163 29.2375 29.2375 22.9163 29.2375 15.1187C29.2375 7.32117 22.9163 1 15.1187 1C7.32117 1 1 7.32117 1 15.1187C1 22.9163 7.32117 29.2375 15.1187 29.2375Z"
                                   stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
