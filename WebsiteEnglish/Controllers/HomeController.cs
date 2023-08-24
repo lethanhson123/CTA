@@ -425,7 +425,7 @@
             {
                 result = e.Message;
             }
-            string url = GlobalHelper.DomainURL + "loi-cam-on.html";
+            string url = GlobalHelper.DomainURL + "thank.html";
             return Redirect(url);
         }
         [HttpPost]

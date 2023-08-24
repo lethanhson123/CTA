@@ -68,7 +68,7 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapControllerRoute(
       name: "Award",
-      pattern: "giai-thuong.html",
+      pattern: "award.html",
       defaults: new { controller = "Home", action = "Award" });
 
     endpoints.MapControllerRoute(
