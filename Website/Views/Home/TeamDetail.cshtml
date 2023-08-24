@@ -1,5 +1,6 @@
 ﻿@model Data.Model.Team;
 @inject Business.Interface.IProjectBusiness _projectBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
     Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
     ViewData["Title"] = Model.Name;
@@ -7,7 +8,8 @@
     ViewData["URLCurrent"] = Model.Note;
     ViewData["URLImage"] = Model.FileName;
 
-    List<Data.Model.Project> listProject = await _projectBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    int pageCount = GlobalHelper.RowCount + 1;
+    List<Data.Model.Project> listProject = _projectBusiness.GetByParentIDAndActiveToList(Helper.GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
     listProject = listProject.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Project project = new Project();
     if (listProject.Count > 0)
@@ -15,6 +17,9 @@
         project = listProject[0];
         project.Note = Helper.GlobalHelper.DomainURL + project.GetType().Name + "/" + project.Code + "-" + project.ID + ".html";
     }
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(5);
+    string urlPage = Helper.GlobalHelper.DomainURL + "Projects/2.html";
 }
 <div class="slider-portfolio">
     <div class="content">
@@ -74,12 +79,15 @@
                     }
                 }
             </div>
+            <div class="padding4_5_0 view-more">
+                <a class="btn-primary" href="@urlPage" title="Xem thêm" style="background-color: #fff;"><span>Xem thêm</span></a>
+            </div>
         </div>
     </div>
 </div>
 <div class="note-text bg-color-4 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

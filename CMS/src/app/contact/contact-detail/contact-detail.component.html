@@ -1,6 +1,6 @@
 <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
     <input name="ID" [(ngModel)]="ContactService.formData.ID" type="hidden">
-    <div class="col s12 m12 l5">
+    <div class="col s12 m12 l6">
         <div class="col s12 m12 l9">
             <h5 class="card-title"><b>Liên hệ</b></h5>
         </div>
@@ -18,7 +18,7 @@
         </div>
         <div class="col s6 m6 l8">
             <mat-select
-                style="padding-top:10px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                style="padding-top:20px; padding-bottom:20px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
                 name="ParentID" [(ngModel)]="ContactService.formData.ParentID">
                 <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
                     {{item.Name}}
@@ -72,7 +72,7 @@
             </p>
         </div>
     </div>
-    <div class="col s12 m12 l7">
+    <div class="col s12 m12 l6">
         <div class="col s4 m4 l4">
             <div class="input-field">
                 <label for="Code">Email</label>
@@ -108,12 +108,23 @@
         </div>        
         <div class="col s4 m4 l4">
             <div class="input-field">
-                <label for="FileName">Hotline (Không khoảng trắng)</label>
+                <label for="Status">Hotline (Không khoảng trắng)</label>
             </div>
         </div>
         <div class="col s8 m8 l8">
             <div class="input-field">
-                <input placeholder="Hotline (Không khoảng trắng)" name="FileName" [(ngModel)]="ContactService.formData.FileName"
+                <input placeholder="Hotline (Không khoảng trắng)" name="Status" [(ngModel)]="ContactService.formData.Status"
+                    type="text">
+            </div>
+        </div>
+        <div class="col s4 m4 l4">
+            <div class="input-field">
+                <label for="Location">Messenger</label>
+            </div>
+        </div>
+        <div class="col s8 m8 l8">
+            <div class="input-field">
+                <input placeholder="Messenger" name="Location" [(ngModel)]="ContactService.formData.Location"
                     type="text">
             </div>
         </div>

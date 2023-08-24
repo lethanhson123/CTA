@@ -1,5 +1,6 @@
 ﻿@inject Business.Interface.IIdeasBusiness _ideasBusiness
 @inject Business.Interface.ICategoryIdeasBusiness _categoryIdeasBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 
 @{
     List<Data.Model.Ideas> listIdeas = await _ideasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
@@ -12,13 +13,14 @@
     }
 
     List<Data.Model.CategoryIdeas> listCategoryIdeas = await _categoryIdeasBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(3);
 }
 
 @{
     ViewData["Title"] = ideas.Name;
     ViewData["Description"] = ideas.Description;
     ViewData["URLImage"] = ideas.FileName;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "y-tuong.html";
+    ViewData["URLCurrent"] = menu.Display;
 }
 
 <script type="text/javascript">
@@ -55,8 +57,8 @@
                         {
                             if (itemSub.CategoryID == item.ID)
                             {
-                                string url = Helper.GlobalHelper.DomainURL + itemSub.GetType().Name + "/y-tuong-" + itemSub.ID + ".html";
-                                @Html.Raw(@"<li><a class='sohu' style='text-decoration: none; font-size: 14px;' href='"+url+"' title='"+ itemSub.Name +"'>"+itemSub.Name+"</a></li>")
+                                string url = Helper.GlobalHelper.DomainURL + itemSub.GetType().Name + "/" + itemSub.ID + ".html";
+                                @Html.Raw(@"<li><a class='sohu' style='text-decoration: none; font-size: 14px; background: url("") no-repeat right center;' href='"+url+"' title='"+ itemSub.Name +"'>"+itemSub.Name+"</a></li>")
                             }
                         }
                         @Html.Raw(@"</ul>")
@@ -115,7 +117,7 @@
 <div class="padding4_5_0"></div>
 <div class="note-text bg-color-4 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

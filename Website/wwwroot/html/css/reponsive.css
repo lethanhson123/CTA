@@ -15,7 +15,6 @@
   }
 }
 @media (max-width: 1600px) {
-
   .owl-carousel .owl-item img, .img-fix{
     height: 500px;
   }
@@ -239,11 +238,21 @@
   .services-page .services-item {
     width: 100%;
   }
+  .languages {
+    right: 15px;
+    top: 34px;
+  }
 
 }
 
 /* contact*/
 @media (max-width: 1199.98px) {
+  .company .content h2 .quote-line{
+    width: 100%;
+  }
+  .ideas .heading, .team .heading {
+    width: 100%;
+  }
   .contact-frm{
     display: block;
   }
@@ -314,6 +323,10 @@
   .about-us .inner .right .content {
     width: 100%;
     padding-left: 0;
+  }
+  .languages {
+    right: 1rem;
+    top: 30px;
   }
 } 
 @media (max-width: 768px) {
@@ -422,7 +435,6 @@
   }
   .heading h2, .copy h2, .slider .content h1 {
     font-size: 35px;
-    margin-top: 4rem;
 }
   .slider .content{
     margin-top: 80px;
@@ -466,9 +478,24 @@
   .meet-team .three-col{
     width: 100%;
   }
+  .btn-project-home{
+    position: absolute;
+    right: 32px;
+  }
+  .languages {
+    right: 15px;
+    top: 30px;
+  }
+  .slider .content{
+    width: 100%;
+  }
 }
 @media (max-width: 489px) {
   .meet-team-portfolio .info-persinal h2::after{
     top: 123px;
+  }
+  .languages {
+    right: 15px;
+    top: 30px;
   }
 }

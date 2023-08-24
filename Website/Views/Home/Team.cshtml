@@ -1,27 +1,30 @@
-﻿@inject Business.Interface.ITeamBusiness _teamBusiness
-
+﻿@model BaseViewModel
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
-    List<Data.Model.Team> listTeam = await _teamBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
-    listTeam = listTeam.OrderBy(item => item.SortOrder).ToList();
+
     Data.Model.Team team = new Team();
-    if (listTeam.Count > 0)
+    if (Model.Teams.Count > 0)
     {
-        team = listTeam[0];
+        team = Model.Teams[0];
         team.Note = Helper.GlobalHelper.DomainURL + team.GetType().Name + "/" + team.Code + "-" + team.ID + ".html";
     }
     Data.Model.Team team001 = new Team();
-    if (listTeam.Count > 1)
+    if (Model.Teams.Count > 1)
     {
-        team001 = listTeam[1];
+        team001 = Model.Teams[1];
         team001.Note = Helper.GlobalHelper.DomainURL + team001.GetType().Name + "/" + team001.Code + "-" + team001.ID + ".html";
     }
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(5);
+
+    string urlPage = Helper.GlobalHelper.DomainURL + "Teams/2.html";
+}
 }
 
 @{
     ViewData["Title"] = team.Name;
     ViewData["Description"] = team.Description;
     ViewData["URLImage"] = team.FileName;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "doi-ngu.html";
+    ViewData["URLCurrent"] = menu.Display;
 }
 <div class="slider">
     <div class="content">
@@ -58,7 +61,7 @@
                     <div class="four-col-wrapper alm-wrapper">
                         <div class="alm-reveal alm-filters">
                             @{
-                                foreach (Data.Model.Team item in listTeam)
+                                foreach (Data.Model.Team item in Model.Teams)
                                 {
                                     if ((item.ID != team.ID) && (item.ID != team001.ID))
                                     {
@@ -74,7 +77,14 @@
                             }
                         </div>
                     </div>
-                    <div class="padding-bottom-3em"></div>
+                    @{
+                        if (Model.IsShowPage == true)
+                        {
+                            @Html.Raw(@"<div class='padding4_5_0 view-more'>")
+                            @Html.Raw(@"<a class='btn-primary' href='"+urlPage+"' title='Xem thêm'><span>Xem thêm</span></a>")
+                            @Html.Raw(@"</div>")
+                        }
+                    }                    
                 </div>
             </div>
         </div>
@@ -82,7 +92,7 @@
 </div>
 <div class="note-text bg-color-4 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

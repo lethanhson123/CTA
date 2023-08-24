@@ -1,6 +1,28 @@
 ﻿@inject Business.Interface.IContactBusiness _contactBusiness
+@inject Business.Interface.ISocialNetworkBusiness _socialNetworkBusiness
 @model Data.Model.Feedback;
 @{
+    List<Data.Model.SocialNetwork> listSocialNetwork = await _socialNetworkBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listSocialNetwork = listSocialNetwork.OrderBy(item => item.SortOrder).ToList();
+
+    Data.Model.SocialNetwork socialNetwork01 = new SocialNetwork();
+    if (listSocialNetwork.Count > 0)
+    {
+        socialNetwork01 = listSocialNetwork[0];
+    }
+
+    Data.Model.SocialNetwork socialNetwork02 = new SocialNetwork();
+    if (listSocialNetwork.Count > 1)
+    {
+        socialNetwork02 = listSocialNetwork[1];
+    }
+
+    Data.Model.SocialNetwork socialNetwork03 = new SocialNetwork();
+    if (listSocialNetwork.Count > 2)
+    {
+        socialNetwork03 = listSocialNetwork[2];
+    }
+
     Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
 }
 
@@ -12,26 +34,11 @@
     ViewData["URLImage"] = Helper.GlobalHelper.ImageURL;
 }
 <style>
-    .btn-talk:hover{
-        cursor:pointer;
+    .btn-talk:hover {
+        cursor: pointer;
         border-width: 0px;
     }
 </style>
-<script>
-    function onSaveFeedback() {
-        $.ajax({
-            type: "POST",
-            datatype: "JSON",
-            url: '@Url.Action("SaveFeedback", "Home")',
-            data: $('#formFeedback').serialize(),
-            success: function (result) {
-                window.location.href = "/loi-cam-on.html";
-            },
-            error: function (jqXHR, exception) { },
-            complete: function () { },
-        })
-    }
-</script>
 <div class="slider bg-image-contact">
     <div class="content">
         <h1 class="marginbt1">@contact.Name</h1>
@@ -78,7 +85,7 @@
                         <div class="social">
                             <ul>
                                 <li>
-                                    <a href="@Helper.GlobalHelper.Facebook" title="Facebook">
+                                    <a target="_blank" href="@socialNetwork01.Code" title="@socialNetwork01.Name">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path d="M10 0.0400391C4.5 0.0400391 0 4.53004 0 10.06C0 15.06 3.66 19.21 8.44 19.96V12.96H5.9V10.06H8.44V7.85004C8.44 5.34004 9.93 3.96004 12.22 3.96004C13.31 3.96004 14.45 4.15004 14.45 4.15004V6.62004H13.19C11.95 6.62004 11.56 7.39004 11.56 8.18004V10.06H14.34L13.89 12.96H11.56V19.96C13.9164 19.5879 16.0622 18.3856 17.6099 16.5701C19.1576 14.7546 20.0054 12.4457 20 10.06C20 4.53004 15.5 0.0400391 10 0.0400391Z">
@@ -87,16 +94,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="@Helper.GlobalHelper.Instagram" title="Instagram">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7383 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7383 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 6.26174 2.61107 4.78649 3.69878 3.69878C4.78649 2.61107 6.26174 2 7.8 2ZM7.6 4C6.64522 4 5.72955 4.37928 5.05442 5.05442C4.37928 5.72955 4 6.64522 4 7.6V16.4C4 18.39 5.61 20 7.6 20H16.4C17.3548 20 18.2705 19.6207 18.9456 18.9456C19.6207 18.2705 20 17.3548 20 16.4V7.6C20 5.61 18.39 4 16.4 4H7.6ZM17.25 5.5C17.5815 5.5 17.8995 5.6317 18.1339 5.86612C18.3683 6.10054 18.5 6.41848 18.5 6.75C18.5 7.08152 18.3683 7.39946 18.1339 7.63388C17.8995 7.8683 17.5815 8 17.25 8C16.9185 8 16.6005 7.8683 16.3661 7.63388C16.1317 7.39946 16 7.08152 16 6.75C16 6.41848 16.1317 6.10054 16.3661 5.86612C16.6005 5.6317 16.9185 5.5 17.25 5.5ZM12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7ZM12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9Z">
-                                            </path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Helper.GlobalHelper.Youtube" title="Youtube">
+                                    <a target="_blank" href="@socialNetwork02.Code" title="@socialNetwork02.Name">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z">
@@ -105,7 +103,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="@Helper.GlobalHelper.Tiktok" title="Tiktok">
+                                    <a target="_blank" href="@socialNetwork03.Code" title="@socialNetwork03.Name">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path d="M19.3208 5.562C19.169 5.48345 19.0211 5.39734 18.8778 5.304C18.4615 5.02872 18.0798 4.7044 17.7408 4.338C16.8918 3.367 16.5748 2.382 16.4588 1.693H16.4628C16.3658 1.12 16.4058 0.75 16.4128 0.75H12.5478V15.693C12.5478 15.893 12.5478 16.092 12.5398 16.288C12.5398 16.312 12.5368 16.334 12.5358 16.361C12.5358 16.371 12.5358 16.383 12.5328 16.394V16.403C12.4922 16.939 12.3205 17.4569 12.0328 17.9109C11.7451 18.365 11.3502 18.7414 10.8828 19.007C10.3953 19.2844 9.84378 19.4298 9.28283 19.429C7.48283 19.429 6.02283 17.961 6.02283 16.148C6.02283 14.334 7.48283 12.866 9.28283 12.866C9.62383 12.866 9.96283 12.92 10.2868 13.026L10.2918 9.09C9.30784 8.96305 8.30822 9.04147 7.35607 9.3203C6.40391 9.59913 5.5199 10.0723 4.75983 10.71C4.09368 11.2885 3.53362 11.9789 3.10483 12.75C2.94183 13.031 2.32583 14.162 2.25183 15.996C2.20483 17.036 2.51783 18.116 2.66683 18.561V18.571C2.75983 18.833 3.12383 19.729 3.71583 20.484C4.19323 21.09 4.75728 21.6224 5.38983 22.064V22.054L5.39883 22.064C7.26883 23.334 9.34383 23.251 9.34383 23.251C9.70283 23.236 10.9058 23.251 12.2718 22.604C13.7868 21.886 14.6488 20.817 14.6488 20.817C15.1999 20.1781 15.6382 19.45 15.9448 18.664C16.2948 17.744 16.4108 16.642 16.4108 16.202V8.273C16.4578 8.301 17.0828 8.714 17.0828 8.714C17.0828 8.714 17.9828 9.291 19.3858 9.666C20.3918 9.933 21.7488 9.99 21.7488 9.99V6.153C21.2738 6.205 20.3088 6.055 19.3198 5.563L19.3208 5.562Z">
@@ -128,8 +126,9 @@
                                         Bạn có thể tìm thấy dự án của tôi tại studio của tôi, địa chỉ <b>@contact.ContentHTML</b>
                                     </p>
                                     <a target="_blank" href="@contact.Note" class="map-link" title="Xem bản đồ">Xem bản đồ</a>
-                                </div>
-                                <form id="formFeedback">                                    
+                                </div>                                
+                                @using (Html.BeginForm("SaveFeedback", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
                                     <div class="content">
                                         <div class="form-group form-text">
                                             <label for="Name">Họ tên <i>(*)</i></label><span class="error"></span>
@@ -147,10 +146,13 @@
                                             <label for="Description">Nội dung</label><span class="error"></span>
                                             @(Html.TextAreaFor(Model => Model.Description, new { placeholder = "Nội dung", rows = 10 }))
                                         </div>
-
+                                      @*   <div class="form-group form-text ">
+                                            <label for="Files">Upload files</label><span class="error"></span>
+                                            @(Html.TextBoxFor(Model => Model.Files, new { type = "file", multiple = "multiple" }))
+                                        </div> *@
                                     </div>
-                                    <button type="button" onclick='onSaveFeedback()' class="btn-talk">Hãy nói chuyện</button>                                 
-                                </form>
+                                    <button type="submit" class="btn-talk">Hãy nói chuyện</button>
+                                }
                             </div>
                         </div>
                     </div>

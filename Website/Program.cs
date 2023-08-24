@@ -57,14 +57,39 @@ app.UseEndpoints(endpoints =>
        defaults: new { controller = "Home", action = "About" });
 
     endpoints.MapControllerRoute(
+     name: "AboutPage",
+     pattern: "Abouts/{PageIndex}.html",
+     defaults: new { controller = "Home", action = "AboutPage" });
+
+    endpoints.MapControllerRoute(
        name: "AboutDetail",
        pattern: "About/{Code}-{ID}.html",
        defaults: new { controller = "Home", action = "AboutDetail" });
 
     endpoints.MapControllerRoute(
+       name: "Award",
+       pattern: "giai-thuong.html",
+       defaults: new { controller = "Home", action = "Award" });
+
+    endpoints.MapControllerRoute(
+     name: "AwardPage",
+     pattern: "Awards/{PageIndex}.html",
+     defaults: new { controller = "Home", action = "AwardPage" });
+
+    endpoints.MapControllerRoute(
+       name: "AwardDetail",
+       pattern: "Award/{Code}-{ID}.html",
+       defaults: new { controller = "Home", action = "AwardDetail" });
+
+    endpoints.MapControllerRoute(
        name: "Team",
        pattern: "doi-ngu.html",
        defaults: new { controller = "Home", action = "Team" });
+
+    endpoints.MapControllerRoute(
+      name: "TeamPage",
+      pattern: "Teams/{PageIndex}.html",
+      defaults: new { controller = "Home", action = "TeamPage" });
 
     endpoints.MapControllerRoute(
        name: "TeamDetail",
@@ -77,6 +102,11 @@ app.UseEndpoints(endpoints =>
       defaults: new { controller = "Home", action = "Project" });
 
     endpoints.MapControllerRoute(
+       name: "ProjectPage",
+       pattern: "Projects/{PageIndex}.html",
+       defaults: new { controller = "Home", action = "ProjectPage" });
+
+    endpoints.MapControllerRoute(
        name: "ProjectDetail",
        pattern: "Project/{Code}-{ID}.html",
        defaults: new { controller = "Home", action = "ProjectDetail" });
@@ -85,6 +115,11 @@ app.UseEndpoints(endpoints =>
       name: "News",
       pattern: "tin-tuc.html",
       defaults: new { controller = "Home", action = "News" });
+
+    endpoints.MapControllerRoute(
+      name: "NewsPage",
+      pattern: "Newss/{PageIndex}.html",
+      defaults: new { controller = "Home", action = "NewsPage" });
 
     endpoints.MapControllerRoute(
        name: "NewsDetail",
@@ -123,7 +158,7 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapControllerRoute(
       name: "CategoryIdeas",
-      pattern: "CategoryIdeas/{Code}-{ID}.html",
+      pattern: "CategoryIdeas/{ID}.html",
       defaults: new { controller = "Home", action = "CategoryIdeas" });
 
     endpoints.MapControllerRoute(

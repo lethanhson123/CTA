@@ -23,8 +23,6 @@ export class Base {
     Recognize?: string;
     IsShow?: boolean;
     CategoryID?: number;
-    CategoryIdeasID?: number;
-    QuickTitle?: string;
-    QuickURL?: string;
+    CategoryIdeasID?: number;    
 }
 

@@ -1,5 +1,6 @@
 ﻿@model Data.Model.About;
 @inject Business.Interface.IAboutBusiness _aboutBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
     Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
     ViewData["Title"] = Model.Name;
@@ -9,6 +10,8 @@
 
     List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listAbout = listAbout.OrderBy(item => item.SortOrder).ToList();
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(1);
 
     string urlParent = Helper.GlobalHelper.DomainURL + "gioi-thieu.html";
 
@@ -30,8 +33,8 @@
 </div>
 <div class="note-text bg-color-4 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>
 <div class="light-grey-after">    

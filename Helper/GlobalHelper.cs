@@ -147,6 +147,14 @@
                 return builder.Build().GetSection("AppSettings").GetSection("DomainOnlineURL").Value;
             }
         }
+        public static string DomainOnlineEnglishURL
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("AppSettings").GetSection("DomainOnlineEnglishURL").Value;
+            }
+        }
         public static string APIURL
         {
             get
@@ -154,7 +162,7 @@
                 var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                 return builder.Build().GetSection("AppSettings").GetSection("APIURL").Value;
             }
-        }        
+        }
         public static string PageTitle
         {
             get
@@ -313,6 +321,30 @@
             {
                 var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                 return builder.Build().GetSection("AppSettings").GetSection("MailTo").Value;
+            }
+        }
+        public static int RowCount
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return int.Parse(builder.Build().GetSection("AppSettings").GetSection("RowCount").Value);
+            }
+        }
+        public static int NewsCount
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return int.Parse(builder.Build().GetSection("AppSettings").GetSection("NewsCount").Value);
+            }
+        }
+        public static int TeamCount
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return int.Parse(builder.Build().GetSection("AppSettings").GetSection("TeamCount").Value);
             }
         }
         public static string LogoURL

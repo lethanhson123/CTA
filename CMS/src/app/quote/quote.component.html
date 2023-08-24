@@ -73,7 +73,23 @@
                                         <input placeholder="Tác giả" name="Code{{element.ID}}"
                                             [(ngModel)]="element.Code" type="text">
                                     </mat-cell>
-                                </ng-container>                                
+                                </ng-container>   
+                                <ng-container matColumnDef="Description">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tiêu đề
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <input placeholder="Tiêu đề" name="Description{{element.ID}}"
+                                            [(ngModel)]="element.Description" type="text">
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="FileName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>URL
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" style="margin-right: 10px;">
+                                        <input placeholder="URL" name="FileName{{element.ID}}"
+                                            [(ngModel)]="element.FileName" type="text">
+                                    </mat-cell>
+                                </ng-container>                              
                                 <ng-container matColumnDef="SortOrder">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
                                     </mat-header-cell>

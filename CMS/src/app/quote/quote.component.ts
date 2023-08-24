@@ -17,7 +17,7 @@ import { QuoteService } from 'src/app/shared/Quote.service';
 export class QuoteComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ParentID', 'Name','Code', 'SortOrder', 'Save'];
+  displayColumns: string[] = ['ParentID', 'Name','Code','Description','FileName', 'SortOrder', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;

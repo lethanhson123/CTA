@@ -18,7 +18,7 @@ import { CandidateService } from 'src/app/shared/Candidate.service';
 export class CandidateComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ParentID', 'Name', 'Code', 'Display', 'LastUpdatedDate', 'Save'];
+  displayColumns: string[] = ['ParentID', 'Name', 'Code', 'Display', 'LastUpdatedDate', 'FileName', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;

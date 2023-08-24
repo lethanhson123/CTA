@@ -1,5 +1,5 @@
 ﻿@inject Business.Interface.ICareerBusiness _careerBusiness
-
+@inject Business.Interface.IMenuBusiness _menuBusiness
 @{
     List<Data.Model.Career> listCareer = await _careerBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listCareer = listCareer.OrderBy(item => item.SortOrder).ToList();
@@ -9,13 +9,14 @@
         career = listCareer[0];
         career.Note = Helper.GlobalHelper.DomainURL + career.GetType().Name + "/" + career.Code + "-" + career.ID + ".html";
     }
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(7);
 }
 
 @{
     ViewData["Title"] = career.Name;
     ViewData["Description"] = career.Description;
     ViewData["URLImage"] = career.FileName;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "tuyen-dung.html";    
+    ViewData["URLCurrent"] = menu.Display;
 }
 <div class="slider">
     <div class="content">
@@ -84,7 +85,7 @@
 
 <div class="note-text bg-color-2 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

@@ -1,7 +1,39 @@
 ﻿@model Data.Model.Service;
+@inject Business.Interface.IServiceBusiness _serviceBusiness
 @inject Business.Interface.IProjectBusiness _projectBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
 
-@{    
+@{
+    List<Data.Model.Service> listService = await _serviceBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listService = listService.OrderBy(item => item.SortOrder).ToList();
+    Data.Model.Service service = new Service();
+    if (listService.Count > 0)
+    {
+        service = listService[0];
+        service.Note = Helper.GlobalHelper.DomainURL + service.GetType().Name + "/" + service.Code + "-" + service.ID + ".html";
+    }
+
+    Data.Model.Service service001 = new Service();
+    if (listService.Count > 1)
+    {
+        service001 = listService[1];
+        service001.Note = Helper.GlobalHelper.DomainURL + service001.GetType().Name + "/" + service001.Code + "-" + service001.ID + ".html";
+    }
+
+    Data.Model.Service service002 = new Service();
+    if (listService.Count > 2)
+    {
+        service002 = listService[2];
+        service002.Note = Helper.GlobalHelper.DomainURL + service002.GetType().Name + "/" + service002.Code + "-" + service002.ID + ".html";
+    }
+
+    Data.Model.Service service003 = new Service();
+    if (listService.Count > 3)
+    {
+        service003 = listService[3];
+        service003.Note = Helper.GlobalHelper.DomainURL + service003.GetType().Name + "/" + service003.Code + "-" + service003.ID + ".html";
+    }
+
     List<Data.Model.Project> listProject = await _projectBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
     listProject = listProject.OrderBy(item => item.SortOrder).ToList();
     Data.Model.Project project = new Project();
@@ -10,20 +42,23 @@
         project = listProject[0];
         project.Note = Helper.GlobalHelper.DomainURL + project.GetType().Name + "/" + project.Code + "-" + project.ID + ".html";
     }
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(4);
 }
 
 @{
-    Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
+    Model.Display = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
     ViewData["Title"] = Model.Name;
-    ViewData["Description"] = Model.Description;    
-    ViewData["URLCurrent"] = Model.Note;
+    ViewData["Description"] = Model.Description;
+    ViewData["URLCurrent"] = Model.Display;
     ViewData["URLImage"] = Model.FileName;
 
 }
 
 <div class="slider">
     <div class="content">
-        <a style="text-decoration: none;" href="@Model.Note" title="@Model.Name"><h1 class="marginbt1">@Model.Name</h1></a>
+        <a style="text-decoration: none;" href="@Model.Display" title="@Model.Name"><h1 class="marginbt1">@Model.Name</h1></a>
+        @Html.Raw(@"" + Model.Note)
     </div>
 </div>
 <div class="light-grey-after">
@@ -31,7 +66,7 @@
         <div class="services-detail">
             <div>
                 <div class="wrapper">
-                    <a class="news-item hover-style" href="@Model.Note" title="@Model.Name">
+                    <a class="news-item hover-style" href="@Model.Display" title="@Model.Name">
                         <div class="zoom-image marginbt1 text-center">
                             <img class="img-fix" src="@Model.FileName" title="@Model.Name" alt="@Model.Name">
                         </div>
@@ -52,8 +87,8 @@
 
 <div class="note-text bg-color-3 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>
 <div class="team padding4_5_0 bg-color-1">
@@ -73,8 +108,15 @@
         </div>
         <div class="content">
             @{
-                foreach (Data.Model.Project item in listProject)
+                int rowCount = GlobalHelper.RowCount;
+                if (listProject.Count < rowCount)
                 {
+                    rowCount = listProject.Count;
+                }
+                rowCount = rowCount + 1;
+                for (int i = 0; i < rowCount; i++)
+                {
+                    Data.Model.Project item = listProject[i];
                     if (item.ID != project.ID)
                     {
                         string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
@@ -97,7 +139,7 @@
                         @Html.Raw(@"</a>")
                     }
                 }
-            }           
+            }
 
         </div>
     </div>

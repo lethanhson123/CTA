@@ -57,6 +57,7 @@ export class ContactDetailComponent implements OnInit {
     this.ContactService.SaveAsync(form.value).subscribe(
       res => {
         this.NotificationService.success(environment.SaveSuccess);
+        this.onClose();
       },
       err => {
         this.NotificationService.warn(environment.SaveNotSuccess);

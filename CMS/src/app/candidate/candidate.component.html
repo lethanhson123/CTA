@@ -68,7 +68,12 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày ứng tuyển
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element">{{element.LastUpdatedDate}}</mat-cell>
-                                </ng-container>                               
+                                </ng-container>       
+                                <ng-container matColumnDef="FileName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Download
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"><a target="_blank" href="{{element.FileName}}" title="Download">Download</a></mat-cell>
+                                </ng-container>                           
                                 <ng-container matColumnDef="Save">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                                     </mat-header-cell>

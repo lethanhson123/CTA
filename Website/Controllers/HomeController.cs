@@ -1,5 +1,7 @@
 ﻿
 
+using Business.Implement;
+using Business.Interface;
 using Data.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing.Matching;
@@ -12,6 +14,7 @@ namespace Website.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IFeedbackBusiness _FeedbackBusiness;
         private readonly IAboutBusiness _AboutBusiness;
+        private readonly IAwardBusiness _AwardBusiness;
         private readonly ITeamBusiness _TeamBusiness;
         private readonly IProjectBusiness _ProjectBusiness;
         private readonly INewsBusiness _NewsBusiness;
@@ -21,10 +24,12 @@ namespace Website.Controllers
         private readonly ICandidateBusiness _CandidateBusiness;
         private readonly INewsletterBusiness _NewsletterBusiness;
         private readonly ICategoryIdeasBusiness _CategoryIdeasBusiness;
+        private readonly IEmailBusiness _EmailBusiness;
         private readonly IWebHostEnvironment _webHostEnvironment;
         public HomeController(ILogger<HomeController> logger
             , IFeedbackBusiness feedbackBusiness
             , IAboutBusiness aboutBusiness
+            , IAwardBusiness awardBusiness
             , ITeamBusiness teamBusiness
             , IProjectBusiness projectBusiness
             , INewsBusiness newsBusiness
@@ -34,13 +39,14 @@ namespace Website.Controllers
             , ICandidateBusiness candidateBusiness
             , INewsletterBusiness newsletterBusiness
             , ICategoryIdeasBusiness categoryIdeasBusiness
+            , IEmailBusiness emailBusiness
             , IWebHostEnvironment webHostEnvironment
-
             )
         {
             _logger = logger;
             _FeedbackBusiness = feedbackBusiness;
             _AboutBusiness = aboutBusiness;
+            _AwardBusiness = awardBusiness;
             _TeamBusiness = teamBusiness;
             _ProjectBusiness = projectBusiness;
             _NewsBusiness = newsBusiness;
@@ -50,6 +56,7 @@ namespace Website.Controllers
             _CandidateBusiness = candidateBusiness;
             _NewsletterBusiness = newsletterBusiness;
             _CategoryIdeasBusiness = categoryIdeasBusiness;
+            _EmailBusiness = emailBusiness;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -73,16 +80,96 @@ namespace Website.Controllers
         }
         public IActionResult About()
         {
-            return View();
+            int PageIndex = 1;
+            int pageCount = PageIndex * GlobalHelper.RowCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Abouts = _AboutBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            model.Awards = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<Award> list = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
+        }
+        public IActionResult AboutPage(int PageIndex)
+        {
+            int pageCount = PageIndex * GlobalHelper.RowCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Abouts = _AboutBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            
+            List<Award> list = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
         }
         public IActionResult AboutDetail(string Code, long ID)
         {
             About model = _AboutBusiness.GetByID(ID);
             return View(model);
         }
+        public IActionResult Award()
+        {
+            int PageIndex = 1;
+            int pageCount = PageIndex * GlobalHelper.RowCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Awards = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<Award> list = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
+        }
+        public IActionResult AwardPage(int PageIndex)
+        {
+            int pageCount = PageIndex * GlobalHelper.RowCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Awards = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<Award> list = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
+        }
+        public IActionResult AwardDetail(string Code, long ID)
+        {
+            Award model = _AwardBusiness.GetByID(ID);
+            return View(model);
+        }
         public IActionResult Team()
         {
-            return View();
+            int PageIndex = 1;
+            int pageCount = PageIndex * GlobalHelper.TeamCount + 2;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Teams = _TeamBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<Team> list = _TeamBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
+        }
+        public IActionResult TeamPage(int PageIndex)
+        {
+            int pageCount = PageIndex * GlobalHelper.TeamCount + 2;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Teams = _TeamBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<Team> list = _TeamBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {     
+                model.IsShowPage = true;
+            }
+            return View(model);
         }
         public IActionResult TeamDetail(string Code, long ID)
         {
@@ -91,7 +178,30 @@ namespace Website.Controllers
         }
         public IActionResult Project()
         {
-            return View();
+            int PageIndex = 1;
+            int pageCount = PageIndex * GlobalHelper.RowCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Projects = _ProjectBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<Project> list = _ProjectBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
+        }
+        public IActionResult ProjectPage(int PageIndex)
+        {
+            int pageCount = PageIndex * GlobalHelper.RowCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Projects = _ProjectBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<Project> list = _ProjectBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
         }
         public IActionResult ProjectDetail(string Code, long ID)
         {
@@ -100,7 +210,30 @@ namespace Website.Controllers
         }
         public IActionResult News()
         {
-            return View();
+            int PageIndex = 1;
+            int pageCount = PageIndex * GlobalHelper.NewsCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;
+            model.Newss = _NewsBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<News> list = _NewsBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
+        }
+        public IActionResult NewsPage(int PageIndex)
+        {
+            int pageCount = PageIndex * GlobalHelper.NewsCount + 1;
+            BaseViewModel model = new BaseViewModel();
+            model.PageIndex = PageIndex;            
+            model.Newss = _NewsBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<News> list = _NewsBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            if (pageCount < list.Count)
+            {
+                model.IsShowPage = true;
+            }
+            return View(model);
         }
         public IActionResult NewsDetail(string Code, long ID)
         {
@@ -122,7 +255,9 @@ namespace Website.Controllers
         }
         public IActionResult CareerDetail(string Code, long ID)
         {
-            Career model = _CareerBusiness.GetByID(ID);
+            Career career = _CareerBusiness.GetByID(ID);
+            BaseViewModel model = new BaseViewModel();
+            model.Career = career;
             return View(model);
         }
         public IActionResult Ideas()
@@ -134,7 +269,7 @@ namespace Website.Controllers
             Ideas model = _IdeasBusiness.GetByID(ID);
             return View(model);
         }
-        public IActionResult CategoryIdeas(string Code, long ID)
+        public IActionResult CategoryIdeas(long ID)
         {
             CategoryIdeas model = _CategoryIdeasBusiness.GetByID(ID);
             return View(model);
@@ -186,12 +321,17 @@ namespace Website.Controllers
                             {
                                 contentHTML = r.ReadToEnd();
                             }
-                        }                        
+                        }
                         contentHTML = contentHTML.Replace("[Name]", feedback.Name);
                         contentHTML = contentHTML.Replace("[Code]", feedback.Code);
                         contentHTML = contentHTML.Replace("[Display]", feedback.Display);
                         contentHTML = contentHTML.Replace("[Description]", feedback.Description);
                         mail.Content = contentHTML;
+                        Data.Model.Email email = _EmailBusiness.GetByID(1);
+                        if (email != null)
+                        {
+                            mail.MailTo = GlobalHelper.MailTo;
+                        }
                         if (!string.IsNullOrEmpty(mail.MailTo))
                         {
                             MailHelper.SendMail(mail);
@@ -211,16 +351,37 @@ namespace Website.Controllers
             return result;
         }
         [HttpPost]
-        public string SaveCandidate(Candidate candidate)
+        public ActionResult SaveCandidate(BaseViewModel model)
         {
             string result = GlobalHelper.InitializationString;
             try
             {
                 Candidate candidateSave = new Candidate();
-                candidateSave.ParentID = candidate.ID;
-                candidateSave.Name = candidate.Name;
-                candidateSave.Code = candidate.Code;
-                candidateSave.Display = candidate.Display;
+                candidateSave.ParentID = model.Career.ID;
+                candidateSave.Name = model.Name;
+                candidateSave.Code = model.Note;
+                candidateSave.Display = model.Display;
+
+                if (model.File == null || model.File.Length == 0)
+                {
+                }
+                if (model.File != null)
+                {
+                    string fileExtension = Path.GetExtension(model.File.FileName);
+                    model.FileName = GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                    string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, GlobalHelper.Image, candidateSave.GetType().Name);
+                    bool isFolderExists = System.IO.Directory.Exists(folderPath);
+                    if (!isFolderExists)
+                    {
+                        System.IO.Directory.CreateDirectory(folderPath);
+                    }
+                    var physicalPath = Path.Combine(folderPath, model.FileName);
+                    using (var stream = new FileStream(physicalPath, FileMode.Create))
+                    {
+                        model.File.CopyTo(stream);
+                    }
+                }
+                candidateSave.FileName = GlobalHelper.DomainURL + GlobalHelper.Image + "/" + candidateSave.GetType().Name + "/" + model.FileName;
                 _CandidateBusiness.Save(candidateSave);
                 if (candidateSave.ID > 0)
                 {
@@ -250,7 +411,13 @@ namespace Website.Controllers
                         contentHTML = contentHTML.Replace("[Code]", candidateSave.Code);
                         contentHTML = contentHTML.Replace("[Display]", candidateSave.Display);
                         contentHTML = contentHTML.Replace("[Description]", candidateSave.Description);
+                        contentHTML = contentHTML.Replace("[FileName]", candidateSave.FileName);
                         mail.Content = contentHTML;
+                        Data.Model.Email email = _EmailBusiness.GetByID(2);
+                        if (email != null)
+                        {
+                            mail.MailTo = GlobalHelper.MailTo;
+                        }
                         if (!string.IsNullOrEmpty(mail.MailTo))
                         {
                             MailHelper.SendMail(mail);
@@ -267,7 +434,8 @@ namespace Website.Controllers
             {
                 result = e.Message;
             }
-            return result;
+            string url = GlobalHelper.DomainURL + "loi-cam-on.html";
+            return Redirect(url);
         }
         [HttpPost]
         public string SaveNewsletter(Newsletter newsletter)
