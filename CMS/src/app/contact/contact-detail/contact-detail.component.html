@@ -1,16 +1,20 @@
 <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
     <input name="ID" [(ngModel)]="ContactService.formData.ID" type="hidden">
-    <div class="col s12 m12 l6">
-        <div class="col s12 m12 l9">
+    <div class="row">
+        <div class="col s12 m12 l10">
             <h5 class="card-title"><b>Liên hệ</b></h5>
         </div>
-        <div class="col s12 m12 l3">
+        <div class="col s12 m12 l2">
             <button title="Lưu thay đổi" type="submit" class="btn-floating waves-effect waves-light cyan"><i
                     class="material-icons">save</i></button>&nbsp;&nbsp;&nbsp;
+            <a (click)="onCopy()" title="Copy" class="btn-floating waves-effect waves-light cyan"><i
+                    class="material-icons">filter_2</i></a>&nbsp;&nbsp;&nbsp;
             <a title="Đóng" class="btn-floating waves-effect waves-light purple lightrn-1" (click)="onClose()">
                 <i class="material-icons">close</i>
             </a>
         </div>
+    </div>
+    <div class="col s12 m12 l6">        
         <div class="col s6 m6 l4">
             <div class="input-field">
                 <label for="ParentID">Ngôn ngữ</label>
@@ -34,7 +38,7 @@
             <div class="input-field">
                 <input placeholder="Tiêu đề" name="Name" [(ngModel)]="ContactService.formData.Name" type="text">
             </div>
-        </div>        
+        </div>
         <div class="col s4 m4 l4">
             <div class="input-field">
                 <label for="SortOrder">Sắp xếp</label>
@@ -80,8 +84,7 @@
         </div>
         <div class="col s8 m8 l8">
             <div class="input-field">
-                <input placeholder="Email" name="Code" [(ngModel)]="ContactService.formData.Code"
-                    type="text">
+                <input placeholder="Email" name="Code" [(ngModel)]="ContactService.formData.Code" type="text">
             </div>
         </div>
         <div class="col s4 m4 l4">
@@ -91,8 +94,7 @@
         </div>
         <div class="col s8 m8 l8">
             <div class="input-field">
-                <input placeholder="Di động" name="Display" [(ngModel)]="ContactService.formData.Display"
-                    type="text">
+                <input placeholder="Di động" name="Display" [(ngModel)]="ContactService.formData.Display" type="text">
             </div>
         </div>
         <div class="col s4 m4 l4">
@@ -105,7 +107,7 @@
                 <input placeholder="Cố định" name="Description" [(ngModel)]="ContactService.formData.Description"
                     type="text">
             </div>
-        </div>        
+        </div>
         <div class="col s4 m4 l4">
             <div class="input-field">
                 <label for="Status">Hotline (Không khoảng trắng)</label>
@@ -113,8 +115,8 @@
         </div>
         <div class="col s8 m8 l8">
             <div class="input-field">
-                <input placeholder="Hotline (Không khoảng trắng)" name="Status" [(ngModel)]="ContactService.formData.Status"
-                    type="text">
+                <input placeholder="Hotline (Không khoảng trắng)" name="Status"
+                    [(ngModel)]="ContactService.formData.Status" type="text">
             </div>
         </div>
         <div class="col s4 m4 l4">
@@ -135,8 +137,7 @@
         </div>
         <div class="col s8 m8 l8">
             <div class="input-field">
-                <input placeholder="Google map" name="Note" [(ngModel)]="ContactService.formData.Note"
-                    type="text">
+                <input placeholder="Google map" name="Note" [(ngModel)]="ContactService.formData.Note" type="text">
             </div>
         </div>
     </div>

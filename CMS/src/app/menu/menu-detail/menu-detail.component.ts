@@ -77,4 +77,17 @@ export class MenuDetailComponent implements OnInit {
       reader.readAsDataURL(this.fileToUpload0);
     }
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.MenuService.formData.ID = environment.InitializationNumber;
+    this.MenuService.SaveAsync(this.MenuService.formData).subscribe(
+      res => {
+        this.NotificationService.success(environment.SaveSuccess);
+        this.onClose();
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
 }

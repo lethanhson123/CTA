@@ -64,4 +64,17 @@ export class ContactDetailComponent implements OnInit {
       }
     );
   }
+  onCopy() {
+    this.isShowLoading = true;
+    this.ContactService.formData.ID = environment.InitializationNumber;
+    this.ContactService.SaveAsync(this.ContactService.formData).subscribe(
+      res => {
+        this.NotificationService.success(environment.SaveSuccess);
+        this.onClose();
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
 }
