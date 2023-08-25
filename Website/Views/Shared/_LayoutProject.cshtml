@@ -1,0 +1,412 @@
+﻿@inject Business.Interface.IAboutBusiness _aboutBusiness
+@inject Business.Interface.IContactBusiness _contactBusiness
+@inject Business.Interface.IIdeasBusiness _ideasBusiness
+@inject Business.Interface.IMenuBusiness _menuBusiness
+@inject Business.Interface.IQuoteBusiness _quoteBusiness
+@inject Business.Interface.ISocialNetworkBusiness _socialNetworkBusiness
+
+@{
+    List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+
+    List<Data.Model.Ideas> listIdeas = _ideasBusiness.GetByCondition(item => item.ParentID == Helper.GlobalHelper.CategoryLanguageID && item.IsHomePage == true && item.Active == true).ToList();
+
+    Data.Model.Ideas ideas = new Ideas();
+    if (listIdeas.Count > 0)
+    {
+        ideas = listIdeas[0];
+        ideas.Note = Helper.GlobalHelper.DomainURL + ideas.GetType().Name + "/" + ideas.Code + "-" + ideas.ID + ".html";
+    }
+
+    List<Data.Model.Menu> listMenu = await _menuBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listMenu = listMenu.OrderBy(item => item.SortOrder).ToList();
+
+    List<Data.Model.Quote> listQuote = await _quoteBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listQuote = listQuote.OrderBy(item => item.SortOrder).ToList();
+
+    Data.Model.Quote quote01 = new Quote();
+    if (listQuote.Count > 0)
+    {
+        quote01 = listQuote[0];
+    }
+
+    Data.Model.Quote quote02 = new Quote();
+    if (listQuote.Count > 1)
+    {
+        quote02 = listQuote[1];
+    }
+
+    Data.Model.Quote quote03 = new Quote();
+    if (listQuote.Count > 2)
+    {
+        quote03 = listQuote[2];
+    }
+
+    Data.Model.Quote quote04 = new Quote();
+    if (listQuote.Count > 3)
+    {
+        quote04 = listQuote[3];
+    }
+
+    Data.Model.Quote quote05 = new Quote();
+    if (listQuote.Count > 4)
+    {
+        quote05 = listQuote[4];
+    }
+
+    Data.Model.Quote quote06 = new Quote();
+    if (listQuote.Count > 5)
+    {
+        quote06 = listQuote[5];
+    }
+
+    Data.Model.Quote quote07 = new Quote();
+    if (listQuote.Count > 6)
+    {
+        quote07 = listQuote[6];
+    }
+
+    List<Data.Model.SocialNetwork> listSocialNetwork = await _socialNetworkBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
+    listSocialNetwork = listSocialNetwork.OrderBy(item => item.SortOrder).ToList();
+
+    Data.Model.SocialNetwork socialNetwork01 = new SocialNetwork();
+    if (listSocialNetwork.Count > 0)
+    {
+        socialNetwork01 = listSocialNetwork[0];
+    }
+
+    Data.Model.SocialNetwork socialNetwork02 = new SocialNetwork();
+    if (listSocialNetwork.Count > 1)
+    {
+        socialNetwork02 = listSocialNetwork[1];
+    }
+
+    Data.Model.SocialNetwork socialNetwork03 = new SocialNetwork();
+    if (listSocialNetwork.Count > 2)
+    {
+        socialNetwork03 = listSocialNetwork[2];
+    }
+
+    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J2ZZDB9QEL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-J2ZZDB9QEL');
+    </script>
+
+    <script language="JavaScript">
+        function redirectToHTTPS() {
+            var URL = location.href;
+            if (URL.includes("http://ctacorporation.vn") == true) {
+                URL = URL.replace("http://", "https://")
+                window.location = URL;
+            }
+        }
+        redirectToHTTPS();
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="Mon, 22 Jul 2002 11:12:01 GMT" />
+    <meta name="robots" content="index,follow">
+    <meta name="Googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+
+    <title>@ViewData["Title"] | @Helper.GlobalHelper.PageTitle</title>
+    <meta name="description" content="@ViewData["Description"]" />
+    <meta name="keywords" content="@ViewData["Title"] | @Helper.GlobalHelper.PageKeywords" />
+    <meta name="news_keywords" content="@ViewData["Title"] | @Helper.GlobalHelper.PageTags" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="@Helper.GlobalHelper.DomainName" />
+    <link rel="icon" type="image/x-icon" href="@Helper.GlobalHelper.LogoURL">
+
+    <link rel="canonical" href="@ViewData["URLCurrent"]" />
+    <meta property="og:site_name" content="@Helper.GlobalHelper.DomainName" />
+    <meta property="og:rich_attachment" content="true" />
+    <meta property="og:type" content="article" />
+    <meta property="article:publisher" content="@Helper.GlobalHelper.Facebook" />
+    <meta property="og:url" itemprop="url" content="@ViewData["URLCurrent"]" />
+    <meta property="og:image" itemprop="thumbnailUrl" content="@ViewData["URLImage"]" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="600" />
+    <meta content="@ViewData["Title"] | @Helper.GlobalHelper.PageTitle" property="og:title" itemprop="headline" />
+    <meta content="@ViewData["Description"]" property="og:description" itemprop="description" />
+    <meta content="@ViewData["Title"] | @Helper.GlobalHelper.PageKeywords" property="article:tag" />
+    <meta content="news" itemprop="genre" name="medium" />
+    <meta content="EN" itemprop="inLanguage" />
+    <meta content="@ViewData["Title"] |  @Helper.GlobalHelper.PageTitle" itemprop="articleSection" />
+    <meta content="@ViewData["Title"] |  @Helper.GlobalHelper.PageTitle" itemprop="sourceOrganization" name="source" />
+    <meta content="2022-01-01T19:22:56+07:00" itemprop="datePublished" name="pubdate" />
+    <meta content="2022-01-01T19:22:56+07:00" itemprop="dateModified" name="lastmod" />
+    <meta content="2022-01-01T19:22:56+07:00" itemprop="dateCreated" />
+    <meta name="copyright" content="@Helper.GlobalHelper.DomainName" />
+    <meta name="author" content="@Helper.GlobalHelper.DomainName" />
+
+    <meta name="twitter:card" value="summary" />
+    <meta name="twitter:url" content="@ViewData["URLCurrent"]" />
+    <meta name="twitter:title" content="@ViewData["Title"] | @Helper.GlobalHelper.PageTitle" />
+    <meta name="twitter:description" content="@ViewData["Description"]" />
+    <meta name="twitter:image" content="@ViewData["URLImage"]" />
+    <meta name="twitter:site" content="@Helper.GlobalHelper.Twitter" />
+    <meta name="twitter:creator" content="@Helper.GlobalHelper.Twitter" />
+
+    <link rel="apple-touch-icon-precomposed" href="@Helper.GlobalHelper.LogoURL" sizes="72x72">
+    <link rel="apple-touch-icon-precomposed" href="@Helper.GlobalHelper.LogoURL" sizes="144x144">
+
+    <link rel="apple-touch-icon-precomposed" href="@Helper.GlobalHelper.LogoURL" sizes="57x57">
+    <link rel="apple-touch-icon-precomposed" href="@Helper.GlobalHelper.LogoURL" sizes="114x114">
+
+    <link rel="nokia-touch-icon" href="@Helper.GlobalHelper.LogoURL">
+
+    <link rel="apple-touch-icon-precomposed" href="@Helper.GlobalHelper.LogoURL" sizes="1x1">
+
+
+    <meta name="its_url" content="@ViewData["URLCurrent"]" />
+    <meta name="its_title" content="@ViewData["Title"] | @Helper.GlobalHelper.PageTitle" />
+    <meta name="its_section" content="@ViewData["Description"]" />
+    <meta name="its_subsection" content="@ViewData["Title"] | @Helper.GlobalHelper.PageKeywords" />
+    <meta name="its_tag" content="@ViewData["Title"] | @Helper.GlobalHelper.PageTags" />
+
+
+    <link rel="stylesheet" type="text/css" href="@Helper.GlobalHelper.DomainURLSub/css/main.css?v=@Helper.GlobalHelper.InitializationDateTimeCode0001">
+    <link rel="stylesheet" type="text/css" href="@Helper.GlobalHelper.DomainURLSub/css/owl.carousel.css?v=@Helper.GlobalHelper.InitializationDateTimeCode0001">
+    <link rel="stylesheet" type="text/css" href="@Helper.GlobalHelper.DomainURLSub/css/animate.css?v=@Helper.GlobalHelper.InitializationDateTimeCode0001">
+    <link rel="stylesheet" type="text/css" href="@Helper.GlobalHelper.DomainURLSub/css/swiper.css?v=@Helper.GlobalHelper.InitializationDateTimeCode0001">
+    <link rel="stylesheet" type="text/css" href="@Helper.GlobalHelper.DomainURLSub/css/reponsive.css?v=@Helper.GlobalHelper.InitializationDateTimeCode0001">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+          rel="stylesheet">
+    <script type="text/javascript">
+        function onSearchString(domain) {
+            var searchString = document.getElementById('SearchString').value;
+            var url = domain + "tag/" + searchString;
+            window.location.href = url;
+        }
+    </script>
+    <style>
+        a.sohu{            
+            text-decoration: none !important;
+            font-size: 20px !important;
+            background: url() no-repeat right center !important;
+        }
+        a.sohu:hover{
+                color: #ff9900 !important;
+        }
+        a.sohu:active {
+                color: #ff9900 !important;
+        }
+    </style>
+</head>
+<body class="sticky-panel-v1 page-template-page_template-home">   
+    <header class="header header-child">
+        <div class="menu">
+            <svg width="30" height="21" viewBox="0 0 30 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.46875" y="0.943848" width="29.3366" height="2.83146" fill="#424B5A" />
+                <rect x="0.46875" y="9.13477" width="24.3074" height="2.73034" fill="#424B5A" />
+                <rect x="0.46875" y="17.9324" width="29.3366" height="2.83146" fill="#424B5A" />
+            </svg>
+        </div>
+        <div class="logo">
+            <a href="@Helper.GlobalHelper.DomainURLSub">
+                <img class="logo-ctaaa" alt="@Helper.GlobalHelper.PageTitle" title="@Helper.GlobalHelper.PageTitle" src="@Helper.GlobalHelper.LogoURL" width="100" />
+            </a>
+        </div>
+    </header>
+    <div class="languages">
+        <div class="en active">
+            <a href="@Helper.GlobalHelper.DomainOnlineEnglishURL" title="English" style="text-decoration: none;"><span>EN</span><img src="@Helper.GlobalHelper.DomainURLSub/image/english.png" alt="English" title="English"></a>
+        </div>       
+    </div>
+    <div id="open-menu">
+        <div class="left">
+            <div class="top-menu marginbt2">
+                <div class="menu">
+                    <svg width="45" height="45" viewBox="0 0 45 45" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M33.75 11.25L11.25 33.75" stroke="#424B5A" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                        <path d="M11.25 11.25L33.75 33.75" stroke="#424B5A" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="logo">
+                    <a href="@Helper.GlobalHelper.DomainURLSub">                        
+                        <img class="logo-ctaaa" alt="@Helper.GlobalHelper.PageTitle" title="@Helper.GlobalHelper.PageTitle" src="@Helper.GlobalHelper.LogoURL" width="100" />
+                    </a>
+                </div>
+            </div>
+            <div class="links">
+                @{
+                    int menuCount = listMenu.Count / 2;
+                    @Html.Raw(@"<ul class=""style_1"">")
+                    for (int i = 0; i < menuCount; i++)
+                    {
+                        Data.Model.Menu item = listMenu[i];
+                        @Html.Raw(@"<li class='marginbt1'><a href='"+ item.Display +"' title='"+ item.Name +"' data-src='"+ item.FileName +"'>"+ item.Name +"</a></li>")
+                    }
+                    @Html.Raw("</ul>")
+                    @Html.Raw(@"<ul class=""style_2"">")
+                    for (int i = menuCount; i < listMenu.Count; i++)
+                    {
+                        Data.Model.Menu item = listMenu[i];
+                        @Html.Raw(@"<li class='marginbt1'><a href='"+ item.Display +"' title='"+ item.Name +"' data-src='"+ item.FileName +"'>"+ item.Name +"</a></li>")
+                    }
+                    @Html.Raw("</ul>")
+                }
+            </div>
+            <div class="bottom">
+                <div class="search padding2_0">
+                    <form method="post" action="">
+                        <input type="text" name="SearchString" id="SearchString" placeholder="Bạn muốn tìm gì?">
+                        <svg onclick="onSearchString('@Helper.GlobalHelper.DomainURL')" style="cursor: pointer;" width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.1187 29.2375C22.9163 29.2375 29.2375 22.9163 29.2375 15.1187C29.2375 7.32117 22.9163 1 15.1187 1C7.32117 1 1 7.32117 1 15.1187C1 22.9163 7.32117 29.2375 15.1187 29.2375Z"
+                                  stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M36.9992 34.8849L26.4102 24.2959" stroke="#424B5A" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                        </svg>
+                    </form>
+                </div>
+                <div class="social padding2_0">
+                    <ul>
+                        <li>
+                            <a target="_blank" href="@socialNetwork01.Code" title="@socialNetwork01.Name">
+                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.5274 2.29956C7.32749 2.29956 2.25488 7.3609 2.25488 13.5946C2.25488 19.2308 6.38061 23.9089 11.7688 24.7543V16.8636H8.90564V13.5946H11.7688V11.1034C11.7688 8.27397 13.4484 6.71837 16.0298 6.71837C17.2585 6.71837 18.5436 6.93255 18.5436 6.93255V9.71685H17.1233C15.7255 9.71685 15.2859 10.5848 15.2859 11.4754V13.5946H18.4196L17.9123 16.8636H15.2859V24.7543C17.9421 24.3348 20.361 22.9795 22.1056 20.933C23.8503 18.8866 24.8058 16.2838 24.7998 13.5946C24.7998 7.3609 19.7272 2.29956 13.5274 2.29956Z"
+                                          fill="#424B5A" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="@socialNetwork02.Code" title="@socialNetwork02.Name">
+                                <svg width="29" height="28" viewBox="0 0 29 28" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.80098 5.63624C8.80068 6.23417 8.56287 6.80749 8.13986 7.23008C7.71685 7.65267 7.14329 7.8899 6.54536 7.88961C5.94743 7.88931 5.37411 7.65149 4.95152 7.22848C4.52893 6.80547 4.29169 6.23191 4.29199 5.63398C4.29229 5.03605 4.5301 4.46273 4.95312 4.04014C5.37613 3.61756 5.94968 3.38032 6.54761 3.38062C7.14554 3.38091 7.71886 3.61873 8.14145 4.04174C8.56404 4.46475 8.80128 5.03831 8.80098 5.63624ZM8.86861 9.55906H4.35963V23.6722H8.86861V9.55906ZM15.9928 9.55906H11.5064V23.6722H15.9477V16.2662C15.9477 12.1405 21.3247 11.7572 21.3247 16.2662V23.6722H25.7773V14.7331C25.7773 7.77801 17.819 8.03728 15.9477 11.4528L15.9928 9.55906Z"
+                                          fill="#424B5A" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="@socialNetwork03.Code" title="@socialNetwork03.Name">
+                                <svg width="29" height="28" viewBox="0 0 29 28" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.7463 6.26978C22.5751 6.18122 22.4085 6.08416 22.247 5.97895C21.7777 5.66864 21.3473 5.30304 20.9653 4.89002C20.0083 3.79547 19.6509 2.68513 19.5202 1.90845H19.5247C19.4153 1.26254 19.4604 0.845459 19.4683 0.845459H15.1115V17.6899C15.1115 17.9154 15.1115 18.1397 15.1025 18.3606C15.1025 18.3877 15.0991 18.4125 15.098 18.4429C15.098 18.4542 15.098 18.4677 15.0946 18.4801V18.4903C15.0488 19.0945 14.8553 19.6782 14.531 20.1901C14.2066 20.7019 13.7615 21.1262 13.2346 21.4256C12.685 21.7383 12.0634 21.9023 11.431 21.9013C9.402 21.9013 7.75621 20.2465 7.75621 18.2028C7.75621 16.158 9.402 14.5032 11.431 14.5032C11.8154 14.5032 12.1976 14.5641 12.5628 14.6836L12.5684 10.2467C11.4592 10.1036 10.3324 10.192 9.2591 10.5063C8.18579 10.8206 7.18929 11.354 6.3325 12.0728C5.58159 12.725 4.95025 13.5032 4.46691 14.3724C4.28317 14.6892 3.58878 15.9641 3.50536 18.0315C3.45238 19.2038 3.80521 20.4212 3.97317 20.9229V20.9341C4.07801 21.2295 4.48832 22.2395 5.15565 23.0906C5.6938 23.7737 6.32963 24.3738 7.04267 24.8716V24.8603L7.05281 24.8716C9.16076 26.3032 11.4998 26.2097 11.4998 26.2097C11.9045 26.1928 13.2606 26.2097 14.8004 25.4803C16.5082 24.671 17.4798 23.4659 17.4798 23.4659C18.1011 22.7458 18.5951 21.925 18.9408 21.039C19.3353 20.0019 19.4661 18.7597 19.4661 18.2637V9.32574C19.519 9.35731 20.2236 9.82286 20.2236 9.82286C20.2236 9.82286 21.2381 10.4733 22.8196 10.896C23.9536 11.197 25.4833 11.2612 25.4833 11.2612V6.93598C24.9479 6.9946 23.8601 6.82551 22.7452 6.2709L22.7463 6.26978Z"
+                                          fill="#424B5A" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="right"><img src="@Helper.GlobalHelper.DomainURLSub/images/img4.png" alt=""></div>
+    </div>
+    @RenderBody()
+    <footer class="footer padding3_0">
+        <div class="wrapper">
+            <div class="top">
+                <div class="left">
+                    <div class="inner marginbt2">
+                        <div class="item">
+                            <h2 class="marginbt2">@quote06.Name</h2><a class="btn-primary" href="@quote06.FileName" title="@quote06.Description"><span>@quote06.Description</span></a>
+                        </div>
+                        <div class="item">
+                            <h2 class="marginbt2">@quote07.Name</h2><a class="btn-primary" href="@quote07.FileName" title="@quote07.Description"><span>@quote07.Description</span></a>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <a target="_blank" href="@socialNetwork01.Code" title="@socialNetwork01.Name">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 0.0400391C4.5 0.0400391 0 4.53004 0 10.06C0 15.06 3.66 19.21 8.44 19.96V12.96H5.9V10.06H8.44V7.85004C8.44 5.34004 9.93 3.96004 12.22 3.96004C13.31 3.96004 14.45 4.15004 14.45 4.15004V6.62004H13.19C11.95 6.62004 11.56 7.39004 11.56 8.18004V10.06H14.34L13.89 12.96H11.56V19.96C13.9164 19.5879 16.0622 18.3856 17.6099 16.5701C19.1576 14.7546 20.0054 12.4457 20 10.06C20 4.53004 15.5 0.0400391 10 0.0400391Z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="@socialNetwork02.Code" title="@socialNetwork02.Name">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.94043 5.00002C6.94017 5.53046 6.7292 6.03906 6.35394 6.41394C5.97868 6.78883 5.46986 6.99929 4.93943 6.99902C4.409 6.99876 3.90039 6.78779 3.52551 6.41253C3.15062 6.03727 2.94016 5.52846 2.94043 4.99802C2.9407 4.46759 3.15166 3.95899 3.52692 3.5841C3.90218 3.20922 4.411 2.99876 4.94143 2.99902C5.47186 2.99929 5.98047 3.21026 6.35535 3.58552C6.73024 3.96078 6.9407 4.46959 6.94043 5.00002ZM7.00043 8.48002H3.00043V21H7.00043V8.48002ZM13.3204 8.48002H9.34043V21H13.2804V14.43C13.2804 10.77 18.0504 10.43 18.0504 14.43V21H22.0004V13.07C22.0004 6.90002 14.9404 7.13002 13.2804 10.16L13.3204 8.48002Z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="@socialNetwork03.Code" title="@socialNetwork03.Name">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19.3208 5.562C19.169 5.48345 19.0211 5.39734 18.8778 5.304C18.4615 5.02872 18.0798 4.7044 17.7408 4.338C16.8918 3.367 16.5748 2.382 16.4588 1.693H16.4628C16.3658 1.12 16.4058 0.75 16.4128 0.75H12.5478V15.693C12.5478 15.893 12.5478 16.092 12.5398 16.288C12.5398 16.312 12.5368 16.334 12.5358 16.361C12.5358 16.371 12.5358 16.383 12.5328 16.394V16.403C12.4922 16.939 12.3205 17.4569 12.0328 17.9109C11.7451 18.365 11.3502 18.7414 10.8828 19.007C10.3953 19.2844 9.84378 19.4298 9.28283 19.429C7.48283 19.429 6.02283 17.961 6.02283 16.148C6.02283 14.334 7.48283 12.866 9.28283 12.866C9.62383 12.866 9.96283 12.92 10.2868 13.026L10.2918 9.09C9.30784 8.96305 8.30822 9.04147 7.35607 9.3203C6.40391 9.59913 5.5199 10.0723 4.75983 10.71C4.09368 11.2885 3.53362 11.9789 3.10483 12.75C2.94183 13.031 2.32583 14.162 2.25183 15.996C2.20483 17.036 2.51783 18.116 2.66683 18.561V18.571C2.75983 18.833 3.12383 19.729 3.71583 20.484C4.19323 21.09 4.75728 21.6224 5.38983 22.064V22.054L5.39883 22.064C7.26883 23.334 9.34383 23.251 9.34383 23.251C9.70283 23.236 10.9058 23.251 12.2718 22.604C13.7868 21.886 14.6488 20.817 14.6488 20.817C15.1999 20.1781 15.6382 19.45 15.9448 18.664C16.2948 17.744 16.4108 16.642 16.4108 16.202V8.273C16.4578 8.301 17.0828 8.714 17.0828 8.714C17.0828 8.714 17.9828 9.291 19.3858 9.666C20.3918 9.933 21.7488 9.99 21.7488 9.99V6.153C21.2738 6.205 20.3088 6.055 19.3198 5.563L19.3208 5.562Z" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <h2 class="marginbt2">Sitemap</h2>
+                    <div class="item">
+                        @{
+                            @Html.Raw("<ul>")
+                            for (int i = 0; i < menuCount; i++)
+                            {
+                                Data.Model.Menu item = listMenu[i];
+                                @Html.Raw("<li><a href='"+ item.Display +"' title='"+ item.Name +"'>"+ item.Name +"</a></li>")
+                            }
+                            @Html.Raw("</ul>")
+                            @Html.Raw("<ul>")
+                            for (int i = menuCount; i < listMenu.Count; i++)
+                            {
+                                Data.Model.Menu item = listMenu[i];
+                                @Html.Raw("<li><a href='"+ item.Display +"' title='"+ item.Name +"'>"+ item.Name +"</a></li>")
+                            }
+                            @Html.Raw("</ul>")
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="bottom padtop_3_0">
+                <p>©2023 - @Helper.GlobalHelper.PageTitle | Bảo lưu tất cả các quyền</p>
+                <ul>
+                    @{
+                        foreach (Data.Model.About item in listAbout)
+                        {
+                            string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
+                            @Html.Raw("<li><a href='"+url +"' title='"+ item.Name +"'>"+ item.Name +"</a></li>")
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div style="position:fixed; bottom:20px; right:20px; z-index:1000;">
+        <div>
+            <a href="https://zalo.me/@contact.Status" target="_blank">
+                <img src="@Helper.GlobalHelper.DomainURLSub/image/zalo.png" width="50" height="50" />
+            </a>
+        </div>
+        <div>
+            <a href="@contact.Location" target="_blank">
+                <img src="@Helper.GlobalHelper.DomainURLSub/image/messenger.png" width="50" height="50" />
+            </a>
+        </div>
+        <div>
+            <a href="tel:@contact.Status" target="_blank">
+                <img src="@Helper.GlobalHelper.DomainURLSub/image/phone.png" width="50" height="50" />
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/jquery.min.js"></script>
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/owl.carousel.js"></script>
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/wow.js"></script>    
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/news-dist.js"></script>
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/projects-dist.js"></script>
+</body>
+</html>

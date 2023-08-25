@@ -2,6 +2,7 @@
 @inject Business.Interface.IProjectBusiness _projectBusiness
 @inject Business.Interface.IMenuBusiness _menuBusiness
 @{
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
     Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
     ViewData["Title"] = Model.Name;
     ViewData["Description"] = Model.Description;
@@ -97,7 +98,7 @@
             }
         </div>
         <div class="padding4_5_0 view-more">
-            <a class="btn-primary white" href="@urlPage" title="Xem thêm" style="background-color: #fff;"><span>Xem thêm</span></a>
+            <a class="btn-primary white" href="@urlPage" title="Xem thêm"><span>Xem thêm</span></a>
         </div>
     </div>
 </div>
