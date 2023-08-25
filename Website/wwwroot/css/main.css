@@ -1371,8 +1371,8 @@ body {
 .slider.bg-image::before{
   content: "";
   background-color: #fff;
-  opacity: 0.3;
-  height: 100%;
+  opacity: 0.4;
+  height: 400px;
   top: 0;
   position: absolute;
   right: 0;
@@ -1800,6 +1800,17 @@ body {
   height: 400px;
   background-size: cover !important;
 }
+.slider.bg-image-contact::before{
+  content: "";
+  background-color: #fff;
+  opacity: 0.4;
+  height: 400px;
+  top: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 0;
+}
 .contact .bg-image-contact {
   background: url(../images/bg-line-contact.svg) no-repeat center right;
   height: 500px;
@@ -1821,6 +1832,17 @@ body {
   background: url(../images/contact-bg.jpg) no-repeat center center;
   height: 300px;
   background-size: cover !important;
+}
+.slider.bg-image-career-detail::before{
+  content: "";
+  background-color: #fff;
+  opacity: 0.4;
+  height: 300px;
+  top: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 0;
 }
 .career-detail .left-contact{
   margin-top: 30px;
@@ -1946,7 +1968,6 @@ body {
   opacity: 0.3;
   top: 17px;
 }
-
 
 /* header bg 1/2 pic*/
 .light-grey-after, .light-grey-after1, .light-grey-after2 {
@@ -2367,6 +2388,17 @@ padding-right: 2.5em
   height: 500px;
   background-size: cover !important;
 }
+.slider.bg-image-project-dtail::before{
+  content: "";
+  background-color: #fff;
+  opacity: 0.4;
+  height: 500px;
+  top: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 0;
+}
 .content-detail{
   max-width: 1000px;
   margin: 4.5rem auto !important;
@@ -2436,7 +2468,8 @@ padding-right: 2.5em
 /* Language*/
 .languages {
   position: absolute;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgb(255,98,0);
+  background: linear-gradient(90deg, rgba(255,98,0,0.09287464985994398) 0%, rgba(255,153,0,0.1881127450980392) 100%);
   padding: 5px 15px;
   top: 80px;
   right: 100px;
@@ -2452,6 +2485,12 @@ padding-right: 2.5em
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+.languages .en a, .languages .vn a {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
 }
 .languages .en img, .languages .vn img {
   width: 23px;

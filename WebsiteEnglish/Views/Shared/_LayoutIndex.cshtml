@@ -319,10 +319,7 @@
     <div class="languages">
         <div class="en active">
             <a href="@Helper.GlobalHelper.DomainOnlineURL" title="Viet Nam" style="text-decoration: none;"><span>VI</span><img src="@Helper.GlobalHelper.DomainURLSub/image/vietnam.png" alt="Viet Nam" title="Viet Nam"></a>
-        </div>
-        <div class="vn">
-            <a href="@Helper.GlobalHelper.DomainOnlineURL" title="Viet Nam" style="text-decoration: none;"><img src="@Helper.GlobalHelper.DomainURLSub/image/vietnam.png" alt="Viet Nam"><span>VI</span></a>
-        </div>
+        </div>       
     </div>
     <div id="open-menu">
         <div class="left">
@@ -982,20 +979,6 @@
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/owl.carousel.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/wow.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/swiper.js"></script>
-    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/main-dist.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".languages").click(function (e) {
-                if ($(".languages .en").hasClass("active")) {
-                    $(".languages .en").removeClass("active")
-                    $(".languages .vn").addClass("active")
-                }
-                else {
-                    $(".languages .en").addClass("active")
-                    $(".languages .vn").removeClass("active")
-                }
-            })
-        });
-    </script>
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/main-dist.js"></script>   
 </body>
 </html>
