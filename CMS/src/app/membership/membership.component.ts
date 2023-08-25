@@ -17,7 +17,7 @@ import { MembershipService } from 'src/app/shared/Membership.service';
 export class MembershipComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['Name', 'Display', 'Code', 'Description', 'Save'];
+  displayColumns: string[] = ['Name', 'Display', 'Code', 'Description', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
@@ -104,5 +104,16 @@ export class MembershipComponent implements OnInit {
         }
       );
     }
+  }
+  onSaveList() {    
+    this.MembershipService.SaveListAsync(this.MembershipService.list).subscribe(
+      res => {
+        this.onSearch();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
   }
 }

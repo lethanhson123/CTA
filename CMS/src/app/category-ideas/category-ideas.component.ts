@@ -17,11 +17,12 @@ import { CategoryIdeasService } from 'src/app/shared/CategoryIdeas.service';
 export class CategoryIdeasComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ParentID', 'CategoryID', 'Name', 'Description', 'SortOrder', 'Save'];
+  displayColumns: string[] = ['ParentID', 'CategoryID', 'Name', 'Description', 'SortOrder', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
   searchString: string = environment.InitializationString;
+  parentID: number = environment.InitializationNumber;
   constructor(
     public CategoryIdeasService: CategoryIdeasService,
     public CategoryLanguageService: CategoryLanguageService,
@@ -30,15 +31,20 @@ export class CategoryIdeasComponent implements OnInit {
 
   ngOnInit(): void {
     this.onGetCategoryLanguageToListAsync();
-    this.onGetCategoryIdeasToListAsync();
-    this.onGetToList();
+    this.onGetCategoryIdeasToListAsync();   
   }
   onGetCategoryLanguageToListAsync() {
     this.isShowLoading = true;
     this.CategoryLanguageService.GetByActiveToListAsync(true).subscribe(
       res => {
         this.CategoryLanguageService.list = (res as CategoryLanguage[]).sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1));
-        this.isShowLoading = false;       
+        if (this.CategoryLanguageService.list) {
+          if (this.CategoryLanguageService.list.length > 0) {
+            this.parentID=this.CategoryLanguageService.list[0].ID;
+            this.onGetToList();
+            this.isShowLoading = false;
+          }
+        }        
       },
       err => {
         this.isShowLoading = false;
@@ -59,7 +65,7 @@ export class CategoryIdeasComponent implements OnInit {
   }
   onGetToList() {
     this.isShowLoading = true;
-    this.CategoryIdeasService.GetAllAndEmptyToListAsync().subscribe(
+    this.CategoryIdeasService.GetByParentIDAndEmptyToListAsync(this.parentID).subscribe(
       res => {
         this.CategoryIdeasService.list = res as CategoryIdeas[];
         this.dataSource = new MatTableDataSource(this.CategoryIdeasService.list.sort((a, b) => (a.SortOrder > b.SortOrder ? 1 : -1)));
@@ -104,5 +110,19 @@ export class CategoryIdeasComponent implements OnInit {
         }
       );
     }
+  }
+  onSaveList() {    
+    this.CategoryIdeasService.SaveListAsync(this.CategoryIdeasService.list).subscribe(
+      res => {
+        this.onSearch();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onChangeParentID($event) {
+    this.onSearch();
   }
 }

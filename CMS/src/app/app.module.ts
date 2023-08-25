@@ -45,7 +45,7 @@ import { EmailComponent } from './email/email.component';
 import { MenuComponent } from './menu/menu.component';
 import { QuoteComponent } from './quote/quote.component';
 import { SocialNetworkComponent } from './social-network/social-network.component';
-import { MenuDetailComponent } from './Menu/menu-detail/menu-detail.component';
+import { MenuDetailComponent } from './menu/menu-detail/menu-detail.component';
 
 
 

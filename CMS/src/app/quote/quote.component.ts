@@ -17,7 +17,7 @@ import { QuoteService } from 'src/app/shared/Quote.service';
 export class QuoteComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ParentID', 'Name','Code','Description','FileName', 'SortOrder', 'Save'];
+  displayColumns: string[] = ['ParentID', 'Name','Code','Description','FileName', 'SortOrder', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
@@ -96,5 +96,19 @@ export class QuoteComponent implements OnInit {
         }
       );
     }
+  }
+  onSaveList() {    
+    this.QuoteService.SaveListAsync(this.QuoteService.list).subscribe(
+      res => {
+        this.onSearch();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onChangeParentID($event) {
+    this.onSearch();
   }
 }

@@ -29,7 +29,7 @@ export class BaseService {
                     formUpload.append('file[]', fileToUpload[i]);
                 }
             }
-        }     
+        }
         return this.httpClient.post(url, formUpload);
     }
     SaveAndUploadFilesAsync(formData: Base, fileToUpload: FileList) {
@@ -42,7 +42,7 @@ export class BaseService {
                     formUpload.append('file[]', fileToUpload[i]);
                 }
             }
-        }     
+        }
         return this.httpClient.post(url, formUpload);
     }
     SaveAndUploadFile(formData: Base, fileToUpload: FileList) {
@@ -55,7 +55,7 @@ export class BaseService {
                     formUpload.append('file[]', fileToUpload[i]);
                 }
             }
-        }     
+        }
         return this.httpClient.post(url, formUpload);
     }
     SaveAndUploadFileAsync(formData: Base, fileToUpload: FileList) {
@@ -68,7 +68,19 @@ export class BaseService {
                     formUpload.append('file[]', fileToUpload[i]);
                 }
             }
-        }     
+        }
+        return this.httpClient.post(url, formUpload);
+    }
+    SaveList(list: Base[]) {
+        let url = this.aPIURL + this.controller + '/SaveList';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(list));
+        return this.httpClient.post(url, formUpload);
+    }
+    SaveListAsync(list: Base[]) {
+        let url = this.aPIURL + this.controller + '/SaveListAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(list));
         return this.httpClient.post(url, formUpload);
     }
     Save(formData: Base) {
@@ -79,8 +91,6 @@ export class BaseService {
     }
     SaveAsync(formData: Base) {
         let url = this.aPIURL + this.controller + '/SaveAsync';
-        console.log(url);
-        console.log(formData);
         const formUpload: FormData = new FormData();
         formUpload.append('data', JSON.stringify(formData));
         return this.httpClient.post(url, formUpload);
@@ -118,7 +128,7 @@ export class BaseService {
         let url = this.aPIURL + this.controller + '/GetAllToListAsync';
         const formUpload: FormData = new FormData();
         return this.httpClient.post(url, formUpload);
-    }    
+    }
     GetAllAndEmptyToList() {
         let url = this.aPIURL + this.controller + '/GetAllAndEmptyToList';
         const formUpload: FormData = new FormData();
@@ -128,7 +138,7 @@ export class BaseService {
         let url = this.aPIURL + this.controller + '/GetAllAndEmptyToListAsync';
         const formUpload: FormData = new FormData();
         return this.httpClient.post(url, formUpload);
-    }    
+    }
     GetByActiveToList(active: boolean) {
         let url = this.aPIURL + this.controller + '/GetByActiveToList';
         const formUpload: FormData = new FormData();
@@ -142,42 +152,73 @@ export class BaseService {
         return this.httpClient.post(url, formUpload);
     }
     GetByParentIDToList(parentID: number) {
-        let url = this.aPIURL + this.controller + '/GetByParentIDToList';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(parentID));
-        return this.httpClient.post(url, formUpload);
+        if (parentID == 0) {
+            return this.GetAllToList();
+        }
+        else {
+            let url = this.aPIURL + this.controller + '/GetByParentIDToList';
+            const formUpload: FormData = new FormData();
+            formUpload.append('data', JSON.stringify(parentID));
+            return this.httpClient.post(url, formUpload);
+        }
     }
     GetByParentIDToListAsync(parentID: number) {
-        let url = this.aPIURL + this.controller + '/GetByParentIDToListAsync';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(parentID));
-        return this.httpClient.post(url, formUpload);
+        if (parentID == 0) {
+            return this.GetAllToListAsync();
+        }
+        else {
+            let url = this.aPIURL + this.controller + '/GetByParentIDToListAsync';
+            const formUpload: FormData = new FormData();
+            formUpload.append('data', JSON.stringify(parentID));
+            return this.httpClient.post(url, formUpload);
+        }
     }
     GetByParentIDAndEmptyToList(parentID: number) {
-        let url = this.aPIURL + this.controller + '/GetByParentIDAndEmptyToList';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(parentID));
-        return this.httpClient.post(url, formUpload);
+        if (parentID == 0) {
+            return this.GetAllAndEmptyToList();
+        }
+        else {
+            let url = this.aPIURL + this.controller + '/GetByParentIDAndEmptyToList';
+            const formUpload: FormData = new FormData();
+            formUpload.append('data', JSON.stringify(parentID));
+            return this.httpClient.post(url, formUpload);
+        }
     }
     GetByParentIDAndEmptyToListAsync(parentID: number) {
-        let url = this.aPIURL + this.controller + '/GetByParentIDAndEmptyToListAsync';
-        const formUpload: FormData = new FormData();
-        formUpload.append('data', JSON.stringify(parentID));
-        return this.httpClient.post(url, formUpload);
+        if (parentID == 0) {
+            return this.GetAllAndEmptyToListAsync();
+        }
+        else {
+            let url = this.aPIURL + this.controller + '/GetByParentIDAndEmptyToListAsync';
+            const formUpload: FormData = new FormData();
+            formUpload.append('data', JSON.stringify(parentID));
+            return this.httpClient.post(url, formUpload);
+        }
     }
     GetByParentIDAndActiveToList(parentID: number, active: boolean) {
-        let url = this.aPIURL + this.controller + '/GetByParentIDAndActiveToList';
-        const formUpload: FormData = new FormData();
-        formUpload.append('parentID', JSON.stringify(parentID));
-        formUpload.append('active', JSON.stringify(active));
-        return this.httpClient.post(url, formUpload);
+        if (parentID == 0) {
+            return this.GetByActiveToList(active);
+        }
+        else {
+            let url = this.aPIURL + this.controller + '/GetByParentIDAndActiveToList';
+            const formUpload: FormData = new FormData();
+            formUpload.append('parentID', JSON.stringify(parentID));
+            formUpload.append('active', JSON.stringify(active));
+            return this.httpClient.post(url, formUpload);
+
+        }
     }
-    GetByParentIDAndActiveToListAsync(parentID: number, active: boolean) {
-        let url = this.aPIURL + this.controller + '/GetByParentIDAndActiveToListAsync';
-        const formUpload: FormData = new FormData();
-        formUpload.append('parentID', JSON.stringify(parentID));
-        formUpload.append('active', JSON.stringify(active));
-        return this.httpClient.post(url, formUpload);
+    GetByParentIDAndActiveToListAsync(parentID: number, active: boolean) {        
+        if (parentID == 0) {
+            return this.GetByActiveToListAsync(active);
+        }
+        else {
+            let url = this.aPIURL + this.controller + '/GetByParentIDAndActiveToListAsync';
+            const formUpload: FormData = new FormData();
+            formUpload.append('parentID', JSON.stringify(parentID));
+            formUpload.append('active', JSON.stringify(active));
+            return this.httpClient.post(url, formUpload);
+        }
     }
     GetByPageAndPageSizeToList(page: number, pageSize: number) {
         let url = this.aPIURL + this.controller + '/GetByPageAndPageSizeToList';

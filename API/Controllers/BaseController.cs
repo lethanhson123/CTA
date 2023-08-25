@@ -189,6 +189,48 @@ namespace API.Controllers
             return model;
         }
         [HttpPost]
+        [Route("SaveList")]
+        public virtual List<T> SaveList()
+        {
+            List<T> result = JsonConvert.DeserializeObject<List<T>>(Request.Form["data"]);
+            foreach (T item in result)
+            {
+                if (item.ID == 0)
+                {
+                    if (!string.IsNullOrEmpty(item.Name))
+                    {
+                        _baseBusiness.Save(item);
+                    }
+                }
+                else
+                {
+                    _baseBusiness.Save(item);
+                }
+            }
+            return result;
+        }
+        [HttpPost]
+        [Route("SaveListAsync")]
+        public virtual async Task<List<T>> SaveListAsync()
+        {
+            List<T> result = JsonConvert.DeserializeObject<List<T>>(Request.Form["data"]);
+            foreach (T item in result)
+            {
+                if (item.ID == 0)
+                {
+                    if (!string.IsNullOrEmpty(item.Name))
+                    {
+                       await _baseBusiness.SaveAsync(item);
+                    }
+                }
+                else
+                {
+                    await _baseBusiness.SaveAsync(item);
+                }
+            }
+            return result;
+        }
+        [HttpPost]
         [Route("Save")]
         public virtual T Save()
         {

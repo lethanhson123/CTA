@@ -15,7 +15,7 @@ import { CategoryLanguageService } from 'src/app/shared/CategoryLanguage.service
 export class CategoryLanguageComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['Name', 'SortOrder', 'Save'];
+  displayColumns: string[] = ['Name', 'SortOrder', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
@@ -75,4 +75,16 @@ export class CategoryLanguageComponent implements OnInit {
       );
     }
   }
+  onSaveList() {    
+    this.CategoryLanguageService.SaveListAsync(this.CategoryLanguageService.list).subscribe(
+      res => {
+        this.onSearch();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  
 }

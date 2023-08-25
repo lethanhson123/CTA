@@ -5,7 +5,8 @@
             <div class="row">
                 <div class="col s12 m6 l6">
                     <h5 class="breadcrumbs-title mt-0 mb-0" style="color: #ffffff;">Loại ý tưởng <span
-                            *ngIf="CategoryIdeasService.list">({{CategoryIdeasService.list.length - 1 }} items)</span></h5>
+                            *ngIf="CategoryIdeasService.list">({{CategoryIdeasService.list.length - 1 }} items)</span>
+                    </h5>
                 </div>
                 <div class="col s12 m6 l6 right-align-md">
                     <ol class="breadcrumbs mb-0">
@@ -23,7 +24,19 @@
             <div class="section section-data-tables">
                 <div class="card">
                     <div class="card-content">
-                        <div class="col s12 m12 l9">
+                        <div class="col s12 m12 l3">
+                            <mat-select
+                                style="padding-top:14px; padding-bottom:10px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
+                                name="parentID" class="browser-default" [(ngModel)]="parentID" (selectionChange)="onChangeParentID($event)">
+                                <mat-option [value]="0">
+                                    Tất cả
+                                </mat-option>
+                                <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
+                                    {{item.Name}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                        <div class="col s12 m12 l6">
                             <input matInput [(ngModel)]="searchString" placeholder="Tìm ..."
                                 class="mat-input-element mat-form-field-autofill-control" autocomplete="off"
                                 (keyup.enter)="onSearch()">
@@ -32,6 +45,9 @@
                             <a title="Tìm" (click)="onSearch()"
                                 class="btn-floating waves-effect waves-light green darken-1"><i
                                     class="material-icons">search</i></a>&nbsp;&nbsp;&nbsp;
+                            <a title="Lưu thay đổi danh sách" (click)="onSaveList()"
+                                class="btn-floating waves-effect waves-light cyan"><i
+                                    class="material-icons">save</i></a>
                         </div>
                         <div class="KhungOverflow">
                             <mat-table [dataSource]="dataSource" matSort>
@@ -43,7 +59,8 @@
                                             style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
                                             name="ParentID{{element.ID}}" class="browser-default"
                                             [(ngModel)]="element.ParentID">
-                                            <mat-option *ngFor="let item of CategoryLanguageService.list" [value]="item.ID">
+                                            <mat-option *ngFor="let item of CategoryLanguageService.list"
+                                                [value]="item.ID">
                                                 {{item.Name}}
                                             </mat-option>
                                         </mat-select>
@@ -57,7 +74,8 @@
                                             style="padding-top:10px; padding-bottom:6px; border-bottom-color: #000000; border-bottom-width: 1px; border-bottom-style: solid;"
                                             name="CategoryID{{element.ID}}" class="browser-default"
                                             [(ngModel)]="element.CategoryID">
-                                            <mat-option *ngFor="let item of CategoryIdeasService.listSearch" [value]="item.ID">
+                                            <mat-option *ngFor="let item of CategoryIdeasService.listSearch"
+                                                [value]="item.ID">
                                                 {{item.Name}}
                                             </mat-option>
                                         </mat-select>
@@ -70,7 +88,7 @@
                                         <input placeholder="Loại ý tưởng" name="Name{{element.ID}}"
                                             [(ngModel)]="element.Name" type="text">
                                     </mat-cell>
-                                </ng-container>       
+                                </ng-container>
                                 <ng-container matColumnDef="Description">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Mô tả
                                     </mat-header-cell>
@@ -78,7 +96,7 @@
                                         <input placeholder="Mô tả" name="Description{{element.ID}}"
                                             [(ngModel)]="element.Description" type="text">
                                     </mat-cell>
-                                </ng-container>    
+                                </ng-container>
                                 <ng-container matColumnDef="SortOrder">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Sắp xếp
                                     </mat-header-cell>
@@ -86,14 +104,25 @@
                                         <input placeholder="0" name="SortOrder{{element.ID}}" style="text-align: right;"
                                             [(ngModel)]="element.SortOrder" type="number">
                                     </mat-cell>
-                                </ng-container>                         
+                                </ng-container>
+                                <ng-container matColumnDef="Active">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Kích hoạt
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">
+                                        <label>
+                                            <input type="checkbox" class="filled-in" name="Active{{element.ID}}"
+                                                [(ngModel)]="element.Active" />
+                                            <span>.</span>
+                                        </label>
+                                    </mat-cell>
+                                </ng-container>
                                 <ng-container matColumnDef="Save">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let element" style="margin-right: 10px;">
-                                        <a title="Lưu thay đổi" (click)="onSave(element)"
+                                        <!-- <a title="Lưu thay đổi" (click)="onSave(element)"
                                             class="btn-floating waves-effect waves-light cyan"><i
-                                                class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp;
+                                                class="material-icons">save</i></a>&nbsp;&nbsp;&nbsp; -->
                                         <a style="padding-left: 8px;" (click)="onDelete(element)" *ngIf="element.ID>0"
                                             class="btn-floating waves-effect waves-light red"><i
                                                 class="material-icons">delete_outline</i></a>

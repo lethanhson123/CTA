@@ -17,7 +17,7 @@ import { SocialNetworkService } from 'src/app/shared/SocialNetwork.service';
 export class SocialNetworkComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayColumns: string[] = ['ParentID', 'Name','Code', 'SortOrder', 'Save'];
+  displayColumns: string[] = ['ParentID', 'Name','Code', 'SortOrder', 'Active', 'Save'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isShowLoading: boolean = false;
@@ -96,5 +96,19 @@ export class SocialNetworkComponent implements OnInit {
         }
       );
     }
+  }
+  onSaveList() {    
+    this.SocialNetworkService.SaveListAsync(this.SocialNetworkService.list).subscribe(
+      res => {
+        this.onSearch();
+        this.NotificationService.warn(environment.SaveSuccess);
+      },
+      err => {
+        this.NotificationService.warn(environment.SaveNotSuccess);
+      }
+    );
+  }
+  onChangeParentID($event) {
+    this.onSearch();
   }
 }
