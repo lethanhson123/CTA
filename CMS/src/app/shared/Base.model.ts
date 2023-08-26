@@ -16,6 +16,7 @@ export class Base {
     SortOrder?: number;
     IsHomePage?: boolean;
     FileName?: string;
+    FileThumbnailName?: string;
     Status?: string;
     DateComplete?: string;
     Location?: string;

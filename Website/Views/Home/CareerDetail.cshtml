@@ -9,7 +9,7 @@
     ViewData["URLCurrent"] = Model.Career.Note;
     ViewData["URLImage"] = Model.Career.FileName;
 
-    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(7);
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuCareerID);
 }
 <style>
     .btn-talk:hover {
@@ -19,7 +19,7 @@
 </style>
 <div class="slider bg-image-career-detail" style="background: url(@Model.Career.FileName) no-repeat center center;">
     <div class="content">
-        <a style="text-decoration: none;" href="@Model.Career.Note" title="@Model.Career.Name"><h1 class="marginbt1">@Model.Career.Name</h1></a>
+        <h1 class="marginbt1">@Model.Career.Name</h1>
     </div>
 </div>
 <div>

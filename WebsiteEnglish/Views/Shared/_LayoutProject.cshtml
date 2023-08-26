@@ -86,7 +86,7 @@
         socialNetwork03 = listSocialNetwork[2];
     }
 
-    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(2);
+    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -208,7 +208,7 @@
             }
     </style>
 </head>
-<body class="sticky-panel-v1 page-template-page_template-home" style="background: #f5f5f5;">
+<body class="sticky-panel-v1 page-template-page_template-home">
     <header class="header header-child">
         <div class="menu">
             <svg width="30" height="21" viewBox="0 0 30 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -218,15 +218,15 @@
             </svg>
         </div>
         <div class="logo">
-            <a href="@Helper.GlobalHelper.DomainURLSub">
+            <a href="@Helper.GlobalHelper.DomainURLSub" title="@Helper.GlobalHelper.IndexTitle">
                 <img class="logo-ctaaa" alt="@Helper.GlobalHelper.PageTitle" title="@Helper.GlobalHelper.PageTitle" src="@Helper.GlobalHelper.LogoURL" width="100" />
             </a>
         </div>
     </header>
     <div class="languages">
         <div class="en active">
-            <a href="@Helper.GlobalHelper.DomainOnlineURL" title="Viet Nam" style="text-decoration: none;"><span>VI</span><img src="@Helper.GlobalHelper.DomainURLSub/image/vietnam.png" alt="Viet Nam" title="Viet Nam"></a>
-        </div>       
+            <a href="@Helper.GlobalHelper.DomainOnlineEnglishURL" title="English" style="text-decoration: none;"><span>EN</span><img src="@Helper.GlobalHelper.DomainURLSub/image/english.png" alt="English" title="English"></a>
+        </div>
     </div>
     <div id="open-menu">
         <div class="left">
@@ -268,7 +268,7 @@
             <div class="bottom">
                 <div class="search padding2_0">
                     <form method="post" action="">
-                        <input type="text" name="SearchString" id="SearchString" placeholder="Search...">
+                        <input type="text" name="SearchString" id="SearchString" placeholder="@Helper.GlobalHelper.SearchTitle">
                         <svg onclick="onSearchString('@Helper.GlobalHelper.DomainURL')" style="cursor: pointer;" width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.1187 29.2375C22.9163 29.2375 29.2375 22.9163 29.2375 15.1187C29.2375 7.32117 22.9163 1 15.1187 1C7.32117 1 1 7.32117 1 15.1187C1 22.9163 7.32117 29.2375 15.1187 29.2375Z"
                                   stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -375,7 +375,7 @@
                 </div>
             </div>
             <div class="bottom padtop_3_0">
-                <p>©2023 - @Helper.GlobalHelper.PageTitle | All right reserved</p>
+                <p>©2023 - @Helper.GlobalHelper.PageTitle | @Helper.GlobalHelper.AllRightsReserved</p>
                 <ul>
                     @{
                         foreach (Data.Model.About item in listAbout)

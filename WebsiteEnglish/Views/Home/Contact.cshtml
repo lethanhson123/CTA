@@ -23,17 +23,16 @@
     {
         socialNetwork03 = listSocialNetwork[2];
     }
-    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(20);
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuContactID);
 
-    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(2);
-
+    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
 }
 
 
 @{
     ViewData["Title"] = contact.Name;
     ViewData["Description"] = Helper.GlobalHelper.PageDescription;
-    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "contact.html";
+    ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "lien-he.html";
     ViewData["URLImage"] = Helper.GlobalHelper.ImageURL;
 }
 <style>
@@ -60,7 +59,7 @@
                                 <path d="M9.49935 12.3337C11.0642 12.3337 12.3327 11.0651 12.3327 9.50033C12.3327 7.93552 11.0642 6.66699 9.49935 6.66699C7.93454 6.66699 6.66602 7.93552 6.66602 9.50033C6.66602 11.0651 7.93454 12.3337 9.49935 12.3337Z"
                                       stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p><strong>Address: </strong><a target="_blank" href="@contact.Note" title="@contact.ContentHTML">@contact.ContentHTML</a></p>
+                            <p><strong>Địa chỉ: </strong><a target="_blank" href="@contact.Note" title="@contact.ContentHTML">@contact.ContentHTML</a></p>
                         </div>
                         <div class="item">
                             <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,14 +75,14 @@
                                 <path d="M17.9995 13.753V16.3173C18.0004 16.5553 17.9517 16.791 17.8563 17.0091C17.7609 17.2272 17.6211 17.423 17.4457 17.5839C17.2702 17.7449 17.0632 17.8674 16.8376 17.9436C16.6121 18.0199 16.3732 18.0482 16.1361 18.0268C13.5059 17.741 10.9794 16.8422 8.75957 15.4027C6.69433 14.0904 4.94337 12.3394 3.63104 10.2742C2.18648 8.0443 1.28751 5.50549 1.00694 2.86345C0.985578 2.62708 1.01367 2.38886 1.08942 2.16394C1.16518 1.93902 1.28693 1.73234 1.44694 1.55706C1.60694 1.38178 1.80169 1.24173 2.01879 1.14584C2.23589 1.04994 2.47057 1.00031 2.7079 1.00008H5.27217C5.68698 0.996 6.08913 1.14289 6.40366 1.41338C6.71818 1.68388 6.92362 2.05951 6.98168 2.47026C7.08991 3.29088 7.29063 4.09663 7.58001 4.87212C7.69501 5.17806 7.7199 5.51055 7.65173 5.8302C7.58355 6.14985 7.42518 6.44326 7.19537 6.67566L6.10983 7.7612C7.32662 9.90112 9.09844 11.6729 11.2384 12.8897L12.3239 11.8042C12.5563 11.5744 12.8497 11.416 13.1694 11.3478C13.489 11.2797 13.8215 11.3045 14.1274 11.4195C14.9029 11.7089 15.7087 11.9096 16.5293 12.0179C16.9445 12.0765 17.3237 12.2856 17.5948 12.6055C17.8658 12.9254 18.0099 13.3338 17.9995 13.753Z"
                                       stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p><strong>Phone:</strong> <a href="tel:@contact.Description">@contact.Description</a></p>
+                            <p><strong>Cố định:</strong> <a href="tel:@contact.Description">@contact.Description</a></p>
                         </div>
                         <div class="item">
                             <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18 1L12.05 18L8.65 10.35L1 6.95L18 1Z" stroke="#424B5A" stroke-width="2"
                                       stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                            <p><strong>Mobile:</strong> <a href="tel:@contact.Display">@contact.Display</a></p>
+                            <p><strong>Di động:</strong> <a href="tel:@contact.Display">@contact.Display</a></p>
                         </div>
                         <div class="social">
                             <ul>
@@ -126,31 +125,35 @@
                                 </svg>
                                 <div class="info-contact">
                                     <p>
-                                        You can find my Projects at my studio, address <b>@contact.ContentHTML</b>
+                                        Bạn có thể tìm thấy dự án của tôi tại studio của tôi, địa chỉ <b>@contact.ContentHTML</b>
                                     </p>
-                                    <a href="@contact.Note" class="map-link" title="View map">View map</a>
+                                    <a target="_blank" href="@contact.Note" class="map-link" title="Xem bản đồ">Xem bản đồ</a>
                                 </div>                                
                                 @using (Html.BeginForm("SaveFeedback", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
                                     <div class="content">
                                         <div class="form-group form-text">
-                                            <label for="Name">Fullname <i>(*)</i></label><span class="error"></span>
-                                            @(Html.TextBoxFor(Model => Model.Name, new { placeholder = "Fullname" }))
+                                            <label for="Name">Họ tên <i>(*)</i></label><span class="error"></span>
+                                            @(Html.TextBoxFor(Model => Model.Name, new { placeholder = "Họ tên" }))
                                         </div>
                                         <div class="form-group form-text ">
                                             <label for="Code">Email <i>(*)</i></label><span class="error"></span>
                                             @(Html.TextBoxFor(Model => Model.Code, new { placeholder = "Email" }))
                                         </div>
                                         <div class="form-group form-text ">
-                                            <label for="Display">Company</label><span class="error"></span>
-                                            @(Html.TextBoxFor(Model => Model.Display, new { placeholder = "Company" }))
+                                            <label for="Display">Công ty</label><span class="error"></span>
+                                            @(Html.TextBoxFor(Model => Model.Display, new { placeholder = "Công ty" }))
                                         </div>
                                         <div class="form-group form-text">
-                                            <label for="Description">Message</label><span class="error"></span>
-                                            @(Html.TextAreaFor(Model => Model.Description, new { placeholder = "Message", rows = 10 }))
+                                            <label for="Description">Nội dung</label><span class="error"></span>
+                                            @(Html.TextAreaFor(Model => Model.Description, new { placeholder = "Nội dung", rows = 10 }))
                                         </div>
+                                      @*   <div class="form-group form-text ">
+                                            <label for="Files">Upload files</label><span class="error"></span>
+                                            @(Html.TextBoxFor(Model => Model.Files, new { type = "file", multiple = "multiple" }))
+                                        </div> *@
                                     </div>
-                                    <button type="submit" class="btn-talk">Let's talk</button>
+                                    <button type="submit" class="btn-talk">Hãy nói chuyện</button>
                                 }
                             </div>
                         </div>

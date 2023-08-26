@@ -180,7 +180,13 @@
         socialNetwork03 = listSocialNetwork[2];
     }
 
-    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(2);
+    Data.Model.Menu menuContact = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuContactID);
+
+    Data.Model.Menu menuService = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuServiceID);
+
+    Data.Model.Menu menuTeam = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuTeamID);
+
+    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -292,7 +298,7 @@
     <div class="banner-ads">
         <div class="wrapper">
             <div class="center">
-                <p>@ideas.Name</p><a class="view" href="@ideas.Note" title="View more">View more</a>
+                <p>@ideas.Name</p><a class="view" href="@ideas.Note" title="@Helper.GlobalHelper.ViewMore">@Helper.GlobalHelper.ViewMore</a>
             </div>
             <div class="close">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -311,16 +317,17 @@
             </svg>
         </div>
         <div class="logo">
-            <a href="@Helper.GlobalHelper.DomainURL" title="Home">
+            <a href="@Helper.GlobalHelper.DomainURL" title="Trang chủ">
                 <img class="logo-ctaaa" alt="@Helper.GlobalHelper.PageTitle" title="@Helper.GlobalHelper.PageTitle" src="@Helper.GlobalHelper.LogoURL" width="100" />
             </a>
         </div>
     </header>
     <div class="languages">
         <div class="en active">
-            <a href="@Helper.GlobalHelper.DomainOnlineURL" title="Viet Nam" style="text-decoration: none;"><span>VI</span><img src="@Helper.GlobalHelper.DomainURLSub/image/vietnam.png" alt="Viet Nam" title="Viet Nam"></a>
-        </div>       
+            <a href="@Helper.GlobalHelper.DomainOnlineEnglishURL" title="English" style="text-decoration: none;"><span>EN</span><img src="@Helper.GlobalHelper.DomainURLSub/image/english.png" alt="English" title="English"></a>
+        </div>
     </div>
+
     <div id="open-menu">
         <div class="left">
             <div class="top-menu marginbt2">
@@ -334,7 +341,7 @@
                     </svg>
                 </div>
                 <div class="logo">
-                    <a href="@Helper.GlobalHelper.DomainURL" title="Home">
+                    <a href="@Helper.GlobalHelper.DomainURL" title="@Helper.GlobalHelper.IndexTitle">
                         <img class="logo-ctaaa" alt="@Helper.GlobalHelper.PageTitle" title="@Helper.GlobalHelper.PageTitle" src="@Helper.GlobalHelper.LogoURL" width="100" />
                     </a>
                 </div>
@@ -361,7 +368,7 @@
             <div class="bottom">
                 <div class="search padding2_0">
                     <form method="post" action="">
-                        <input type="text" name="SearchString" id="SearchString" placeholder="Search...">
+                        <input type="text" name="SearchString" id="SearchString" placeholder="@Helper.GlobalHelper.SearchTitle">
                         <svg onclick="onSearchString('@Helper.GlobalHelper.DomainURL')" style="cursor: pointer;" width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.1187 29.2375C22.9163 29.2375 29.2375 22.9163 29.2375 15.1187C29.2375 7.32117 22.9163 1 15.1187 1C7.32117 1 1 7.32117 1 15.1187C1 22.9163 7.32117 29.2375 15.1187 29.2375Z"
                                   stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -431,7 +438,7 @@
     </div>
     <div class="scroll-panel scroll-panel-0">
         <div class="slide-social">
-            <span>Join us</span>
+            <span>@Helper.GlobalHelper.JoinUs</span>
             <ul>
                 <li>
                     <a target="_blank" href="@socialNetwork01.Code" title="@socialNetwork01.Name">
@@ -469,8 +476,9 @@
                     </path>
                 </svg>
             </a>
-            <a class="btn-primary color1 white" href="@Helper.GlobalHelper.DomainURLSub/contact.html" title="Contact"><span>Contact</span></a>
-        </div><a class="home-scroll-down" href="#projects">
+            <a class="btn-primary color1 white" href="@menuContact.Display" title="@menuContact.Name"><span>@menuContact.Name</span></a>
+        </div>
+        <a class="home-scroll-down" href="#projects">
             <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                 <path d="m2.749 13.316 8.483 7.625 8.485-7.801m-8.484 7.716V.064" stroke="#fff" fill="none" fill-rule="evenodd">
                 </path>
@@ -505,9 +513,9 @@
     </div>
     <div class="services padding7_0">
         <div class="wrapper">
-            <a href="@Helper.GlobalHelper.DomainURLSub/dich-vu.html" title="Dịch vụ">
+            <a href="@menuService.Display" title="@menuService.Name">
                 <h2>
-                    <span>More services</span>
+                    <span>@menuService.Name</span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="24" height="24" rx="12" fill="#FFD685"></rect>
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -686,7 +694,7 @@
                             @Html.Raw(@"<path d='M13 10.332V4.99863C12.9998 4.76482 12.938 4.53517 12.821 4.33274C12.704 4.13031 12.5358 3.96221 12.3333 3.8453L7.66667 1.17863C7.46397 1.06161 7.23405 1 7 1C6.76595 1 6.53603 1.06161 6.33333 1.17863L1.66667 3.8453C1.46418 3.96221 1.29599 4.13031 1.17897 4.33274C1.06196 4.53517 1.00024 4.76482 1 4.99863V10.332C1.00024 10.5658 1.06196 10.7954 1.17897 10.9979C1.29599 11.2003 1.46418 11.3684 1.66667 11.4853L6.33333 14.152C6.53603 14.269 6.76595 14.3306 7 14.3306C7.23405 14.3306 7.46397 14.269 7.66667 14.152L12.3333 11.4853C12.5358 11.3684 12.704 11.2003 12.821 10.9979C12.938 10.7954 12.9998 10.5658 13 10.332Z' stroke='#424B5A' stroke-linecap='round' stroke-linejoin='round'>")
                             @Html.Raw(@"</path>")
                             @Html.Raw(@"</svg>")
-                            @Html.Raw(@"<span>Ideas</span>")
+                            @Html.Raw(@"<span>"+Helper.GlobalHelper.IdeasTitle+"</span>")
                             @Html.Raw(@"</div>")
                             @Html.Raw(@"<h3>")
                             @Html.Raw(@"<span>"+ item.Name +"</span>")
@@ -725,7 +733,7 @@
             </div>
         </div>
     </div>
-    <div class="projects padding7_0">
+    <div class="projects padtop_4_5">
         <div class="projects-inner">
             <div class="owl-carousel owl-theme main">
                 <a class="item hover-style" href="@project001.Note" title="@project001.Name">
@@ -733,7 +741,7 @@
                         <div class="icon">
                             <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 10.332V4.99863C12.9998 4.76482 12.938 4.53517 12.821 4.33274C12.704 4.13031 12.5358 3.96221 12.3333 3.8453L7.66667 1.17863C7.46397 1.06161 7.23405 1 7 1C6.76595 1 6.53603 1.06161 6.33333 1.17863L1.66667 3.8453C1.46418 3.96221 1.29599 4.13031 1.17897 4.33274C1.06196 4.53517 1.00024 4.76482 1 4.99863V10.332C1.00024 10.5658 1.06196 10.7954 1.17897 10.9979C1.29599 11.2003 1.46418 11.3684 1.66667 11.4853L6.33333 14.152C6.53603 14.269 6.76595 14.3306 7 14.3306C7.23405 14.3306 7.46397 14.269 7.66667 14.152L12.3333 11.4853C12.5358 11.3684 12.704 11.2003 12.821 10.9979C12.938 10.7954 12.9998 10.5658 13 10.332Z" stroke="#424B5A" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg><span>Projects</span>
+                            </svg><span class="bold123">Dự án</span>
                         </div>
                         <h3>
                             <span>@project001.Name</span>
@@ -746,6 +754,7 @@
                         <div class="zoom-image marginbt1"><img src="@project001.FileName" title="@project001.Name" alt="@project001.Name"></div>
                     </div>
                 </a>
+
                 @{
                     foreach (Data.Model.ProjectFile item in listProjectFile)
                     {
@@ -755,7 +764,6 @@
                         @Html.Raw("<svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'>")
                         @Html.Raw("<path d='M13 10.332V4.99863C12.9998 4.76482 12.938 4.53517 12.821 4.33274C12.704 4.13031 12.5358 3.96221 12.3333 3.8453L7.66667 1.17863C7.46397 1.06161 7.23405 1 7 1C6.76595 1 6.53603 1.06161 6.33333 1.17863L1.66667 3.8453C1.46418 3.96221 1.29599 4.13031 1.17897 4.33274C1.06196 4.53517 1.00024 4.76482 1 4.99863V10.332C1.00024 10.5658 1.06196 10.7954 1.17897 10.9979C1.29599 11.2003 1.46418 11.3684 1.66667 11.4853L6.33333 14.152C6.53603 14.269 6.76595 14.3306 7 14.3306C7.23405 14.3306 7.46397 14.269 7.66667 14.152L12.3333 11.4853C12.5358 11.3684 12.704 11.2003 12.821 10.9979C12.938 10.7954 12.9998 10.5658 13 10.332Z' stroke='#424B5A' stroke-linecap='round' stroke-linejoin='round' />")
                         @Html.Raw("</svg>")
-                        @Html.Raw("<span>Projects</span>")
                         @Html.Raw("</div>")
                         @Html.Raw("<h3>")
                         @Html.Raw("<span>"+project001.Name+"</span>")
@@ -770,11 +778,12 @@
                         @Html.Raw("</a>")
                     }
                 }
+
             </div>
             <div id="counter"></div>
         </div>
     </div>
-    <div class="team padbottom_3_0">
+    <div class="team padding4_5_0">
         <div class="light-grey-after2">
             <div class="wrapper">
                 <div class="heading">
@@ -788,33 +797,47 @@
                         <div class="wrapper">
                             <div class="four-col-wrapper alm-wrapper">
                                 <div class="alm-reveal alm-filters">
-                                    @{
-                                        int teamCount = 14;
-                                        if (listTeam.Count < teamCount)
-                                        {
-                                            teamCount = listTeam.Count;
-                                        }
-                                        for (int i = 0; i < teamCount; i++)
-                                        {
-                                            Data.Model.Team item = listTeam[i];
-                                            if ((item.ID != team.ID) && (item.ID != team001.ID))
+                                    <div class="content">
+                                        @{
+                                            int teamCount = 4;
+                                            if (listTeam.Count < teamCount)
                                             {
-                                                string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
-                                                @Html.Raw(@"<a class='news-item hover-style column three-col people-box' href='"+ url +"' title='"+ item.Name +"'>")
-                                                @Html.Raw(@"<div class='zoom-image marginbt1 text-center'>")
-                                                @Html.Raw(@"<img width='600' height='800' src='"+ item.FileName +"' decoding='async' title='"+ item.Name +"' alt='"+ item.Name +"'>")
-                                                @Html.Raw(@"<h2>"+ item.Name +"</h2>")
-                                                @Html.Raw(@"</div>")
-                                                @Html.Raw(@"</a>")
+                                                teamCount = listTeam.Count;
+                                            }
+                                            for (int i = 0; i < teamCount; i++)
+                                            {
+                                                Data.Model.Team item = listTeam[i];
+                                                if ((item.ID != team.ID) && (item.ID != team001.ID))
+                                                {
+                                                    string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
+
+                                                    @Html.Raw(@"<a title='"+ item.Name +"' href='"+ url +"' class='item hover-style wow fadeInUp' data-wow-duration='1s'>")
+                                                    @Html.Raw(@"<div class='zoom-image marginbt1'><img class='mCS_img_loaded' src='"+item.FileName+"' title='"+ item.Name +"' alt='"+ item.Name +"'></div>")
+                                                    @Html.Raw(@"<div class='icon'>")
+                                                    @Html.Raw(@"<svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'>")
+                                                    @Html.Raw(@"<path d='M13 10.332V4.99863C12.9998 4.76482 12.938 4.53517 12.821 4.33274C12.704 4.13031 12.5358 3.96221 12.3333 3.8453L7.66667 1.17863C7.46397 1.06161 7.23405 1 7 1C6.76595 1 6.53603 1.06161 6.33333 1.17863L1.66667 3.8453C1.46418 3.96221 1.29599 4.13031 1.17897 4.33274C1.06196 4.53517 1.00024 4.76482 1 4.99863V10.332C1.00024 10.5658 1.06196 10.7954 1.17897 10.9979C1.29599 11.2003 1.46418 11.3684 1.66667 11.4853L6.33333 14.152C6.53603 14.269 6.76595 14.3306 7 14.3306C7.23405 14.3306 7.46397 14.269 7.66667 14.152L12.3333 11.4853C12.5358 11.3684 12.704 11.2003 12.821 10.9979C12.938 10.7954 12.9998 10.5658 13 10.332Z' stroke='#424B5A' stroke-linecap='round' stroke-linejoin='round'>")
+                                                    @Html.Raw(@"</path>")
+                                                    @Html.Raw(@"</svg>")
+                                                    @Html.Raw(@"<span>"+Helper.GlobalHelper.TeamTitle+"</span>")
+                                                    @Html.Raw(@"</div>")
+                                                    @Html.Raw(@"<h3>")
+                                                    @Html.Raw(@"<span>"+ item.Name +"</span>")
+                                                    @Html.Raw(@"<svg width='33' height='20' viewBox='0 0 33 20' fill='none' xmlns='http://www.w3.org/2000/svg'>")
+                                                    @Html.Raw(@"<path fill-rule='evenodd' clip-rule='evenodd' d='M23.7071 0.707106C23.3166 0.316582 22.6834 0.316582 22.2929 0.707106L21.944 1.05603C21.5537 1.4463 21.5534 2.07898 21.9433 2.46961L28.2125 8.75H1C0.447715 8.75 0 9.19771 0 9.75V10.25C0 10.8023 0.447715 11.25 1 11.25H28.2125L21.9433 17.5304C21.5534 17.921 21.5537 18.5537 21.944 18.944L22.2929 19.2929C22.6834 19.6834 23.3166 19.6834 23.7071 19.2929L33 10L23.7071 0.707106Z' fill='#424B5A'>")
+                                                    @Html.Raw(@"</path>")
+                                                    @Html.Raw(@"</svg>")
+                                                    @Html.Raw(@"</h3>")
+                                                    @Html.Raw(@"</a>")
+                                                }
                                             }
                                         }
-                                    }
-                                </div>
-                                <div class="padding4_5_0 view-more">
-                                    <a class="btn-primary" href="@Helper.GlobalHelper.DomainURLSub/doi-ngu.html" title="View more" style="background-color: #fff;"><span>View more</span></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="padding4_5_0 view-more">
+                        <a class="btn-primary" href="@menuTeam.Display" title="@Helper.GlobalHelper.ViewMore"><span>@Helper.GlobalHelper.ViewMore</span></a>
                     </div>
                 </div>
             </div>
@@ -864,7 +887,7 @@
                             @Html.Raw(@"<path d='M13 10.332V4.99863C12.9998 4.76482 12.938 4.53517 12.821 4.33274C12.704 4.13031 12.5358 3.96221 12.3333 3.8453L7.66667 1.17863C7.46397 1.06161 7.23405 1 7 1C6.76595 1 6.53603 1.06161 6.33333 1.17863L1.66667 3.8453C1.46418 3.96221 1.29599 4.13031 1.17897 4.33274C1.06196 4.53517 1.00024 4.76482 1 4.99863V10.332C1.00024 10.5658 1.06196 10.7954 1.17897 10.9979C1.29599 11.2003 1.46418 11.3684 1.66667 11.4853L6.33333 14.152C6.53603 14.269 6.76595 14.3306 7 14.3306C7.23405 14.3306 7.46397 14.269 7.66667 14.152L12.3333 11.4853C12.5358 11.3684 12.704 11.2003 12.821 10.9979C12.938 10.7954 12.9998 10.5658 13 10.332Z' stroke='#424B5A' stroke-linecap='round' stroke-linejoin='round'>")
                             @Html.Raw(@"</path>")
                             @Html.Raw(@"</svg>")
-                            @Html.Raw(@"<span>Ideas</span>")
+                            @Html.Raw(@"<span>"+Helper.GlobalHelper.NewsTitle+"</span>")
                             @Html.Raw(@"</div>")
                             @Html.Raw(@"<h3>")
                             @Html.Raw(@"<span>"+ item.Name +"</span>")
@@ -944,7 +967,7 @@
                 </div>
             </div>
             <div class="bottom padtop_3_0">
-                <p>©2023 - @Helper.GlobalHelper.PageTitle | All right reserved</p>
+                <p>©2023 - @Helper.GlobalHelper.PageTitle | @Helper.GlobalHelper.AllRightsReserved</p>
                 <ul>
                     @{
                         foreach (Data.Model.About item in listAbout)
@@ -979,6 +1002,6 @@
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/owl.carousel.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/wow.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/swiper.js"></script>
-    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/main-dist.js"></script>   
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/main-dist.js"></script>
 </body>
 </html>

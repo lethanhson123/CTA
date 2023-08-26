@@ -61,7 +61,7 @@ namespace API.Controllers
                 string mes = e.Message;
             }
             return model;
-        }
+        }       
         [HttpPost]
         [Route("SaveAndUploadFiles")]
         public T SaveAndUploadFiles()
@@ -108,6 +108,115 @@ namespace API.Controllers
                 string mes = e.Message;
             }
 
+            return model;
+        }
+
+        [HttpPost]
+        [Route("SaveAndUploadTwoFilesAsync")]
+        public async Task<T> SaveAndUploadTwoFilesAsync()
+        {
+            T model = JsonConvert.DeserializeObject<T>(Request.Form["data"]);
+            model.Code = GlobalHelper.SetName(model.Name);
+            try
+            {
+                if (Request.Form.Files.Count > 0)
+                {
+                    for (int i = 0; i < Request.Form.Files.Count; i++)
+                    {
+                        var file = Request.Form.Files[i];
+                        if (file == null || file.Length == 0)
+                        {
+                        }
+                        if (file != null)
+                        {
+                            string fileExtension = Path.GetExtension(file.FileName);
+                            if (fileExtension.Contains("txt") == false)
+                            {
+                                string fileName = model.Code + "_" + i + "_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                                string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, GlobalHelper.Image, model.GetType().Name);
+                                bool isFolderExists = System.IO.Directory.Exists(folderPath);
+                                if (!isFolderExists)
+                                {
+                                    System.IO.Directory.CreateDirectory(folderPath);
+                                }
+                                var physicalPath = Path.Combine(folderPath, fileName);
+                                using (var stream = new FileStream(physicalPath, FileMode.Create))
+                                {
+                                    file.CopyTo(stream);
+                                    switch (i)
+                                    {
+                                        case 0:
+                                            model.FileName = fileName;
+                                            break;
+                                        case 1:
+                                            model.FileThumbnailName = fileName;
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string mes = e.Message;
+            }
+            await _baseBusiness.SaveAsync(model);
+            return model;
+        }
+        [HttpPost]
+        [Route("SaveAndUploadTwoFiles")]
+        public T SaveAndUploadTwoFiles()
+        {
+            T model = JsonConvert.DeserializeObject<T>(Request.Form["data"]);
+            model.Code = GlobalHelper.SetName(model.Name);
+            try
+            {
+                if (Request.Form.Files.Count > 0)
+                {
+                    for (int i = 0; i < Request.Form.Files.Count; i++)
+                    {
+                        var file = Request.Form.Files[i];
+                        if (file == null || file.Length == 0)
+                        {
+                        }
+                        if (file != null)
+                        {
+                            string fileExtension = Path.GetExtension(file.FileName);
+                            if (fileExtension.Contains("txt") == false)
+                            {
+                                string fileName = model.Code + "_" + i + "_" + GlobalHelper.InitializationDateTimeCode0001 + fileExtension;
+                                string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, GlobalHelper.Image, model.GetType().Name);
+                                bool isFolderExists = System.IO.Directory.Exists(folderPath);
+                                if (!isFolderExists)
+                                {
+                                    System.IO.Directory.CreateDirectory(folderPath);
+                                }
+                                var physicalPath = Path.Combine(folderPath, model.FileName);
+                                using (var stream = new FileStream(physicalPath, FileMode.Create))
+                                {
+                                    file.CopyTo(stream);
+                                    switch (i)
+                                    {
+                                        case 0:
+                                            model.FileName = fileName;
+                                            break;
+                                        case 1:
+                                            model.FileThumbnailName = fileName;
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string mes = e.Message;
+            }
+            _baseBusiness.Save(model);
             return model;
         }
         [HttpPost]

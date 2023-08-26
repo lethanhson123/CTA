@@ -1,18 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Cảm ơn quý khách đã tin tưởng";
-    ViewData["Description"] = "Chúng tôi đã nhận được phản hồi của bạn và sẽ liên hệ trong thời gian sớm nhất";
+﻿@inject Business.Interface.IMenuBusiness _menuBusiness
+
+@{
+    ViewData["Title"] = Helper.GlobalHelper.ThankTitle;
+    ViewData["Description"] = Helper.GlobalHelper.ThankContent;
     ViewData["URLCurrent"] = Helper.GlobalHelper.DomainURL + "loi-cam-on.html";
     ViewData["URLImage"] = Helper.GlobalHelper.ImageURL;
+
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuContactID);
 }
 <div class="slider bg-image-contact">
     <div class="content">
-        <h1 class="marginbt1">Cảm ơn quý khách đã tin tưởng</h1>
-        <h2 class="marginbt1">Chúng tôi đã nhận được phản hồi của bạn và sẽ liên hệ trong thời gian sớm nhất</h2>
+        <h1 class="marginbt1">Helper.GlobalHelper.ThankTitle</h1>
+        <h2 class="marginbt1">Helper.GlobalHelper.ThankContent</h2>
     </div>
 </div>
 <div class="note-text bg-color-2 padding4_5_0">
     <div class="content">
-        <h2 class="marginbt2">Thảo luận về nơi làm việc của bạn</h2>
-        <a class="btn-primary white" href="@Helper.GlobalHelper.DomainURLSub/lien-he.html" title="Liên hệ"><span>Liên hệ</span></a>
+        <h2 class="marginbt2">@menu.Description</h2>
+        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>

@@ -37,6 +37,7 @@
                     <form autocomplete="off" class="row" #form="ngForm" (submit)="onSubmit(form)">
                         <input name="ID" [(ngModel)]="TeamService.formData.ID" type="hidden">
                         <input name="FileName" [(ngModel)]="TeamService.formData.FileName" type="hidden">
+                        <input name="FileThumbnailName" [(ngModel)]="TeamService.formData.FileThumbnailName" type="hidden">
                         <div class="col s12 m12 l5">
                             <div class="col s12 m12 l12">
                                 <a title="Danh sách" href="javascript:window.open('','_self').close();"
@@ -222,6 +223,24 @@
                                             title="{{TeamService.formData.FileName}}"
                                             alt="{{TeamService.formData.FileName}}"
                                             [src]="TeamService.formData.FileName"></a>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <div class="input-field">
+                                    <label for="FileThumbnailName">Đại diện</label>
+                                </div>
+                            </div>
+                            <div class="col s8 m8 l8">
+                                <div class="input-field">
+                                    <input type="file" multiple (change)="changeFileThumbnailName($event.target.files)">
+                                </div>
+                                <div class="input-field">
+                                    <a target="_blank" href="{{TeamService.formData.FileThumbnailName}}"
+                                        *ngIf="TeamService.formData.FileThumbnailName" title="{{TeamService.formData.FileThumbnailName}}">
+                                        <img class="responsive-img" width="50%"
+                                            title="{{TeamService.formData.FileThumbnailName}}"
+                                            alt="{{TeamService.formData.FileThumbnailName}}"
+                                            [src]="TeamService.formData.FileThumbnailName"></a>
                                 </div>
                             </div>
                         </div>

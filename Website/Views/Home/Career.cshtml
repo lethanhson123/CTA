@@ -9,7 +9,7 @@
         career = listCareer[0];
         career.Note = Helper.GlobalHelper.DomainURL + career.GetType().Name + "/" + career.Code + "-" + career.ID + ".html";
     }
-    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(7);
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuCareerID);
 }
 
 @{
@@ -20,7 +20,7 @@
 }
 <div class="slider">
     <div class="content">
-        @Html.Raw("<a style='text-decoration: none;' href='"+ career.Note +"' title='"+ career.Name +"'><h1 class='marginbt1'>"+ career.Name +"</h1></a>")
+        <h1 class='marginbt1'>@career.Name</h1>
         <p>
             @career.Description
         </p>

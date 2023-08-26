@@ -14,7 +14,7 @@
         team001 = Model.Teams[1];
         team001.Note = Helper.GlobalHelper.DomainURL + team001.GetType().Name + "/" + team001.Code + "-" + team001.ID + ".html";
     }
-    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(17);
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuTeamID);
 
     string urlPage = Helper.GlobalHelper.DomainURL + "Teams/2.html";
 }
@@ -28,7 +28,7 @@
 }
 <div class="slider">
     <div class="content">
-        @Html.Raw("<a style='text-decoration: none;' href='"+ team.Note +"' title='"+ team.Name +"'><h1 class='marginbt1'>"+ team.Name +"</h1></a>")
+        <h1 class='marginbt1'>@team.Name</h1>
         <p>
             @team.Description
         </p>
@@ -68,7 +68,7 @@
                                         string url = Helper.GlobalHelper.DomainURL + item.GetType().Name + "/" + item.Code + "-" + item.ID + ".html";
                                         @Html.Raw(@"<a class='news-item hover-style column three-col people-box' href='"+ url +"' title='"+ item.Name +"'>")
                                         @Html.Raw(@"<div class='zoom-image marginbt1 text-center'>")
-                                        @Html.Raw(@"<img width='600' height='800' src='"+ item.FileName +"' decoding='async' title='"+ item.Name +"' alt='"+ item.Name +"'>")
+                                        @Html.Raw(@"<img width='600' height='800' src='"+ item.FileThumbnailName +"' decoding='async' title='"+ item.Name +"' alt='"+ item.Name +"'>")
                                         @Html.Raw(@"<h2>"+ item.Name +"</h2>")
                                         @Html.Raw(@"</div>")
                                         @Html.Raw(@"</a>")
@@ -81,7 +81,7 @@
                         if (Model.IsShowPage == true)
                         {
                             @Html.Raw(@"<div class='padding4_5_0 view-more'>")
-                            @Html.Raw(@"<a class='btn-primary' href='"+urlPage+"' title='View more'><span>View more</span></a>")
+                            @Html.Raw(@"<a class='btn-primary' href='"+urlPage+"' title='Xem thêm'><span>Xem thêm</span></a>")
                             @Html.Raw(@"</div>")
                         }
                     }                    

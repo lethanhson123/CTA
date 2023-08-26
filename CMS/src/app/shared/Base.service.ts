@@ -45,6 +45,42 @@ export class BaseService {
         }
         return this.httpClient.post(url, formUpload);
     }
+    SaveAndUploadTwoFiles(formData: Base, fileToUpload0: File, fileToUpload1: File) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadTwoFiles';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));
+        if (fileToUpload1 == null) {
+            fileToUpload1 = new File(["fileToUpload1"], "fileToUpload1.txt", {
+                type: "text/plain",
+            });
+        }
+        if (fileToUpload0 == null) {
+            fileToUpload0 = new File(["fileToUpload0"], "fileToUpload0.txt", {
+                type: "text/plain",
+            });
+        }       
+        formUpload.append('file', fileToUpload1, fileToUpload1.name);
+        formUpload.append('file', fileToUpload0, fileToUpload0.name);       
+        return this.httpClient.post(url, formUpload);
+    }
+    SaveAndUploadTwoFilesAsync(formData: Base, fileToUpload0: File, fileToUpload1: File) {
+        let url = this.aPIURL + this.controller + '/SaveAndUploadTwoFilesAsync';
+        const formUpload: FormData = new FormData();
+        formUpload.append('data', JSON.stringify(formData));        
+        if (fileToUpload0 == null) {
+            fileToUpload0 = new File(["fileToUpload0"], "fileToUpload0.txt", {
+                type: "text/plain",
+            });
+        }       
+        if (fileToUpload1 == null) {
+            fileToUpload1 = new File(["fileToUpload1"], "fileToUpload1.txt", {
+                type: "text/plain",
+            });
+        }
+        formUpload.append('file', fileToUpload0, fileToUpload0.name);      
+        formUpload.append('file', fileToUpload1, fileToUpload1.name);
+        return this.httpClient.post(url, formUpload);
+    }
     SaveAndUploadFile(formData: Base, fileToUpload: FileList) {
         let url = this.aPIURL + this.controller + '/SaveAndUploadFile';
         const formUpload: FormData = new FormData();

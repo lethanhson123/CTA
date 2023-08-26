@@ -46,6 +46,13 @@ namespace Business.Implement
                     model.FileName = GlobalHelper.APISite + GlobalHelper.Image + @"/" + model.GetType().Name + @"/" + model.FileName;
                 }
             }
+            if (!string.IsNullOrEmpty(model.FileThumbnailName))
+            {
+                if (model.FileThumbnailName.Contains("https") == false)
+                {
+                    model.FileThumbnailName = GlobalHelper.APISite + GlobalHelper.Image + @"/" + model.GetType().Name + @"/" + model.FileThumbnailName;
+                }
+            }
         }
         public virtual T Save(T model)
         {

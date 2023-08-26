@@ -28,6 +28,8 @@ export class TeamDetailComponent implements OnInit {
   isShowLoading: boolean = false;
   fileToUpload: any;
   fileToUpload0: File = null;
+  fileToUpload1: any;
+  fileToUpload2: File = null;
   fileToUpload001: any;
   detailURL: string = "/Team/Info";
   liveURL: string = environment.Website;
@@ -106,7 +108,7 @@ export class TeamDetailComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     this.isShowLoading = true;
-    this.TeamService.SaveAndUploadFileAsync(form.value, this.fileToUpload).subscribe(
+    this.TeamService.SaveAndUploadTwoFilesAsync(form.value, this.fileToUpload0, this.fileToUpload2).subscribe(
       res => {
         if (form.value.ID > 0) {
           this.NotificationService.success(environment.SaveSuccess);
@@ -148,6 +150,17 @@ export class TeamDetailComponent implements OnInit {
         this.TeamService.formData.FileName = event.target.result;
       };
       reader.readAsDataURL(this.fileToUpload0);
+    }
+  }
+  changeFileThumbnailName(files: FileList) {
+    if (files) {
+      this.fileToUpload1 = files;
+      this.fileToUpload2 = files.item(0);
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.TeamService.formData.FileThumbnailName = event.target.result;
+      };
+      reader.readAsDataURL(this.fileToUpload2);
     }
   }
   changeFiles(files: FileList) {

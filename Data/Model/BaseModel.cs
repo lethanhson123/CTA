@@ -20,6 +20,7 @@ namespace Data.Model
         public int? SortOrder { get; set; }
         public bool? IsHomePage { get; set; }
         public string? FileName { get; set; }
+        public string? FileThumbnailName { get; set; }
         public string? Status { get; set; }
         public string? DateComplete { get; set; }
         public string? Location { get; set; }

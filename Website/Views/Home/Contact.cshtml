@@ -23,7 +23,7 @@
     {
         socialNetwork03 = listSocialNetwork[2];
     }
-    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(8);
+    Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuContactID);
 
     Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
 }

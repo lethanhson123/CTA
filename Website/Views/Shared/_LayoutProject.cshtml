@@ -193,20 +193,22 @@
         }
     </script>
     <style>
-        a.sohu{            
+        a.sohu {
             text-decoration: none !important;
             font-size: 20px !important;
             background: url() no-repeat right center !important;
         }
-        a.sohu:hover{
+
+            a.sohu:hover {
                 color: #ff9900 !important;
-        }
-        a.sohu:active {
+            }
+
+            a.sohu:active {
                 color: #ff9900 !important;
-        }
+            }
     </style>
 </head>
-<body class="sticky-panel-v1 page-template-page_template-home">   
+<body class="sticky-panel-v1 page-template-page_template-home">
     <header class="header header-child">
         <div class="menu">
             <svg width="30" height="21" viewBox="0 0 30 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,7 +218,7 @@
             </svg>
         </div>
         <div class="logo">
-            <a href="@Helper.GlobalHelper.DomainURLSub">
+            <a href="@Helper.GlobalHelper.DomainURLSub" title="@Helper.GlobalHelper.IndexTitle">
                 <img class="logo-ctaaa" alt="@Helper.GlobalHelper.PageTitle" title="@Helper.GlobalHelper.PageTitle" src="@Helper.GlobalHelper.LogoURL" width="100" />
             </a>
         </div>
@@ -224,7 +226,7 @@
     <div class="languages">
         <div class="en active">
             <a href="@Helper.GlobalHelper.DomainOnlineEnglishURL" title="English" style="text-decoration: none;"><span>EN</span><img src="@Helper.GlobalHelper.DomainURLSub/image/english.png" alt="English" title="English"></a>
-        </div>       
+        </div>
     </div>
     <div id="open-menu">
         <div class="left">
@@ -239,7 +241,7 @@
                     </svg>
                 </div>
                 <div class="logo">
-                    <a href="@Helper.GlobalHelper.DomainURLSub">                        
+                    <a href="@Helper.GlobalHelper.DomainURLSub">
                         <img class="logo-ctaaa" alt="@Helper.GlobalHelper.PageTitle" title="@Helper.GlobalHelper.PageTitle" src="@Helper.GlobalHelper.LogoURL" width="100" />
                     </a>
                 </div>
@@ -266,7 +268,7 @@
             <div class="bottom">
                 <div class="search padding2_0">
                     <form method="post" action="">
-                        <input type="text" name="SearchString" id="SearchString" placeholder="Bạn muốn tìm gì?">
+                        <input type="text" name="SearchString" id="SearchString" placeholder="@Helper.GlobalHelper.SearchTitle">
                         <svg onclick="onSearchString('@Helper.GlobalHelper.DomainURL')" style="cursor: pointer;" width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.1187 29.2375C22.9163 29.2375 29.2375 22.9163 29.2375 15.1187C29.2375 7.32117 22.9163 1 15.1187 1C7.32117 1 1 7.32117 1 15.1187C1 22.9163 7.32117 29.2375 15.1187 29.2375Z"
                                   stroke="#424B5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -373,7 +375,7 @@
                 </div>
             </div>
             <div class="bottom padtop_3_0">
-                <p>©2023 - @Helper.GlobalHelper.PageTitle | Bảo lưu tất cả các quyền</p>
+                <p>©2023 - @Helper.GlobalHelper.PageTitle | @Helper.GlobalHelper.AllRightsReserved</p>
                 <ul>
                     @{
                         foreach (Data.Model.About item in listAbout)
@@ -405,7 +407,7 @@
     </div>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/jquery.min.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/owl.carousel.js"></script>
-    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/wow.js"></script>    
+    <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/wow.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/news-dist.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/projects-dist.js"></script>
 </body>
