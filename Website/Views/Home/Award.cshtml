@@ -20,14 +20,16 @@
     Model.PageIndex = Model.PageIndex + 1;
     string urlPage = Helper.GlobalHelper.DomainURL + "Awards/" + Model.PageIndex + ".html";
 }
+<div class="slider">
+    <div class="content">
+        <h1 class='marginbt1'>@award.Name</h1>
+        <p>
+            @award.Description
+        </p>
+    </div>
+</div>
 <div class="team padding4_5_0">
-    <div class="wrapper">
-        <div class="heading">
-            <h1>@award.Name</h1>
-            <p class="marginbt2">
-                @award.Description
-            </p>
-        </div>
+    <div class="wrapper">       
         <div class="content">
             @{
                 foreach (Data.Model.Award item in Model.Awards)
