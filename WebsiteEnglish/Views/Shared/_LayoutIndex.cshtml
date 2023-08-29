@@ -10,7 +10,7 @@
 @inject Business.Interface.IMenuBusiness _menuBusiness
 @inject Business.Interface.IQuoteBusiness _quoteBusiness
 @inject Business.Interface.ISocialNetworkBusiness _socialNetworkBusiness
-@inject Business.Interface.IContactBusiness _contactBusiness
+
 
 @{
     List<Data.Model.About> listAbout = await _aboutBusiness.GetByParentIDAndActiveToListAsync(Helper.GlobalHelper.CategoryLanguageID, true);
@@ -186,7 +186,7 @@
 
     Data.Model.Menu menuTeam = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuTeamID);
 
-    Data.Model.Contact contact = await _contactBusiness.GetByIDAsync(1);
+    
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -980,23 +980,7 @@
             </div>
         </div>
     </footer>
-    <div style="position:fixed; bottom:20px; right:20px; z-index:1000;">
-        <div>
-            <a href="https://zalo.me/@contact.Status" target="_blank">
-                <img src="@Helper.GlobalHelper.DomainURLSub/image/zalo.png" width="50" height="50" />
-            </a>
-        </div>
-        <div>
-            <a href="@contact.Location" target="_blank">
-                <img src="@Helper.GlobalHelper.DomainURLSub/image/messenger.png" width="50" height="50" />
-            </a>
-        </div>
-        <div>
-            <a href="tel:@contact.Status" target="_blank">
-                <img src="@Helper.GlobalHelper.DomainURLSub/image/phone.png" width="50" height="50" />
-            </a>
-        </div>
-    </div>
+    
     <!-- Load Js-->
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/jquery.min.js"></script>
     <script type="text/javascript" src="@Helper.GlobalHelper.DomainURLSub/js/owl.carousel.js"></script>
