@@ -211,6 +211,14 @@
                 return builder.Build().GetSection("AppSettings").GetSection("ImageFileName").Value;
             }
         }
+        public static string LanguageFileName
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("AppSettings").GetSection("LanguageFileName").Value;
+            }
+        }
         public static string Facebook
         {
             get
@@ -427,6 +435,14 @@
                 return builder.Build().GetSection("AppSettings").GetSection("IndexTitle").Value;
             }
         }
+        public static string LanguageTitle
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("AppSettings").GetSection("LanguageTitle").Value;
+            }
+        }
         public static string ViewMore
         {
             get
@@ -575,6 +591,13 @@
             get
             {
                 return DomainURL + Image + @"/" + ImageFileName;
+            }
+        }
+        public static string LanguageURL
+        {
+            get
+            {
+                return DomainURL + Image + @"/" + LanguageFileName;
             }
         }
         #endregion
