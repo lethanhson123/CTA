@@ -75,7 +75,7 @@
             int pageCount = PageIndex * GlobalHelper.RowCount + 1;
             BaseViewModel model = new BaseViewModel();
             model.PageIndex = PageIndex;
-            model.Abouts = _AboutBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            model.Abouts = _AboutBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
             model.Awards = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
             List<Award> list = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
             if (pageCount < list.Count)
@@ -90,8 +90,8 @@
             BaseViewModel model = new BaseViewModel();
             model.PageIndex = PageIndex;
             model.Abouts = _AboutBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
-
-            List<Award> list = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
+            model.Awards = _AwardBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true).Take(pageCount).OrderBy(item => item.SortOrder).ToList();
+            List<About> list = _AboutBusiness.GetByParentIDAndActiveToList(GlobalHelper.CategoryLanguageID, true);
             if (pageCount < list.Count)
             {
                 model.IsShowPage = true;

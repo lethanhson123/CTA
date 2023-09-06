@@ -7,7 +7,7 @@
     {
         award = Model.Awards[0];
         award.Note = Helper.GlobalHelper.DomainURL + award.GetType().Name + "/" + award.Code + "-" + award.ID + ".html";
-    }
+    }   
 
     Data.Model.Menu menu = await _menuBusiness.GetByIDAsync(Helper.GlobalHelper.MenuAwardID);
 }
@@ -30,7 +30,7 @@
     </div>
 </div>
 <div class="team padding4_5_0">
-    <div class="wrapper">
+    <div class="wrapper">        
         <div class="content">
             @{
                 foreach (Data.Model.Award item in Model.Awards)
@@ -65,6 +65,10 @@
                 @Html.Raw(@"<div class='padding4_5_0 view-more'>")
                 @Html.Raw(@"<a class='btn-primary' href='"+urlPage+"' title='"+Helper.GlobalHelper.ViewMore+"'><span>"+Helper.GlobalHelper.ViewMore+"</span></a>")
                 @Html.Raw(@"</div>")
+            }
+            else
+            {
+                @Html.Raw(@"<div class='padding4_5_0'></div>")
             }
         }
     </div>
