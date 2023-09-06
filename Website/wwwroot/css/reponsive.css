@@ -331,6 +331,15 @@
   }
 } 
 @media (max-width: 768px) {
+  .scroll-panel-0 .slide-social{
+    position: absolute;
+  }
+  .team .item h3 span, .filter ul.top > li a {
+    font-size: 35px;
+  }
+  .wrapper.padtop_4_5{
+    padding-top: 0;
+  }
   .slider{
     height: auto;
   }

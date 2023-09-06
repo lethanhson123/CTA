@@ -2202,7 +2202,7 @@ padding-right: 2.5em
   content: "";
   height: 2px;
   width: 100px;
-  top: 56px;
+  top: 100%;
   background: #424B5A;
   position: absolute;
   left: 0;
@@ -2437,7 +2437,90 @@ padding-right: 2.5em
   justify-content: space-between;
   align-items: flex-start;
   padding: 4.5rem 0;
+  background: #000;
+  color: #fff !important;
 }
+.chakra-container{
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.css-fsuivm {
+  font-size: 48px;
+  line-height: 60px;
+  color: #fff;
+}
+.css-18k1txx {
+  grid-gap: 0 140px;
+  grid-template-columns: 437px 437px;
+}
+.css-18k1txx {
+  display: grid;
+  width: var(--chakra-sizes-full);
+  -webkit-align-items: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+.css-kbn7if {
+  color: white;
+  border-bottom: 1px solid #424B5A;
+}
+.css-paa9n {
+  text-align: start;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  line-height: 20px;
+  border-bottom: 1px solid #424B5A;
+  border-color: #424B5A;
+  color: #424B5A;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  -webkit-padding-end: 0px;
+  padding-inline-end: 0px;
+}
+.css-jg3ej5 {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  line-height: 20px;
+  border-bottom: 1px solid #424B5A;
+  border-color: #424B5A;
+  text-align: right;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  -webkit-padding-end: 0px;
+  padding-inline-end: 0px;
+}
+.css-5605sr {
+  font-variant-numeric: lining-nums tabular-nums;
+  border-collapse: collapse;
+  width: var(--chakra-sizes-full);
+}
+.css-jg3ej5 {
+  color: white;
+}
+.css-1cy8dje .chakra-text {
+  color: white;
+}
+.css-1cy8dje {
+  line-height: var(--chakra-lineHeights-5);
+  border-bottom: var(--chakra-borders-1px);
+  border-color: var(--chakra-colors-gray-100);
+  border: var(--chakra-borders-none);
+  text-align: right;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  -webkit-padding-end: 0px;
+  padding-inline-end: 0px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+ .project-detail p{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  margin-top: 35px;
+}
+
 .content-detail-top-p{
   width: 65%;
 }
@@ -2471,7 +2554,7 @@ padding-right: 2.5em
   background: rgb(255,98,0);
   background: linear-gradient(90deg, rgba(255,98,0,0.09287464985994398) 0%, rgba(255,153,0,0.1881127450980392) 100%);
   padding: 5px 15px;
-  top: 80px;
+  top: 50px;
   right: 100px;
   border-radius: 30px;
   z-index: 1000;

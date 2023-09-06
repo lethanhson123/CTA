@@ -3,10 +3,10 @@
 @inject Business.Interface.IMenuBusiness _menuBusiness
 @{
     Layout = "~/Views/Shared/_LayoutProject.cshtml";
-    Model.Note = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
+    string urlCurrent = Helper.GlobalHelper.DomainURL + Model.GetType().Name + "/" + Model.Code + "-" + Model.ID + ".html";
     ViewData["Title"] = Model.Name;
     ViewData["Description"] = Model.Description;
-    ViewData["URLCurrent"] = Model.Note;
+    ViewData["URLCurrent"] = urlCurrent;
     ViewData["URLImage"] = Model.FileName;
 
     int pageCount = GlobalHelper.RowCount + 1;
@@ -30,33 +30,61 @@
 </div>
 <div class="light-grey-after2">
     <div class="project-detail">
+        <div class="top-content-project">
+            <div class="chakra-container css-1piph48" bis_skin_checked="1">
+                <div class="css-xhobj5" bis_skin_checked="1">
+                    <h1 class="chakra-heading css-fsuivm">
+                        @Model.Note
+                    </h1>
+                    <div class="css-1g7feip" bis_skin_checked="1">
+                        <div class="css-18k1txx" bis_skin_checked="1">
+                            <div class="css-0" bis_skin_checked="1">
+                                <table class="chakra-table css-5605sr">
+                                    <tbody class="css-0">
+                                        <tr class="css-kbn7if">
+                                            <td class="css-paa9n">Client</td>
+                                            <td class="css-jg3ej5">@Model.Status</td>
+                                        </tr>
+                                        <tr class="css-kbn7if">
+                                            <td class="css-paa9n">Area</td>
+                                            <td class="css-jg3ej5">@Model.Area</td>
+                                        </tr>
+                                        <tr class="css-kbn7if">
+                                            <td class="css-paa9n">Completion day</td>
+                                            <td class="css-jg3ej5">@Model.DateComplete</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <table class="chakra-table css-5605sr">
+                                <tbody class="css-0">
+                                    <tr class="css-kbn7if">
+                                        <td class="css-paa9n">Industry</td>
+                                        <td class="css-jg3ej5">@Model.Location</td>
+                                    </tr>
+                                    <tr class="css-kbn7if">
+                                        <td class="css-13mzjih">Achievements</td>
+                                        <td class="css-1cy8dje">
+                                            <p class="chakra-text css-0">@Model.Recognize</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="css-0" bis_skin_checked="1"></div>
+                        </div>
+                    </div>
+                    <p class="chakra-text css-16u02a4">
+                        @Model.Description
+                    </p>
+                </div>
+            </div>
+        </div>
         <div class="wrapper ">
             <div class="main-content-detail">
-                <div class="top-content-project">
-                    <div class="content-detail-top-p">
-                        <p>
-                            @Model.Description
-                        </p>
-                    </div>
-                    <div class="info-company-project-page" style="border-left-color: #eee; border-left-style: solid; border-left-width: 3px; padding-left: 10px;">
-                        <p style="border-bottom-color: #eee; border-bottom-style: solid; border-bottom-width: 3px; padding-bottom: 5px;"><strong>Trạng thái:</strong> @Model.Status </p>
-                        <p style="border-bottom-color: #eee; border-bottom-style: solid; border-bottom-width: 3px; padding-bottom: 5px;"><strong>Ngày hoàn thành:</strong> @Model.DateComplete </p>
-                        <p style="border-bottom-color: #eee; border-bottom-style: solid; border-bottom-width: 3px; padding-bottom: 5px;"><strong>Vị trí:</strong> @Model.Location</p>
-                        <p style="border-bottom-color: #eee; border-bottom-style: solid; border-bottom-width: 3px; padding-bottom: 5px;"><strong>Khu vực:</strong> @Model.Area</p>
-                        <p style="border-bottom-color: #eee; border-bottom-style: solid; border-bottom-width: 3px; padding-bottom: 5px;"><strong>Công nhận:</strong> @Model.Recognize</p>
-                    </div>
-                </div>
                 @Html.Raw(@"" + Model.ContentHTML)
-
                 <div class="padding4_5_0"></div>
             </div>
         </div>
-    </div>
-</div>
-<div class="note-text bg-color-4 padding4_5_0">
-    <div class="content">
-        <h2 class="marginbt2">@menu.Description</h2>
-        <a class="btn-primary white" href="@menu.Note" title="@menu.ContentHTML"><span>@menu.ContentHTML</span></a>
     </div>
 </div>
 <div class="team padding4_5_0 bg-color-1">
